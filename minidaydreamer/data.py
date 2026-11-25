@@ -15,6 +15,7 @@ def collect(path, demos, extra, holdout, seed, env):
         if ep[3][-1]:
             rows.append(("demo", "demo", cursor))
             episodes.append(ep)
+        print(f"Demo seed {cursor}: {len(rows)}/{demos} accepted", flush=True)
         cursor += 1
     if len(rows) < demos:
         raise RuntimeError(f"Scripted expert stacked {len(rows)} times in {cursor-seed} attempts. Inspect preview.")
@@ -33,6 +34,8 @@ def collect(path, demos, extra, holdout, seed, env):
         o, a, r, s = episodes[i] if i < demos else scripted_episode(env, reset_seed, variant)
         t = len(a)
         obs[i, :t+1], actions[i, :t], rewards[i, :t], success[i, :t], lengths[i] = o, a, r, s, t
+        if i >= demos:
+            print(f"Recorded {i+1}/{n} episodes; seed={reset_seed} variant={variant} success={int(s[-1])}", flush=True)
     splits, kinds, seeds = zip(*rows)
     # Exclusive creation protects a fixed corpus from accidental replacement.
     with path.open("xb") as f:

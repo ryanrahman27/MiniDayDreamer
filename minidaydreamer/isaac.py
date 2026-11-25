@@ -35,7 +35,7 @@ class IsaacStack:
     block_height = .0468
     grip_delay = 7
 
-    def __init__(self):
+    def __init__(self, *, cameras=True):
         task = TASK_V3 if TASK_V3 in gym.registry else TASK_V2
         options = {"overrides": ["physics=isaacsim_physx"]} if task == TASK_V3 else {}
         cfg = parse_env_cfg(task, device="cuda:0", num_envs=1, **options)
@@ -50,8 +50,14 @@ class IsaacStack:
         # Disable internal auto-resets so the final transition still contains its terminal scene.
         for term in ("success", "time_out", "cube_1_dropping", "cube_2_dropping", "cube_3_dropping"):
             setattr(cfg.terminations, term, None)
-        cfg.scene.table_cam.width = 640
-        cfg.scene.table_cam.height = 480
+        if cameras:
+            cfg.scene.table_cam.width = 640
+            cfg.scene.table_cam.height = 480
+        else:
+            cfg.scene.table_cam = cfg.scene.wrist_cam = None
+            cfg.observations.policy.table_cam = cfg.observations.policy.wrist_cam = None
+            cfg.num_rerenders_on_reset = 0
+            cfg.image_obs_list = []
         self.env = gym.make(task, cfg=cfg)
         self.scale = cfg.actions.arm_action.scale
         self.frame_callback = None
@@ -61,7 +67,7 @@ class IsaacStack:
 
     def state(self, observation):
         p = observation["policy"]
-        self.camera = p["table_cam"]
+        self.camera = p.get("table_cam")
         tool = p["eef_pos"].reshape(1, 3)
         # One environment at the world origin. Express xyz relative to the table work area.
         blue, red, _ = p["cube_positions"].reshape(3, 3)

@@ -20,18 +20,23 @@ With the Isaac environment activated and MiniDayDreamer as the current directory
 python -m pip install -e ".[video]"
 python -m minidaydreamer preview --seed 0 --out runs/scene-0.mp4
 python -m minidaydreamer preview --seed 1 --out runs/scene-1.mp4
-python -m minidaydreamer collect --demos 24 --extra 72 --holdout 12 --out runs/isaac.npz
-python -m minidaydreamer train --data runs/isaac.npz --coverage demos --out runs/demos.pt
-python -m minidaydreamer train --data runs/isaac.npz --coverage varied --out runs/varied.pt
-python -m minidaydreamer eval --model runs/demos.pt --episodes 50 --video-dir runs/demo-videos
-python -m minidaydreamer eval --model runs/varied.pt --episodes 50 --video-dir runs/varied-videos
+run=runs/isaac-full-24
+python -m minidaydreamer collect --demos 24 --extra 72 --holdout 12 --out "$run/corpus.npz"
+python -m minidaydreamer calibrate --data "$run/corpus.npz" --out "$run/base.pt"
+for arm in demos varied; do
+  python -m minidaydreamer train --data "$run/corpus.npz" --base-model "$run/base.pt" --coverage "$arm" --out "$run/$arm.pt"
+done
+python -m minidaydreamer compare --demos-model "$run/demos.pt" --varied-model "$run/varied.pt" --episodes 50 --out "$run/eval-0.jsonl"
+python scripts/summarize_stack.py "$run"
 ```
 
-The preview records the scripted controller and prints whether it achieved a stable release. Check this on the target host before collecting the corpus. The collector keeps successful demonstrations for behavior cloning and includes scripted misses, bad placements, early drops and successful placements in the extra trajectories. Each held-out scene has two recorded attempts from the same initial condition. Evaluation uses fresh scene seeds, pairs policy noise seeds, and records the **first** scene for each policy irrespective of its outcome.
+The collector keeps successful demonstrations for behavior cloning and includes scripted misses, bad placements, early drops and attempted successful placements in the extra trajectories. Each world-model validation scene has two recorded attempts from the same reset seed. Calibration evaluates BC checkpoints in order of 3,000, 6,000 and 12,000 updates. It selects the first that stacks at least once on eight development scenes, or the last if none succeeds. These scenes are disjoint from training and final evaluation.
+
+The comparison uses fresh scene seeds, paired Gaussian noise, and one JSON record per scene for all three policies. For parallel runs, set `--scene-offset` and `--episodes` to disjoint intervals and write each shard to `eval-<offset>.jsonl`. Add `--video-dir` to record the first seed of that invocation. State-only runs skip the two camera sensors. The task, physics and reset events are shared across runs.
 
 ## Training and interpretation
 
-The frozen base policy generates three Cartesian commands at a time with conditional flow matching. Both coverage conditions fit the base policy from the same successful episodes and random seed. The RSSM learns action-conditioned dynamics, reward and success from recorded sequences. A soft actor-critic learner selects a bounded four-dimensional shift to fresh per-step Gaussian noise. Its replay buffer contains only two-chunk imagined rollouts initialized from filtered training histories. The policy consumes 11 state values measured in the simulator during evaluation and decoded from the RSSM during imagination. The noise actor consumes the RSSM state in both settings.
+The frozen base policy generates three Cartesian commands at a time with conditional flow matching. Both coverage conditions load the selected base checkpoint, and the comparison checks that their base weights match. The RSSM learns action-conditioned dynamics, reward and success from recorded sequences. A soft actor-critic learner selects a bounded four-dimensional shift to fresh per-step Gaussian noise. Both learners initialize two-chunk imagined rollouts from the same demonstration histories. The base policy consumes 11 state values measured in the simulator during evaluation and decoded from the RSSM during imagination. The noise actor consumes the RSSM state in both settings.
 
 The validation report ranks pairs of held-out action sequences by their short-horizon return and compares red-cube position error with a stationary-cube prediction. Check the informative-pair count when interpreting ranking accuracy. The evaluation report gives completed stacks and counts both gains and losses on matched scenes. A larger imagined reward alone cannot establish improved stacking.
 

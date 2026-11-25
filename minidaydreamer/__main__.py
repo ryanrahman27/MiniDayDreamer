@@ -27,22 +27,38 @@ def main():
     t.add_argument("--out", type=Path, required=True)
     t.add_argument("--seed", type=int, default=0)
     t.add_argument("--coverage", choices=["demos", "varied"], default="varied")
+    t.add_argument("--base-model", type=Path, help="Reuse a frozen base from calibrate")
     for option, default in (("bc", 3000), ("model", 1800), ("rl", 1500)):
         t.add_argument(f"--{option}-steps", type=positive, default=default)
     e = sub.add_parser("eval")
     e.add_argument("--model", type=Path, required=True)
     e.add_argument("--episodes", type=positive, default=50)
     e.add_argument("--video-dir", type=Path, help="Record the first matched Isaac scene for each policy")
+    b = sub.add_parser("calibrate")
+    b.add_argument("--data", type=Path, required=True)
+    b.add_argument("--out", type=Path, required=True)
+    b.add_argument("--seed", type=int, default=0)
+    b.add_argument("--episodes", type=positive, default=8)
+    b.add_argument("--bc-steps", type=positive, nargs="+", default=[3000, 6000, 12000])
+    paired = sub.add_parser("compare")
+    paired.add_argument("--demos-model", type=Path, required=True)
+    paired.add_argument("--varied-model", type=Path, required=True)
+    paired.add_argument("--out", type=Path, required=True, help="Per-scene outcomes in JSON Lines format")
+    paired.add_argument("--episodes", type=positive, default=50)
+    paired.add_argument("--scene-offset", type=int, default=0, help="First test scene index for this shard")
+    paired.add_argument("--video-dir", type=Path, help="Record all three arms on the first scene")
     v = sub.add_parser("preview")
     v.add_argument("--out", type=Path, required=True)
     v.add_argument("--seed", type=int, default=0)
-    for p in (c, e):
+    for p in (c, e, paired, b):
         p.add_argument("--backend", choices=["isaac", "mujoco"], default="isaac")
     args = parser.parse_args()
     if getattr(args, "video_dir", None) and args.backend != "isaac":
         parser.error("--video-dir requires the Isaac camera")
     if args.command == "collect" and args.extra < 0:
         parser.error("--extra must be nonnegative")
+    if getattr(args, "scene_offset", 0) < 0:
+        parser.error("--scene-offset must be nonnegative")
     if hasattr(args, "out"):
         if args.out.exists():
             parser.error(f"Output already exists: {args.out}")
@@ -51,10 +67,11 @@ def main():
         env = None
         if args.command == "preview" or getattr(args, "backend", None) == "isaac":
             from isaaclab.app import AppLauncher
-            launcher = AppLauncher(headless=True, enable_cameras=True)
+            cameras = args.command == "preview" or bool(getattr(args, "video_dir", None))
+            launcher = AppLauncher(headless=True, enable_cameras=cameras)
             resources.callback(launcher.app.close)
             from .isaac import IsaacStack
-            env = IsaacStack()
+            env = IsaacStack(cameras=cameras)
             resources.callback(env.close)
         elif getattr(args, "backend", None) == "mujoco":
             from .stack import CubeStack
@@ -68,6 +85,9 @@ def main():
         elif args.command == "train":
             from .experiment import train
             train(args)
+        elif args.command == "calibrate":
+            from .experiment import calibrate
+            calibrate(args, env)
         elif args.command == "preview":
             import imageio.v2 as imageio
             from .stack import scripted_episode
@@ -75,6 +95,9 @@ def main():
                 env.frame_callback = lambda: video.append_data(env.rgb())
                 *_, success = scripted_episode(env, args.seed)
             print(json.dumps({"success": bool(success[-1]), "frames": len(success), "seed": args.seed}))
+        elif args.command == "compare":
+            from .experiment import compare
+            compare(args, env)
         else:
             from .experiment import evaluate
             print(json.dumps(evaluate(args, env), indent=2))
