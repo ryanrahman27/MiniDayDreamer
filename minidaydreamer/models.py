@@ -29,7 +29,11 @@ class FlowPolicy(nn.Module):
         self.width = HORIZON * ACTION_DIM
         self.velocity = mlp(STATE_DIM + self.width + 1, self.width)
 
+    def condition(self, obs):
+        return obs
+
     def loss(self, obs, action_chunk):
+        obs = self.condition(obs)
         actions = action_chunk.flatten(1)
         noise = torch.randn_like(actions)
         t = torch.rand_like(actions[:, :1])
@@ -38,11 +42,33 @@ class FlowPolicy(nn.Module):
 
     @torch.no_grad()
     def sample(self, obs, noise):
+        obs = self.condition(obs)
         x = noise.flatten(1)
         for i in range(8):
             t = torch.full_like(x[:, :1], i / 8)
             x = x + self.velocity(torch.cat((obs, x, t), -1)) / 8
         return x.reshape(-1, HORIZON, ACTION_DIM).clamp(-1, 1)
+
+
+class RelativeFlowPolicy(FlowPolicy):
+    """Flow cloning with relative tool/cube geometry and no absolute horizontal origin."""
+
+    def __init__(self):
+        nn.Module.__init__(self)
+        self.width = HORIZON * ACTION_DIM
+        self.velocity = nn.Sequential(nn.Linear(16 + self.width + 1, 160), nn.SiLU(),
+                                      nn.Linear(160, 160), nn.SiLU(), nn.Linear(160, 160), nn.SiLU(),
+                                      nn.Linear(160, self.width))
+
+    def condition(self, obs):
+        tool, red, blue = obs[:, :3], obs[:, 3:6], obs[:, 6:9]
+        return torch.cat((tool-red, red-blue, tool-blue, obs[:, [2, 5, 8]],
+                          (red[:, :2]-blue[:, :2]).norm(dim=1, keepdim=True),
+                          (tool-red).norm(dim=1, keepdim=True), obs[:, 9:]), dim=1)
+
+
+def make_policy(kind):
+    return {"original": FlowPolicy, "relative": RelativeFlowPolicy}[kind]()
 
 
 class RSSM(nn.Module):

@@ -1,0 +1,722 @@
+{
+  "first_seed": 258,
+  "last_seed": 307,
+  "episodes": 400,
+  "policies": {
+    "weak_base": {
+      "success": 2,
+      "lifted": 49,
+      "reached_xy_lifted": 14,
+      "reached_xyz_lifted": 7,
+      "scenes": 50,
+      "successful_seeds": [
+        262,
+        273
+      ],
+      "mean_return": 0.6173855231990887
+    },
+    "weak_demos_learned": {
+      "success": 2,
+      "lifted": 50,
+      "reached_xy_lifted": 27,
+      "reached_xyz_lifted": 2,
+      "scenes": 50,
+      "successful_seeds": [
+        301,
+        305
+      ],
+      "mean_return": 0.6919175861776771
+    },
+    "weak_demos_direct": {
+      "success": 2,
+      "lifted": 49,
+      "reached_xy_lifted": 9,
+      "reached_xyz_lifted": 3,
+      "scenes": 50,
+      "successful_seeds": [
+        262,
+        273
+      ],
+      "mean_return": 0.6219974752166447
+    },
+    "weak_varied_learned": {
+      "success": 1,
+      "lifted": 47,
+      "reached_xy_lifted": 16,
+      "reached_xyz_lifted": 5,
+      "scenes": 50,
+      "successful_seeds": [
+        293
+      ],
+      "mean_return": 0.565471780864645
+    },
+    "weak_varied_direct": {
+      "success": 4,
+      "lifted": 49,
+      "reached_xy_lifted": 23,
+      "reached_xyz_lifted": 7,
+      "scenes": 50,
+      "successful_seeds": [
+        273,
+        274,
+        279,
+        293
+      ],
+      "mean_return": 0.7077476105707788
+    },
+    "strong_base": {
+      "success": 48,
+      "lifted": 50,
+      "reached_xy_lifted": 50,
+      "reached_xyz_lifted": 46,
+      "scenes": 50,
+      "successful_seeds": [
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        296,
+        298,
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307
+      ],
+      "mean_return": 2.5557754628597142
+    },
+    "strong_varied_learned": {
+      "success": 48,
+      "lifted": 50,
+      "reached_xy_lifted": 50,
+      "reached_xyz_lifted": 47,
+      "scenes": 50,
+      "successful_seeds": [
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        296,
+        298,
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307
+      ],
+      "mean_return": 2.5562073673183177
+    },
+    "strong_varied_direct": {
+      "success": 47,
+      "lifted": 50,
+      "reached_xy_lifted": 50,
+      "reached_xyz_lifted": 47,
+      "scenes": 50,
+      "successful_seeds": [
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        296,
+        298,
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307
+      ],
+      "mean_return": 2.514769289757138
+    }
+  },
+  "paired": {
+    "weak_demos_learned_vs_weak_base": {
+      "gained": 2,
+      "lost": 2,
+      "both_succeeded": 0,
+      "difference_pp": 0.0,
+      "exact_p": 1.0
+    },
+    "weak_demos_direct_vs_weak_base": {
+      "gained": 0,
+      "lost": 0,
+      "both_succeeded": 2,
+      "difference_pp": 0.0,
+      "exact_p": 1.0
+    },
+    "weak_varied_learned_vs_weak_base": {
+      "gained": 1,
+      "lost": 2,
+      "both_succeeded": 0,
+      "difference_pp": -2.0,
+      "exact_p": 1.0
+    },
+    "weak_varied_direct_vs_weak_base": {
+      "gained": 3,
+      "lost": 1,
+      "both_succeeded": 1,
+      "difference_pp": 4.0,
+      "exact_p": 0.625
+    },
+    "strong_varied_learned_vs_strong_base": {
+      "gained": 0,
+      "lost": 0,
+      "both_succeeded": 48,
+      "difference_pp": 0.0,
+      "exact_p": 1.0
+    },
+    "strong_varied_direct_vs_strong_base": {
+      "gained": 0,
+      "lost": 1,
+      "both_succeeded": 47,
+      "difference_pp": -2.0,
+      "exact_p": 1.0
+    },
+    "weak_demos_direct_vs_weak_demos_learned": {
+      "gained": 2,
+      "lost": 2,
+      "both_succeeded": 0,
+      "difference_pp": 0.0,
+      "exact_p": 1.0
+    },
+    "weak_varied_direct_vs_weak_varied_learned": {
+      "gained": 3,
+      "lost": 0,
+      "both_succeeded": 1,
+      "difference_pp": 6.0,
+      "exact_p": 0.25
+    },
+    "strong_varied_direct_vs_strong_varied_learned": {
+      "gained": 0,
+      "lost": 1,
+      "both_succeeded": 47,
+      "difference_pp": -2.0,
+      "exact_p": 1.0
+    },
+    "strong_base_vs_weak_base": {
+      "gained": 46,
+      "lost": 0,
+      "both_succeeded": 2,
+      "difference_pp": 92.0,
+      "exact_p": 2.842170943040401e-14
+    }
+  },
+  "training": {
+    "original_bc_updates": 12000,
+    "selected_bc_updates": 12000,
+    "calibration": [
+      {
+        "step": 12000,
+        "stacks": 11
+      }
+    ],
+    "extra_demo_seeds": [
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026,
+      2027,
+      2028,
+      2029,
+      2030,
+      2031,
+      2032,
+      2033,
+      2034,
+      2035,
+      2036,
+      2037,
+      2038,
+      2039,
+      2040,
+      2041,
+      2042,
+      2043,
+      2044,
+      2045,
+      2046,
+      2047
+    ],
+    "actors": {
+      "weak_demos_learned": {
+        "imagined_ticks": 576000,
+        "direct_bonuses": null,
+        "actor_rng_sha256": "f4848ec567f391f66a2543188823b21e8d7dcddeb9c2e2b5a3e162d28df1bd88"
+      },
+      "weak_demos_direct": {
+        "imagined_ticks": 576000,
+        "direct_bonuses": 3341,
+        "actor_rng_sha256": "f4848ec567f391f66a2543188823b21e8d7dcddeb9c2e2b5a3e162d28df1bd88"
+      },
+      "weak_varied_learned": {
+        "imagined_ticks": 576000,
+        "direct_bonuses": null,
+        "actor_rng_sha256": "f4848ec567f391f66a2543188823b21e8d7dcddeb9c2e2b5a3e162d28df1bd88"
+      },
+      "weak_varied_direct": {
+        "imagined_ticks": 576000,
+        "direct_bonuses": 3727,
+        "actor_rng_sha256": "f4848ec567f391f66a2543188823b21e8d7dcddeb9c2e2b5a3e162d28df1bd88"
+      },
+      "strong_varied_learned": {
+        "imagined_ticks": 576000,
+        "direct_bonuses": null,
+        "actor_rng_sha256": "f4848ec567f391f66a2543188823b21e8d7dcddeb9c2e2b5a3e162d28df1bd88"
+      },
+      "strong_varied_direct": {
+        "imagined_ticks": 576000,
+        "direct_bonuses": 3727,
+        "actor_rng_sha256": "f4848ec567f391f66a2543188823b21e8d7dcddeb9c2e2b5a3e162d28df1bd88"
+      }
+    }
+  },
+  "measured_fresh": {
+    "tp": 154,
+    "fp": 0,
+    "fn": 0,
+    "tn": 246,
+    "exact_terminal_tick": 154,
+    "episodes": 400,
+    "event_tick_errors": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "max_dense_error": null
+  },
+  "base_trajectory_forecasts": {
+    "demos": {
+      "weak_base": {
+        "windows": 1695,
+        "true_terminal_windows": 2,
+        "predicted_terminal_windows": 1,
+        "matched_terminal_windows": 1,
+        "mean_recorded": 0.017428608611226082,
+        "learned": {
+          "mean": 0.5704761743545532,
+          "mae": 0.6023255586624146,
+          "correlation": 0.022125663808519647,
+          "terminal_mae": 6.218484401702881,
+          "nonterminal_mae": 0.5956910252571106
+        },
+        "direct": {
+          "mean": 0.020339123904705048,
+          "mae": 0.01679619774222374,
+          "correlation": 0.8325066060097893,
+          "terminal_mae": 0.9481742978096008,
+          "nonterminal_mae": 0.015695927664637566
+        }
+      },
+      "strong_base": {
+        "windows": 1318,
+        "true_terminal_windows": 48,
+        "predicted_terminal_windows": 48,
+        "matched_terminal_windows": 48,
+        "mean_recorded": 0.09254126250743866,
+        "learned": {
+          "mean": 0.5534908771514893,
+          "mae": 0.5036157965660095,
+          "correlation": 0.6611547702854704,
+          "terminal_mae": 4.3653244972229,
+          "nonterminal_mae": 0.3576614260673523
+        },
+        "direct": {
+          "mean": 0.09139647334814072,
+          "mae": 0.006507578305900097,
+          "correlation": 0.9995695746119524,
+          "terminal_mae": 0.021941155195236206,
+          "nonterminal_mae": 0.005924262572079897
+        }
+      }
+    },
+    "varied": {
+      "weak_base": {
+        "windows": 1695,
+        "true_terminal_windows": 2,
+        "predicted_terminal_windows": 2,
+        "matched_terminal_windows": 2,
+        "mean_recorded": 0.017428608611226082,
+        "learned": {
+          "mean": 0.026204325258731842,
+          "mae": 0.06053157150745392,
+          "correlation": 0.5200148725715493,
+          "terminal_mae": 1.6230227947235107,
+          "nonterminal_mae": 0.05868574604392052
+        },
+        "direct": {
+          "mean": 0.018540825694799423,
+          "mae": 0.014449645765125751,
+          "correlation": 0.9198007522517925,
+          "terminal_mae": 0.0012978315353393555,
+          "nonterminal_mae": 0.014465183019638062
+        }
+      },
+      "strong_base": {
+        "windows": 1318,
+        "true_terminal_windows": 48,
+        "predicted_terminal_windows": 48,
+        "matched_terminal_windows": 48,
+        "mean_recorded": 0.09254126250743866,
+        "learned": {
+          "mean": 0.030075805261731148,
+          "mae": 0.11131418496370316,
+          "correlation": 0.5478213952425315,
+          "terminal_mae": 1.5777292251586914,
+          "nonterminal_mae": 0.05589062720537186
+        },
+        "direct": {
+          "mean": 0.09247064590454102,
+          "mae": 0.0040916558355093,
+          "correlation": 0.9995205049574699,
+          "terminal_mae": 0.005798324942588806,
+          "nonterminal_mae": 0.004027151502668858
+        }
+      }
+    }
+  },
+  "steering_on_base_traces": {
+    "weak": {
+      "chunk_starts": 3340,
+      "carrying": 1491,
+      "carrying_outside_xy": 1387,
+      "actors": {
+        "learned": {
+          "mean_targetward_change_mm": -0.14650873839855194,
+          "median_absolute_targetward_change_mm": 0.10949765145778656,
+          "grip_flips_while_carrying": 1,
+          "mean_absolute_noise_shift": 0.023658547550439835
+        },
+        "direct": {
+          "mean_targetward_change_mm": 0.1082310825586319,
+          "median_absolute_targetward_change_mm": 0.12832549214363098,
+          "grip_flips_while_carrying": 1,
+          "mean_absolute_noise_shift": 0.0890369638800621
+        }
+      }
+    },
+    "strong": {
+      "chunk_starts": 2613,
+      "carrying": 1115,
+      "carrying_outside_xy": 776,
+      "actors": {
+        "learned": {
+          "mean_targetward_change_mm": 0.010934553109109402,
+          "median_absolute_targetward_change_mm": 0.016530970111489296,
+          "grip_flips_while_carrying": 0,
+          "mean_absolute_noise_shift": 0.01060881931334734
+        },
+        "direct": {
+          "mean_targetward_change_mm": 0.04176747053861618,
+          "median_absolute_targetward_change_mm": 0.04349358752369881,
+          "grip_flips_while_carrying": 0,
+          "mean_absolute_noise_shift": 0.045205533504486084
+        }
+      }
+    }
+  },
+  "baseline_interaction": {
+    "direct_vs_base": {
+      "difference_in_differences_pp": -6.0,
+      "per_scene_counts": {
+        "-2": 0,
+        "-1": 4,
+        "0": 45,
+        "1": 1,
+        "2": 0
+      }
+    },
+    "direct_vs_varied_learned": {
+      "difference_in_differences_pp": -8.0,
+      "per_scene_counts": {
+        "-2": 0,
+        "-1": 4,
+        "0": 46,
+        "1": 0,
+        "2": 0
+      }
+    }
+  }
+}

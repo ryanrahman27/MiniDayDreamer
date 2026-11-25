@@ -8,8 +8,9 @@ import numpy as np
 import torch
 
 from .data import Dataset
-from .models import HORIZON, FlowPolicy, NoiseSAC, make_world
+from .models import HORIZON, FlowPolicy, NoiseSAC, make_policy, make_world
 from .stack import ACTION_DIM, STEP, potential
+from .state_reward import StateReward
 from .transport import CarryStall, WINDOW, targetward_xy
 
 
@@ -79,8 +80,10 @@ def world_diagnostics(wm, data):
 
 
 @torch.no_grad()
-def imagine_batch(wm, policy, sac, starts, chunks=2):
-    state = starts[torch.randint(len(starts), (128 // chunks,))]
+def imagine_batch(wm, policy, sac, starts, chunks=2, state_reward=None):
+    indices = torch.randint(len(starts), (128 // chunks,))
+    state = starts[indices]
+    dwell = state_reward.starts[indices] if state_reward is not None else None
     transitions = []
     for _ in range(chunks):
         shift, _ = sac.draw(state)
@@ -90,8 +93,13 @@ def imagine_batch(wm, policy, sac, starts, chunks=2):
         discount = torch.ones_like(state[:, :1])
         reward = torch.zeros_like(discount)
         for action in actions.unbind(1):
+            previous = successor
             successor = wm.imagine(successor, action, sample=True)
-            reward += discount * wm.reward(successor)
+            if state_reward is None:
+                tick_reward = wm.reward(successor)
+            else:
+                tick_reward, dwell = state_reward.step(wm.decode(previous), wm.decode(successor), dwell)
+            reward += discount * tick_reward
             discount *= .99 * (1 - wm.success(successor).sigmoid())
         transitions.append(torch.cat((state, shift, reward, discount, successor), -1))
         state = successor
@@ -134,6 +142,7 @@ def calibrate(args, env):
 def train(args):
     data = Dataset(args.data, args.seed)
     demo = np.flatnonzero(data.split == "demo")
+    direct = StateReward(data, demo) if args.reward_mode == "direct" else None
     wm_ids = np.flatnonzero(data.split != "holdout") if args.coverage == "varied" else demo
     if args.base_model:
         base = torch.load(args.base_model, map_location="cpu", weights_only=True)
@@ -158,16 +167,19 @@ def train(args):
             raise ValueError("Mismatched short-horizon reference")
         verify_weights(policy, ref["policy"], "frozen base")
         verify_weights(wm, ref["world"], "frozen world")
-        short = fit_steering(wm, policy, starts, args.rl_steps, 2)
+        reference_reward = StateReward(data, demo) if ref.get("reward_mode") == "direct" else None
+        short = fit_steering(wm, policy, starts, args.rl_steps, 2, reference_reward)
         verify_weights(short.actor, ref["actor"], "six-step actor")
         print("Reproduced the base, RSSM and six-step actor weights exactly", flush=True)
         torch.set_rng_state(pre_actor_rng)
-    sac = fit_steering(wm, policy, starts, args.rl_steps, args.imagination_chunks)
+    sac = fit_steering(wm, policy, starts, args.rl_steps, args.imagination_chunks, direct)
     torch.save(dict(policy=policy.state_dict(), world=wm.state_dict(), actor=sac.actor.state_dict(),
                     eval_seed=int(data.seeds.max()) + 1, coverage=args.coverage, training_seed=args.seed,
                     demos=len(demo), world_episodes=len(wm_ids), imagination_start_episodes=len(demo),
                     backend=data.backend, diagnostics=metrics, world_model=args.world_model,
                     imagination_chunks=args.imagination_chunks, rl_steps=args.rl_steps,
+                    reward_mode=args.reward_mode, direct_bonuses=direct.bonuses if direct else None,
+                    imagined_ticks=args.rl_steps * 128 * HORIZON,
                     pre_actor_rng=pre_actor_rng, matched_short=bool(args.match_short)), args.out)
 
 
@@ -177,13 +189,13 @@ def verify_weights(module, weights, name):
         raise ValueError(f"Could not reproduce {name} weights")
 
 
-def fit_steering(wm, policy, starts, rl_steps, chunks):
+def fit_steering(wm, policy, starts, rl_steps, chunks, state_reward=None):
     sac = NoiseSAC(wm.features)
     # Circular replay measured in 128-transition batches.
     blocks = min(128, rl_steps)
     replay = torch.empty((blocks, 128, 2 * starts.shape[1] + ACTION_DIM + 2))
     for i in range(rl_steps):
-        replay[i % blocks] = imagine_batch(wm, policy, sac, starts, chunks)
+        replay[i % blocks] = imagine_batch(wm, policy, sac, starts, chunks, state_reward)
         flat = replay[:min(i + 1, blocks)].flatten(0, 1)
         sample = flat[torch.randint(len(flat), (128,))]
         sac.update(*sample.split([starts.shape[1], ACTION_DIM, 1, 1, starts.shape[1]], dim=1))
@@ -195,7 +207,7 @@ def load_policies(path, env):
     if ckpt["backend"] != env.backend:
         raise ValueError(f"Checkpoint requires the {ckpt['backend']} backend")
     wm = make_world(ckpt.get("world_model", "absolute"))
-    pi, sac = FlowPolicy(), NoiseSAC(wm.features)
+    pi, sac = make_policy(ckpt.get("policy_kind", "original")), NoiseSAC(wm.features)
     pi.load_state_dict(ckpt["policy"])
     wm.load_state_dict(ckpt["world"])
     sac.actor.load_state_dict(ckpt["actor"])

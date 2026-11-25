@@ -28,6 +28,8 @@ def main():
     t.add_argument("--seed", type=int, default=0)
     t.add_argument("--world-model", choices=["absolute", "residual"], default="residual")
     t.add_argument("--coverage", choices=["demos", "varied"], default="varied")
+    t.add_argument("--reward-mode", choices=["learned", "direct"], default="learned",
+                   help="Score imagined transitions with the reward head or the Isaac state reward")
     t.add_argument("--base-model", type=Path, help="Reuse a frozen base from calibrate")
     t.add_argument("--imagination-chunks", type=positive, choices=(1, 2, 4, 8, 16, 32, 64, 128), default=2,
                    help="Depth of each RSSM rollout in three-control-tick chunks (128 chunk transitions per update)")

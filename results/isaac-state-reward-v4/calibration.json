@@ -1,0 +1,104 @@
+[
+  {
+    "step": 12000,
+    "stacks": 11,
+    "outcomes": [
+      {
+        "seed": 5200,
+        "success": 1,
+        "steps": 138,
+        "lifted": true,
+        "episode_return": 2.618257976457537,
+        "final_xy_error_mm": 1.34225594997406
+      },
+      {
+        "seed": 5201,
+        "success": 0,
+        "steps": 200,
+        "lifted": true,
+        "episode_return": 0.6099883987755685,
+        "final_xy_error_mm": 91.89097595214844
+      },
+      {
+        "seed": 5202,
+        "success": 1,
+        "steps": 138,
+        "lifted": true,
+        "episode_return": 2.610248160240001,
+        "final_xy_error_mm": 1.827061414718628
+      },
+      {
+        "seed": 5203,
+        "success": 1,
+        "steps": 146,
+        "lifted": true,
+        "episode_return": 2.6229725381889795,
+        "final_xy_error_mm": 2.596381664276123
+      },
+      {
+        "seed": 5204,
+        "success": 1,
+        "steps": 164,
+        "lifted": true,
+        "episode_return": 2.6556726719362214,
+        "final_xy_error_mm": 0.5012568235397339
+      },
+      {
+        "seed": 5205,
+        "success": 1,
+        "steps": 151,
+        "lifted": true,
+        "episode_return": 2.6283039290345123,
+        "final_xy_error_mm": 2.1475048065185547
+      },
+      {
+        "seed": 5206,
+        "success": 1,
+        "steps": 167,
+        "lifted": true,
+        "episode_return": 2.6635666197082064,
+        "final_xy_error_mm": 1.17530357837677
+      },
+      {
+        "seed": 5207,
+        "success": 1,
+        "steps": 157,
+        "lifted": true,
+        "episode_return": 2.647907091346836,
+        "final_xy_error_mm": 0.5792875289916992
+      },
+      {
+        "seed": 5208,
+        "success": 1,
+        "steps": 147,
+        "lifted": true,
+        "episode_return": 2.608338430589959,
+        "final_xy_error_mm": 4.732516765594482
+      },
+      {
+        "seed": 5209,
+        "success": 1,
+        "steps": 163,
+        "lifted": true,
+        "episode_return": 2.6371252212078042,
+        "final_xy_error_mm": 2.34999942779541
+      },
+      {
+        "seed": 5210,
+        "success": 1,
+        "steps": 139,
+        "lifted": true,
+        "episode_return": 2.6084998799215047,
+        "final_xy_error_mm": 1.4129177331924438
+      },
+      {
+        "seed": 5211,
+        "success": 1,
+        "steps": 165,
+        "lifted": true,
+        "episode_return": 2.6508261026298876,
+        "final_xy_error_mm": 1.7936567068099976
+      }
+    ]
+  }
+]

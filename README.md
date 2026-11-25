@@ -4,6 +4,8 @@ Can a weak imitation policy learn to stack a red cube on a blue cube by changing
 
 ## Isaac pilot
 
+Computing imagination rewards from predicted cube and gripper states gave 4/50 stacks with the original base and varied RSSM, compared with 1/50 using the learned reward and 2/50 from imitation alone. A separate 72-demo base stacked on 48/50 of the same scenes before steering and 47/50 with direct-reward steering. [Paired reward comparison, forecast checks and stronger baseline](results/isaac-state-reward-v4/README.md)
+
 Extending imagination from six to 24 ticks yielded 0/50 stacks at both depths with demos-only data and 4/50 versus 3/50 with varied data. A paired Isaac intervention traced a common carry stall to weak target-directed commands. [Horizon comparison and carry-stall measurements](results/isaac-horizon-24ticks-v3/README.md)
 
 The repaired RSSM beat a stationary cube forecast on 12 independent scenes. On 50 fresh stacking scenes, each repaired steering actor completed two stacks and the base completed one. A gripper intervention tested whether delaying release helped. [World-model repair and gripper-timing results](results/isaac-residual-24-v2/README.md)
