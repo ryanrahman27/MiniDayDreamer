@@ -1,4 +1,6 @@
-"""Isaac Lab 2.3.2 adapter. Import after AppLauncher starts the Kit application."""
+"""Isaac Lab adapter. Import after AppLauncher starts the Kit application."""
+
+import random
 
 import gymnasium as gym
 import isaaclab_tasks  # noqa: F401 -- registers the task
@@ -9,7 +11,22 @@ import torch
 from .stack import STEP
 
 
-TASK = "Isaac-Stack-Cube-Franka-IK-Rel-Visuomotor-v0"
+TASK_V2 = "Isaac-Stack-Cube-Franka-IK-Rel-Visuomotor-v0"
+TASK_V3 = "IsaacContrib-Stack-Cube-Franka-IK-Rel-Visuomotor"
+
+
+def randomize_tabletop(env, env_ids, asset_cfg, textures, default_texture="", texture_rotation=(0.0, 0.0)):
+    """Change the rendered tabletop's authored material, leaving its collider intact."""
+    import omni.usd
+    from pxr import Sdf
+
+    stage = omni.usd.get_context().get_stage()
+    visuals = stage.GetPrimAtPath("/World/envs/env_0/Table/Visuals")
+    if visuals.IsInstance():
+        visuals.SetInstanceable(False)
+    shader = stage.GetPrimAtPath(visuals.GetPath().AppendPath("Looks/table_base/Shader"))
+    texture = shader.GetAttribute("inputs:diffuse_texture")
+    texture.Set(Sdf.AssetPath(random.choice(textures)))
 
 
 class IsaacStack:
@@ -19,14 +36,23 @@ class IsaacStack:
     grip_delay = 7
 
     def __init__(self):
-        cfg = parse_env_cfg(TASK, device="cuda:0", num_envs=1)
+        task = TASK_V3 if TASK_V3 in gym.registry else TASK_V2
+        options = {"overrides": ["physics=isaacsim_physx"]} if task == TASK_V3 else {}
+        cfg = parse_env_cfg(task, device="cuda:0", num_envs=1, **options)
+        # The upstream lighting and material reset events use these flags in every split.
+        cfg.eval_mode = True
+        cfg.eval_type = "all"
+        # These HDR domes saturate the white Franka at the upstream training intensities.
+        cfg.events.randomize_light.params.update(intensity_range=(500.0, 1100.0), color_variation=0.15)
+        cfg.events.randomize_robot_arm_visual_texture = None
+        cfg.events.randomize_table_visual_material.func = randomize_tabletop
         # Keep the green cube as a distractor. The outer task scores red on blue.
         # Disable internal auto-resets so the final transition still contains its terminal scene.
         for term in ("success", "time_out", "cube_1_dropping", "cube_2_dropping", "cube_3_dropping"):
             setattr(cfg.terminations, term, None)
         cfg.scene.table_cam.width = 640
         cfg.scene.table_cam.height = 480
-        self.env = gym.make(TASK, cfg=cfg)
+        self.env = gym.make(task, cfg=cfg)
         self.scale = cfg.actions.arm_action.scale
         self.frame_callback = None
 
@@ -67,7 +93,8 @@ class IsaacStack:
         state = self.state(obs)
         tool, red, blue = state[:9].reshape(3, 3) * .1
         scene = self.env.unwrapped.scene
-        slow = all(scene[k].data.root_lin_vel_w[0].norm().item() < .025 for k in ("cube_1", "cube_2"))
+        velocities = (scene[k].data.root_lin_vel_w for k in ("cube_1", "cube_2"))
+        slow = all(getattr(v, "torch", v)[0].norm().item() < .025 for v in velocities)
         stacked = (not self.closed and self.aperture > .035 and np.linalg.norm(tool - red) > .05
                    and np.linalg.norm(red[:2] - blue[:2]) < .012
                    and abs(red[2] - blue[2] - self.block_height) < .008

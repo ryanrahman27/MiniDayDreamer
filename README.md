@@ -4,7 +4,15 @@ Can a weak imitation policy learn to stack a red cube on a blue cube by changing
 
 ## Isaac pilot
 
-Use Isaac Lab **v2.3.2**, Isaac Sim **5.1.0** and its Python **3.11** environment. The Franka visuomotor stacking scene supplies randomized cube positions and orientations, lighting and surface materials. The green cube is a distractor. The experiment ends successfully when the red cube stays centered above blue, both cubes move slowly, and the gripper is open and clear for eight control ticks. See the [pinned installation guide](https://isaac-sim.github.io/IsaacLab/v2.3.2/source/setup/installation/index.html), [scene configuration](https://github.com/isaac-sim/IsaacLab/blob/v2.3.2/source/isaaclab_tasks/isaaclab_tasks/manager_based/manipulation/stack/config/franka/stack_ik_rel_visuomotor_env_cfg.py) and [GPU requirements](https://docs.isaacsim.omniverse.nvidia.com/5.1.0/installation/requirements.html).
+The Franka visuomotor stacking scene randomizes cube placements, lighting and materials. The green cube is a distractor. The experiment ends successfully when the red cube stays centered above blue, both cubes move slowly, and the gripper is open and clear for eight control ticks.
+
+For the RTX PRO 6000 Blackwell Max-Q rental, use Python 3.12, Isaac Lab 3.0.0 and Isaac Sim 6.2. On the Ubuntu 24.04 Vast PyTorch image, install the graphics libraries with `apt-get install libxt6t64 libglu1-mesa`. Activate a Python 3.12 environment, then install NVIDIA's tested package combination. [Isaac Lab installation](https://docs.nvidia.com/isaaclab/3.0/isaac-lab/installation)
+
+```bash
+uv pip install 'isaaclab[isaacsim]==3.0.0' \
+  --overrides https://raw.githubusercontent.com/isaac-sim/IsaacLab/v3.0.0/tools/wheel_builder/uv-overrides.txt \
+  --extra-index-url https://pypi.nvidia.com --torch-backend cu130 --index-strategy unsafe-best-match
+```
 
 With the Isaac environment activated and MiniDayDreamer as the current directory:
 
@@ -38,4 +46,4 @@ python -m minidaydreamer train --data runs/smoke.npz --bc-steps 2000 --model-ste
 python -m minidaydreamer eval --backend mujoco --model runs/smoke.pt --episodes 32
 ```
 
-The Isaac runtime, camera capture and physical grasp controller still require validation on an RTX host. The current experiment measures performance in simulation.
+The scripted controller completed and released stable stacks on seeds 0 and 1 on the RTX rental. The table camera recorded 640 × 480 video at 20 fps. These runs validate the simulation, grasp controller and camera. The learned policy needs its own paired evaluation in Isaac.
