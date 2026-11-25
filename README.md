@@ -4,6 +4,8 @@ Can a weak imitation policy learn to stack a red cube on a blue cube by changing
 
 ## Isaac pilot
 
+The repaired RSSM beat a stationary cube forecast on 12 independent scenes. On 50 fresh stacking scenes, each repaired steering actor completed two stacks and the base completed one. A gripper intervention tested whether delaying release helped. [World-model repair and gripper-timing results](results/isaac-residual-24-v2/README.md)
+
 On 50 held-out Isaac scenes, the frozen policy stacked 2/50 times, demos-only RSSM steering stacked 1/50, and varied-rollout RSSM steering stacked 2/50. All three lifted the cube on every scene. [Experiment results and paired outcomes](results/isaac-stack-24-v1/README.md)
 
 The Franka visuomotor stacking scene randomizes cube placements, lighting and materials. The green cube is a distractor. The experiment ends successfully when the red cube stays centered above blue, both cubes move slowly, and the gripper is open and clear for eight control ticks.

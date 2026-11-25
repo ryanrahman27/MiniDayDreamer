@@ -1,0 +1,271 @@
+{
+  "expert": {
+    "episodes": 24,
+    "categories": {
+      "first_open_in_zone": 24
+    },
+    "commanded_open_while_grasped": 24,
+    "median_open_xy_mm": 1.3392343521118164,
+    "median_open_height_error_mm": 3.18389892578125,
+    "reached_zone_while_held": 24,
+    "median_first_open_duration_steps": 25.0,
+    "reclosed_within_three_steps": 0,
+    "lost_grasp_signal_within_three_steps": 24,
+    "ended_grasped": 0,
+    "grasp_loss_before_open": 0,
+    "intervention_activated": 0
+  },
+  "policies": {
+    "base": {
+      "all": {
+        "episodes": 50,
+        "categories": {
+          "never_opened_after_lift": 19,
+          "first_open_off_center": 25,
+          "first_open_in_zone": 3,
+          "first_open_at_wrong_height": 2,
+          "no_lift": 1
+        },
+        "commanded_open_while_grasped": 30,
+        "median_open_xy_mm": 51.75718688964844,
+        "median_open_height_error_mm": 4.023036956787109,
+        "reached_zone_while_held": 8,
+        "median_first_open_duration_steps": 18.5,
+        "reclosed_within_three_steps": 0,
+        "lost_grasp_signal_within_three_steps": 30,
+        "ended_grasped": 31,
+        "grasp_loss_before_open": 0,
+        "intervention_activated": 0
+      },
+      "failed": {
+        "episodes": 49,
+        "categories": {
+          "never_opened_after_lift": 19,
+          "first_open_off_center": 25,
+          "first_open_in_zone": 3,
+          "no_lift": 1,
+          "first_open_at_wrong_height": 1
+        },
+        "commanded_open_while_grasped": 29,
+        "median_open_xy_mm": 52.2744255065918,
+        "median_open_height_error_mm": 3.7533340454101562,
+        "reached_zone_while_held": 8,
+        "median_first_open_duration_steps": 20.0,
+        "reclosed_within_three_steps": 0,
+        "lost_grasp_signal_within_three_steps": 29,
+        "ended_grasped": 31,
+        "grasp_loss_before_open": 0,
+        "intervention_activated": 0
+      }
+    },
+    "demos": {
+      "all": {
+        "episodes": 50,
+        "categories": {
+          "never_opened_after_lift": 39,
+          "first_open_at_wrong_height": 2,
+          "first_open_in_zone": 1,
+          "first_open_off_center": 8
+        },
+        "commanded_open_while_grasped": 11,
+        "median_open_xy_mm": 33.19435501098633,
+        "median_open_height_error_mm": 19.799724578857422,
+        "reached_zone_while_held": 1,
+        "median_first_open_duration_steps": 18.0,
+        "reclosed_within_three_steps": 0,
+        "lost_grasp_signal_within_three_steps": 11,
+        "ended_grasped": 43,
+        "grasp_loss_before_open": 0,
+        "intervention_activated": 0
+      },
+      "failed": {
+        "episodes": 48,
+        "categories": {
+          "never_opened_after_lift": 39,
+          "first_open_off_center": 8,
+          "first_open_at_wrong_height": 1
+        },
+        "commanded_open_while_grasped": 9,
+        "median_open_xy_mm": 47.09097671508789,
+        "median_open_height_error_mm": 19.799724578857422,
+        "reached_zone_while_held": 0,
+        "median_first_open_duration_steps": 20.0,
+        "reclosed_within_three_steps": 0,
+        "lost_grasp_signal_within_three_steps": 9,
+        "ended_grasped": 43,
+        "grasp_loss_before_open": 0,
+        "intervention_activated": 0
+      }
+    },
+    "gated_base": {
+      "all": {
+        "episodes": 50,
+        "categories": {
+          "never_opened_after_lift": 42,
+          "first_open_in_zone": 6,
+          "no_lift": 1,
+          "first_open_without_grasp": 1
+        },
+        "commanded_open_while_grasped": 6,
+        "median_open_xy_mm": 9.22010850906372,
+        "median_open_height_error_mm": 0.29998207092285156,
+        "reached_zone_while_held": 11,
+        "median_first_open_duration_steps": 20.0,
+        "reclosed_within_three_steps": 0,
+        "lost_grasp_signal_within_three_steps": 6,
+        "ended_grasped": 44,
+        "grasp_loss_before_open": 1,
+        "intervention_activated": 27
+      },
+      "failed": {
+        "episodes": 49,
+        "categories": {
+          "never_opened_after_lift": 42,
+          "first_open_in_zone": 5,
+          "no_lift": 1,
+          "first_open_without_grasp": 1
+        },
+        "commanded_open_while_grasped": 5,
+        "median_open_xy_mm": 9.163853645324707,
+        "median_open_height_error_mm": -0.2613639831542969,
+        "reached_zone_while_held": 10,
+        "median_first_open_duration_steps": 18.0,
+        "reclosed_within_three_steps": 0,
+        "lost_grasp_signal_within_three_steps": 5,
+        "ended_grasped": 44,
+        "grasp_loss_before_open": 1,
+        "intervention_activated": 26
+      }
+    },
+    "original_demos": {
+      "all": {
+        "episodes": 50,
+        "categories": {
+          "never_opened_after_lift": 31,
+          "first_open_off_center": 17,
+          "first_open_at_wrong_height": 2
+        },
+        "commanded_open_while_grasped": 19,
+        "median_open_xy_mm": 34.10979080200195,
+        "median_open_height_error_mm": 17.57992935180664,
+        "reached_zone_while_held": 2,
+        "median_first_open_duration_steps": 22.0,
+        "reclosed_within_three_steps": 0,
+        "lost_grasp_signal_within_three_steps": 19,
+        "ended_grasped": 38,
+        "grasp_loss_before_open": 0,
+        "intervention_activated": 0
+      },
+      "failed": {
+        "episodes": 49,
+        "categories": {
+          "never_opened_after_lift": 31,
+          "first_open_off_center": 17,
+          "first_open_at_wrong_height": 1
+        },
+        "commanded_open_while_grasped": 18,
+        "median_open_xy_mm": 40.76629829406738,
+        "median_open_height_error_mm": 16.702903747558594,
+        "reached_zone_while_held": 2,
+        "median_first_open_duration_steps": 23.0,
+        "reclosed_within_three_steps": 0,
+        "lost_grasp_signal_within_three_steps": 18,
+        "ended_grasped": 38,
+        "grasp_loss_before_open": 0,
+        "intervention_activated": 0
+      }
+    },
+    "original_varied": {
+      "all": {
+        "episodes": 50,
+        "categories": {
+          "first_open_off_center": 32,
+          "never_opened_after_lift": 12,
+          "first_open_in_zone": 2,
+          "first_open_at_wrong_height": 2,
+          "no_lift": 2
+        },
+        "commanded_open_while_grasped": 36,
+        "median_open_xy_mm": 33.35113334655762,
+        "median_open_height_error_mm": 10.468118667602539,
+        "reached_zone_while_held": 7,
+        "median_first_open_duration_steps": 23.0,
+        "reclosed_within_three_steps": 0,
+        "lost_grasp_signal_within_three_steps": 36,
+        "ended_grasped": 24,
+        "grasp_loss_before_open": 0,
+        "intervention_activated": 0
+      },
+      "failed": {
+        "episodes": 49,
+        "categories": {
+          "first_open_off_center": 32,
+          "never_opened_after_lift": 12,
+          "first_open_in_zone": 2,
+          "no_lift": 2,
+          "first_open_at_wrong_height": 1
+        },
+        "commanded_open_while_grasped": 35,
+        "median_open_xy_mm": 35.330650329589844,
+        "median_open_height_error_mm": 10.014812469482422,
+        "reached_zone_while_held": 7,
+        "median_first_open_duration_steps": 24.0,
+        "reclosed_within_three_steps": 0,
+        "lost_grasp_signal_within_three_steps": 35,
+        "ended_grasped": 24,
+        "grasp_loss_before_open": 0,
+        "intervention_activated": 0
+      }
+    },
+    "varied": {
+      "all": {
+        "episodes": 50,
+        "categories": {
+          "never_opened_after_lift": 24,
+          "first_open_off_center": 22,
+          "first_open_in_zone": 4
+        },
+        "commanded_open_while_grasped": 26,
+        "median_open_xy_mm": 49.080810546875,
+        "median_open_height_error_mm": 4.806301116943359,
+        "reached_zone_while_held": 9,
+        "median_first_open_duration_steps": 20.0,
+        "reclosed_within_three_steps": 1,
+        "lost_grasp_signal_within_three_steps": 26,
+        "ended_grasped": 34,
+        "grasp_loss_before_open": 0,
+        "intervention_activated": 0
+      },
+      "failed": {
+        "episodes": 48,
+        "categories": {
+          "never_opened_after_lift": 24,
+          "first_open_off_center": 22,
+          "first_open_in_zone": 2
+        },
+        "commanded_open_while_grasped": 24,
+        "median_open_xy_mm": 57.29926872253418,
+        "median_open_height_error_mm": 5.299413681030273,
+        "reached_zone_while_held": 7,
+        "median_first_open_duration_steps": 18.5,
+        "reclosed_within_three_steps": 1,
+        "lost_grasp_signal_within_three_steps": 24,
+        "ended_grasped": 34,
+        "grasp_loss_before_open": 0,
+        "intervention_activated": 0
+      }
+    }
+  },
+  "gate_effect": {
+    "applied": {
+      "scenes": 27,
+      "gained": 0,
+      "lost": 0
+    },
+    "unused": {
+      "scenes": 23,
+      "gained": 0,
+      "lost": 0
+    }
+  }
+}

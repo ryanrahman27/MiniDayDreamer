@@ -112,6 +112,14 @@ def analyze(run):
     for arm in sorted({r["policy"] for r in rows}):
         subset = [r for r in rows if r["policy"] == arm]
         report["policies"][arm] = dict(all=describe(subset), failed=describe([r for r in subset if not r["success"]]))
+    if "gated_base" in report["policies"]:
+        base_success = {r["seed"]: r["success"] for r in rows if r["policy"] == "base"}
+        report["gate_effect"] = {}
+        for active in (True, False):
+            subset = [r for r in rows if r["policy"] == "gated_base" and bool(r["override_steps"]) == active]
+            delta = [r["success"] - base_success[r["seed"]] for r in subset]
+            report["gate_effect"]["applied" if active else "unused"] = dict(
+                scenes=len(subset), gained=delta.count(1), lost=delta.count(-1))
     (run / "release-summary.json").write_text(json.dumps(report, indent=2, allow_nan=False) + "\n")
     return report
 

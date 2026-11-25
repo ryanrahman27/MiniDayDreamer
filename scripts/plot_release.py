@@ -14,18 +14,21 @@ from diagnose_stack import release_events
 
 
 def plot(run, seeds):
-    fig, axes = plt.subplots(3, len(seeds), figsize=(5.3 * len(seeds) + 1.2, 6.6),
-                             sharex=True, sharey=True, squeeze=False)
-    arms = (("base", "Frozen base"), ("varied", "Repaired varied RSSM"),
+    arms = (("base", "Frozen base"), ("demos", "Repaired demos-only RSSM"), ("varied", "Repaired varied RSSM"),
             ("gated_base", "Base with delayed opening"))
+    fig, axes = plt.subplots(len(arms), len(seeds), figsize=(5.3 * len(seeds) + 1.2, 8.2),
+                             sharex=True, sharey=True, squeeze=False)
+    max_xy, max_tick = 12., 0
     for (row, col), ax in np.ndenumerate(axes):
         arm, title = arms[row]
         seed = seeds[col]
         with np.load(run / "traces" / f"{arm}-{seed}.npz") as d:
-            obs, actions = d["obs"], d["actions"]
+            obs, actions, success = d["obs"], d["actions"], bool(d["success"])
             event = release_events(obs, actions, d["proposed_grip"], d["aperture_m"])
         ticks = np.arange(len(obs))
         xy = 100 * np.linalg.norm(obs[:, 3:5] - obs[:, 6:8], axis=1)
+        max_xy = max(max_xy, float(xy.max()))
+        max_tick = max(max_tick, len(actions))
         ax.fill_between(ticks, 0, np.r_[actions[:, 3] <= 0, actions[-1, 3] <= 0].astype(float),
                         step="post", transform=ax.get_xaxis_transform(), color="#c8dcf1", alpha=.8)
         ax.plot(ticks, xy, color="#18466b", linewidth=1.8)
@@ -38,10 +41,11 @@ def plot(run, seeds):
             ax.scatter(opening, xy[opening], color="#b93e39", s=42, zorder=4)
             ax.annotate(f"{xy[opening]:.0f} mm", (opening, xy[opening]), xytext=(6, 5),
                         textcoords="offset points", color="#9d302d", fontsize=9)
-        ax.set_title(f"Scene {seed} · {title}", loc="left", fontsize=10, fontweight="bold")
+        ax.set_title(f"Scene {seed} · {title}" + (" · stacked" if success else ""),
+                     loc="left", fontsize=10, fontweight="bold")
         ax.spines[["right", "top"]].set_visible(False)
-        ax.set_ylim(bottom=0)
-        ax.set_xlim(left=0)
+    axes[0, 0].set_ylim(0, max_xy * 1.16)
+    axes[0, 0].set_xlim(0, max_tick + 1)
     fig.supxlabel("Control tick (20 ticks per second)", fontsize=10)
     fig.supylabel("Horizontal distance between cube centers (mm)", fontsize=10)
     fig.suptitle("Cube transport and gripper timing in Isaac", fontsize=15, fontweight="bold")
