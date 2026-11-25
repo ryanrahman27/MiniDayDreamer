@@ -34,7 +34,7 @@ def augment(obs, actions):
     return torch.cat((pos, obs[:, 9:]), dim=1), act
 
 
-def fit_bc(run):
+def fit_bc(run, checkpoints=(12000, 30000)):
     # The world-model dataset and the additional cloning-only data have separate files.
     obs, act, lens, seeds = [], [], [], []
     for name, expected in (("corpus.npz", 24), ("extra-bc.npz", 48)):
@@ -51,7 +51,7 @@ def fit_bc(run):
     policy = make_policy("relative").to(device)
     opt = torch.optim.Adam(policy.parameters(), lr=.001)
     batch = 128
-    for step in range(1, 30001):
+    for step in range(1, max(checkpoints) + 1):
         ep = torch.randint(len(lengths), (batch,), device=device)
         tick = (torch.rand(batch, device=device) * (lengths[ep]-HORIZON+1)).long()
         o, a = augment(obs[ep, tick], act[ep[:, None], tick[:, None]+torch.arange(HORIZON, device=device)])
@@ -60,7 +60,7 @@ def fit_bc(run):
         loss.backward()
         torch.nn.utils.clip_grad_norm_(policy.parameters(), 5)
         opt.step()
-        if step in (12000, 30000):
+        if step in checkpoints:
             torch.save(dict(policy={k: v.cpu() for k, v in policy.state_dict().items()}, policy_kind="relative",
                             bc_steps=step, demo_seeds=list(map(int, seeds)), source_sha256=digest(run/"extra-bc.npz")),
                        run/f"candidate-{step}.pt")
@@ -71,7 +71,8 @@ def fit_actors(args):
     run = args.run
     data = Dataset(run/"corpus.npz", 0)
     ids = np.flatnonzero(data.split == "demo")
-    base = load(run/("base.pt" if args.group == "weak" else "selected-base.pt"))
+    base_path = run/("base.pt" if args.group == "weak" else "selected-base.pt")
+    base = load(base_path)
     assert load(run/"base.pt")["corpus_sha256"] == digest(run/"corpus.npz")
     kind = base.get("policy_kind", "original")
     pi = make_policy(kind).eval().requires_grad_(False)
@@ -93,6 +94,7 @@ def fit_actors(args):
                 verify_weights(actor.actor, short["actor"], "existing learned-reward actor")
             checkpoint = dict(short, policy=pi.state_dict(), policy_kind=kind, actor=actor.actor.state_dict(),
                               reward_mode=mode, imagination_chunks=2, rl_steps=1500, base_group=args.group,
+                              base_checkpoint_sha256=digest(base_path), base_bc_steps=base["bc_steps"],
                               imagined_ticks=576000, direct_bonuses=direct.bonuses if direct else None,
                               actor_rng_sha256=hashlib.sha256(ref["pre_actor_rng"].numpy().tobytes()).hexdigest())
             if direct and direct.ticks != checkpoint["imagined_ticks"]:
@@ -152,7 +154,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=("bc","calibrate","actors","score"))
     parser.add_argument("run", type=Path)
-    parser.add_argument("--group", choices=("weak","strong"), default="weak")
+    parser.add_argument("--group", choices=("weak","strong","mid"), default="weak")
     parser.add_argument("--short", type=Path)
     parser.add_argument("--rng", type=Path)
     parser.add_argument("--first", type=int, default=258)

@@ -25,14 +25,25 @@ def plot(folder):
         ("strong_varied_direct", "Varied RSSM · direct"),
     ]
     scores = {(r["arm"], int(r["seed"])): int(r["success"]) for r in rows}
-    fig, axes = plt.subplots(2, 1, figsize=(10.3, 4.25), height_ratios=[5, 3])
-    fig.subplots_adjust(left=.195, right=.895, bottom=.14, top=.86, hspace=.57)
-    for ax, group, label in zip(axes, [arms[:5], arms[5:]], ["24-demo imitation policy", "72-demo imitation policy"]):
+    if ("mid_base", seeds[0]) in scores:
+        groups = [[("mid_base", "Frozen base"), ("mid_varied_learned", "Learned reward"),
+                   ("mid_varied_direct", "Direct state reward")]]
+        labels = ["Development-selected baseline · varied RSSM"]
+        fig, ax = plt.subplots(figsize=(12, 2.8))
+        axes = [ax]
+        fig.subplots_adjust(left=.16, right=.91, bottom=.23, top=.68)
+    else:
+        groups = [arms[:5], arms[5:]]
+        labels = ["24-demo imitation policy", "72-demo imitation policy"]
+        fig, axes = plt.subplots(2, 1, figsize=(10.3, 4.25), height_ratios=[5, 3])
+        fig.subplots_adjust(left=.195, right=.895, bottom=.14, top=.86, hspace=.57)
+    ticks = [0] + [int(i)-1 for i in np.linspace(0, len(seeds), 6)[1:]]
+    for ax, group, label in zip(axes, groups, labels):
         matrix = np.array([[scores[name,seed] for seed in seeds] for name, _ in group])
         ax.imshow(matrix, vmin=0, vmax=1, cmap=ListedColormap(["#e7ecee","#00766d"]), aspect="auto",
                   interpolation="nearest")
         ax.set_yticks(range(len(group)), [name for _, name in group],fontsize=9)
-        ax.set_xticks([0, 9, 19, 29, 39, 49], [seeds[i] for i in (0,9,19,29,39,49)],fontsize=9)
+        ax.set_xticks(ticks, [seeds[i] for i in ticks],fontsize=9)
         ax.set_xticks(np.arange(.5,len(seeds)-.5),minor=True)
         ax.set_yticks(np.arange(.5,len(group)-.5),minor=True)
         ax.grid(which="minor",color="white",linewidth=.6)
@@ -42,9 +53,10 @@ def plot(folder):
             ax.text(len(seeds)-.05,y,f"{count} / {len(seeds)}",va="center",fontsize=9)
         for side in ax.spines.values():
             side.set_visible(False)
-    axes[0].tick_params(labelbottom=False)
-    axes[1].set_xlabel("Held-out Isaac scene seed",fontsize=9)
-    fig.text(.195,.97,"Stable stacks on matched scenes",va="top",fontsize=16,fontweight="bold")
+    for ax in axes[:-1]:
+        ax.tick_params(labelbottom=False)
+    axes[-1].set_xlabel("Held-out Isaac scene seed",fontsize=9)
+    fig.text(fig.subplotpars.left,.97,"Stable stacks on matched scenes",va="top",fontsize=16,fontweight="bold")
     fig.text(.895,.965,"Teal = stacked",va="top",ha="right",color="#00645e",fontsize=10)
     fig.savefig(folder / "paired-stacks.png",dpi=170,facecolor="white")
     plt.close(fig)
