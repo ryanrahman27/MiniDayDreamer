@@ -215,12 +215,16 @@ def load_policies(path, env):
 
 
 @torch.no_grad()
-def policy_episode(env, pi, wm, sac, seed, video=None, trace=None, release_gate=False, transport_pulse=None):
+def policy_episode(env, pi, wm, sac, seed, video=None, trace=None, release_gate=False, transport_pulse=None,
+                   handoff_at_target=False):
+    if handoff_at_target and sac is None:
+        raise ValueError("Target handoff requires a steering actor")
     generator = torch.Generator().manual_seed(seed)
     first = env.reset(seed)
     obs = torch.from_numpy(first)[None]
     state = wm.initial(obs) if sac is not None else None
     lifted = False
+    steering_off_step = -1
     steps = 0
     if transport_pulse not in (None, "xy", "height"):
         raise ValueError("Unknown transport intervention")
@@ -243,9 +247,20 @@ def policy_episode(env, pi, wm, sac, seed, video=None, trace=None, release_gate=
         done = False
         while not done:
             noise = torch.randn(1, HORIZON, ACTION_DIM, generator=generator)
-            if sac is not None:
-                noise += sac.draw(state, deterministic=True)[0][:, None]
-            for action in pi.sample(obs, noise)[0]:
+            chunk_start = obs
+            shifted = noise
+            if sac is not None and steering_off_step < 0:
+                shifted = noise + sac.draw(state, deterministic=True)[0][:, None]
+            chunk = pi.sample(chunk_start, shifted)[0]
+            for index in range(len(chunk)):
+                if handoff_at_target and steering_off_step < 0:
+                    before = obs[0].numpy()
+                    if (before[9] > .5 and before[5] - first[5] > .2
+                            and np.linalg.norm(before[3:5] - before[6:8]) < .12):
+                        steering_off_step = steps
+                        # Keep the chunk clock and its original Gaussian draw, even on a mid-chunk handoff.
+                        chunk = pi.sample(chunk_start, noise)[0]
+                action = chunk[index]
                 command = action.numpy()
                 if transport_pulse:
                     before = obs[0].numpy()
@@ -286,6 +301,8 @@ def policy_episode(env, pi, wm, sac, seed, video=None, trace=None, release_gate=
     if trace:
         extra = dict(pulse_trigger=trigger, pulse_steps=pulse_steps,
                      proposals=np.stack(proposals)) if transport_pulse else {}
+        if handoff_at_target:
+            extra["steering_off_step"] = steering_off_step
         with trace.open("xb") as f:
             np.savez_compressed(f, obs=np.stack(observations), actions=np.stack(commands),
                                 proposed_grip=proposed_grip, aperture_m=apertures, success=success, seed=seed, **extra)

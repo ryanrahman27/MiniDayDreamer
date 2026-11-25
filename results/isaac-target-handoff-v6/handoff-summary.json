@@ -1,0 +1,237 @@
+{
+  "first_seed": 408,
+  "last_seed": 507,
+  "episodes": 300,
+  "policies": {
+    "base": {
+      "stacks": 51,
+      "lifts": 100,
+      "first_eligible": 95,
+      "never_open_after_lift": 31
+    },
+    "direct": {
+      "stacks": 36,
+      "lifts": 100,
+      "first_eligible": 95,
+      "never_open_after_lift": 45
+    },
+    "handoff": {
+      "stacks": 40,
+      "lifts": 100,
+      "first_eligible": 96,
+      "never_open_after_lift": 43
+    }
+  },
+  "paired": {
+    "handoff_vs_direct": {
+      "gained": 5,
+      "lost": 1,
+      "both_succeeded": 35,
+      "difference_pp": 4.0,
+      "exact_p": 0.21875,
+      "gained_seeds": [
+        447,
+        448,
+        449,
+        462,
+        495
+      ],
+      "lost_seeds": [
+        411
+      ]
+    },
+    "handoff_vs_base": {
+      "gained": 10,
+      "lost": 21,
+      "both_succeeded": 30,
+      "difference_pp": -11.0,
+      "exact_p": 0.07075554598122835,
+      "gained_seeds": [
+        425,
+        440,
+        455,
+        476,
+        482,
+        485,
+        495,
+        496,
+        500,
+        503
+      ],
+      "lost_seeds": [
+        411,
+        419,
+        421,
+        426,
+        430,
+        431,
+        433,
+        442,
+        446,
+        450,
+        456,
+        465,
+        466,
+        488,
+        489,
+        490,
+        494,
+        501,
+        505,
+        506,
+        507
+      ]
+    },
+    "direct_vs_base": {
+      "gained": 9,
+      "lost": 24,
+      "both_succeeded": 27,
+      "difference_pp": -15.0,
+      "exact_p": 0.013530986849218607,
+      "gained_seeds": [
+        425,
+        440,
+        455,
+        476,
+        482,
+        485,
+        496,
+        500,
+        503
+      ],
+      "lost_seeds": [
+        419,
+        421,
+        426,
+        430,
+        431,
+        433,
+        442,
+        446,
+        447,
+        448,
+        449,
+        450,
+        456,
+        462,
+        465,
+        466,
+        488,
+        489,
+        490,
+        494,
+        501,
+        505,
+        506,
+        507
+      ]
+    }
+  },
+  "trigger": {
+    "count": 96,
+    "midchunk": 58,
+    "median_tick": 126.0
+  },
+  "failed_to_open_on_direct": {
+    "scenes": 45,
+    "opened_with_handoff": 3,
+    "stacked_with_handoff": 2
+  },
+  "fresh_base_success_direct_failure": {
+    "scenes": 24,
+    "stacked_with_handoff": 4,
+    "placement": {
+      "base": {
+        "episodes": 24,
+        "opened": 24,
+        "never_opened": 0,
+        "ended_holding_among_never_open": 0,
+        "opened_before_first_over": 0,
+        "opens_off_center": 0,
+        "opens_high": 18,
+        "opens_low": 0,
+        "opens_in_xyz": 6,
+        "losses_high_at_grasp_loss": 7,
+        "losses_off_center_at_grasp_loss": 0,
+        "median_open_z_error_mm": 10.64865493774414,
+        "median_open_xy_mm": 7.117579698562622,
+        "median_ticks_over_to_open": 27.5,
+        "grasp_losses": 24,
+        "jaws_reached_open": 24,
+        "median_z_at_grasp_loss_mm": 0.2607707977294922,
+        "median_z_at_measured_open_mm": 0.2607707977294922,
+        "median_final_z_never_open_mm": null,
+        "median_min_centered_z_never_open_mm": null,
+        "never_open_always_high_while_centered": 0,
+        "never_open_reached_xyz": 0,
+        "reached_xyz_while_held": 9
+      },
+      "direct": {
+        "episodes": 24,
+        "opened": 10,
+        "never_opened": 14,
+        "ended_holding_among_never_open": 14,
+        "opened_before_first_over": 0,
+        "opens_off_center": 2,
+        "opens_high": 7,
+        "opens_low": 0,
+        "opens_in_xyz": 3,
+        "losses_high_at_grasp_loss": 3,
+        "losses_off_center_at_grasp_loss": 2,
+        "median_open_z_error_mm": 14.407737731933594,
+        "median_open_xy_mm": 8.958468437194824,
+        "median_ticks_over_to_open": 44.0,
+        "grasp_losses": 10,
+        "jaws_reached_open": 10,
+        "median_z_at_grasp_loss_mm": 2.7279796600341797,
+        "median_z_at_measured_open_mm": 2.7279796600341797,
+        "median_final_z_never_open_mm": 393.6105499267578,
+        "median_min_centered_z_never_open_mm": 72.54676818847656,
+        "never_open_always_high_while_centered": 13,
+        "never_open_reached_xyz": 1,
+        "reached_xyz_while_held": 4
+      },
+      "handoff": {
+        "episodes": 24,
+        "opened": 12,
+        "never_opened": 12,
+        "ended_holding_among_never_open": 12,
+        "opened_before_first_over": 0,
+        "opens_off_center": 1,
+        "opens_high": 6,
+        "opens_low": 0,
+        "opens_in_xyz": 6,
+        "losses_high_at_grasp_loss": 3,
+        "losses_off_center_at_grasp_loss": 1,
+        "median_open_z_error_mm": 7.958858489990234,
+        "median_open_xy_mm": 8.32474422454834,
+        "median_ticks_over_to_open": 43.5,
+        "grasp_losses": 12,
+        "jaws_reached_open": 12,
+        "median_z_at_grasp_loss_mm": 0.02208709716796875,
+        "median_z_at_measured_open_mm": 0.02208709716796875,
+        "median_final_z_never_open_mm": 394.6210174560547,
+        "median_min_centered_z_never_open_mm": 71.89190673828125,
+        "never_open_always_high_while_centered": 11,
+        "never_open_reached_xyz": 1,
+        "reached_xyz_while_held": 8
+      }
+    }
+  },
+  "max_start_coordinate_difference_mm": 0.0,
+  "max_action_replay_error": 5.453824996948242e-06,
+  "base_sha256": "eafd9895ee92b67c3a8c922fe9cb213e786a16553d3fbd1b84bbfa1aaeb16ef9",
+  "direct_checkpoint_sha256": "1a2c9491e8844e03b7f6e64a5afd74dbc09a084d21415580ec9572516c2df9cb",
+  "paired_prefix_check": {
+    "same_trigger_tick": 91,
+    "close_pairs": 90,
+    "median_max_gap_mm": 0.11880619078874588,
+    "handoff_vs_direct": {
+      "gained": 3,
+      "lost": 1,
+      "both_succeeded": 33,
+      "difference_pp": 2.2222222222222223,
+      "exact_p": 0.625
+    }
+  }
+}

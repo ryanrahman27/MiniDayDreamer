@@ -4,6 +4,8 @@ Can a weak imitation policy learn to stack a red cube on a blue cube by changing
 
 ## Isaac pilot
 
+In 16 of 24 archived losses, direct steering kept holding the cube. On 100 new scenes, switching steering off when the cube first crossed over blue stacked 40/100 times, versus 36/100 with always-on steering and 51/100 for the frozen base. [Paired height and release measurements, and fresh handoff results](results/isaac-target-handoff-v6/README.md)
+
 A frozen baseline selected at 15/32 development stacks completed 60/100 fresh Isaac scenes without steering. Noise-space steering in the varied RSSM completed 51/100 with learned reward and 48/100 with direct state reward. [Development selection and paired steering comparison](results/isaac-midbase-v5/README.md)
 
 Computing imagination rewards from predicted cube and gripper states gave 4/50 stacks with the original base and varied RSSM, compared with 1/50 using the learned reward and 2/50 from imitation alone. A separate 72-demo base stacked on 48/50 of the same scenes before steering and 47/50 with direct-reward steering. [Paired reward comparison, forecast checks and stronger baseline](results/isaac-state-reward-v4/README.md)
