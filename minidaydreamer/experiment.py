@@ -9,7 +9,8 @@ import torch
 
 from .data import Dataset
 from .models import HORIZON, FlowPolicy, NoiseSAC, make_world
-from .stack import ACTION_DIM, potential
+from .stack import ACTION_DIM, STEP, potential
+from .transport import CarryStall, WINDOW, targetward_xy
 
 
 def fit(module, steps, loss_fn):
@@ -78,10 +79,10 @@ def world_diagnostics(wm, data):
 
 
 @torch.no_grad()
-def imagine_batch(wm, policy, sac, starts):
-    state = starts[torch.randint(len(starts), (64,))]
+def imagine_batch(wm, policy, sac, starts, chunks=2):
+    state = starts[torch.randint(len(starts), (128 // chunks,))]
     transitions = []
-    for _ in range(2):
+    for _ in range(chunks):
         shift, _ = sac.draw(state)
         noise = torch.randn(len(state), HORIZON, ACTION_DIM) + shift[:, None]
         actions = policy.sample(wm.decode(state), noise)
@@ -149,19 +150,44 @@ def train(args):
     print(json.dumps(metrics), flush=True)
     # Only the world-model fitting data varies between arms of this experiment.
     starts = posterior_states(wm, data, demo)
-    sac = NoiseSAC(wm.features)
-    # Circular replay measured in 128-transition batches.
-    blocks = min(128, args.rl_steps)
-    replay = torch.empty((blocks, 128, 2 * starts.shape[1] + ACTION_DIM + 2))
-    for i in range(args.rl_steps):
-        replay[i % blocks] = imagine_batch(wm, policy, sac, starts)
-        flat = replay[:min(i + 1, blocks)].flatten(0, 1)
-        sample = flat[torch.randint(len(flat), (128,))]
-        sac.update(*sample.split([starts.shape[1], ACTION_DIM, 1, 1, starts.shape[1]], dim=1))
+    pre_actor_rng = torch.get_rng_state()
+    if args.match_short:
+        ref = torch.load(args.match_short, map_location="cpu", weights_only=True)
+        if (ref["coverage"] != args.coverage or ref["training_seed"] != args.seed
+                or ref.get("imagination_chunks", 2) != 2):
+            raise ValueError("Mismatched short-horizon reference")
+        verify_weights(policy, ref["policy"], "frozen base")
+        verify_weights(wm, ref["world"], "frozen world")
+        short = fit_steering(wm, policy, starts, args.rl_steps, 2)
+        verify_weights(short.actor, ref["actor"], "six-step actor")
+        print("Reproduced the base, RSSM and six-step actor weights exactly", flush=True)
+        torch.set_rng_state(pre_actor_rng)
+    sac = fit_steering(wm, policy, starts, args.rl_steps, args.imagination_chunks)
     torch.save(dict(policy=policy.state_dict(), world=wm.state_dict(), actor=sac.actor.state_dict(),
                     eval_seed=int(data.seeds.max()) + 1, coverage=args.coverage, training_seed=args.seed,
                     demos=len(demo), world_episodes=len(wm_ids), imagination_start_episodes=len(demo),
-                    backend=data.backend, diagnostics=metrics, world_model=args.world_model), args.out)
+                    backend=data.backend, diagnostics=metrics, world_model=args.world_model,
+                    imagination_chunks=args.imagination_chunks, rl_steps=args.rl_steps,
+                    pre_actor_rng=pre_actor_rng, matched_short=bool(args.match_short)), args.out)
+
+
+def verify_weights(module, weights, name):
+    current = module.state_dict()
+    if current.keys() != weights.keys() or any(not torch.equal(current[k], weights[k]) for k in weights):
+        raise ValueError(f"Could not reproduce {name} weights")
+
+
+def fit_steering(wm, policy, starts, rl_steps, chunks):
+    sac = NoiseSAC(wm.features)
+    # Circular replay measured in 128-transition batches.
+    blocks = min(128, rl_steps)
+    replay = torch.empty((blocks, 128, 2 * starts.shape[1] + ACTION_DIM + 2))
+    for i in range(rl_steps):
+        replay[i % blocks] = imagine_batch(wm, policy, sac, starts, chunks)
+        flat = replay[:min(i + 1, blocks)].flatten(0, 1)
+        sample = flat[torch.randint(len(flat), (128,))]
+        sac.update(*sample.split([starts.shape[1], ACTION_DIM, 1, 1, starts.shape[1]], dim=1))
+    return sac
 
 
 def load_policies(path, env):
@@ -177,16 +203,21 @@ def load_policies(path, env):
 
 
 @torch.no_grad()
-def policy_episode(env, pi, wm, sac, seed, video=None, trace=None, release_gate=False):
+def policy_episode(env, pi, wm, sac, seed, video=None, trace=None, release_gate=False, transport_pulse=None):
     generator = torch.Generator().manual_seed(seed)
     first = env.reset(seed)
     obs = torch.from_numpy(first)[None]
     state = wm.initial(obs) if sac is not None else None
     lifted = False
     steps = 0
+    if transport_pulse not in (None, "xy", "height"):
+        raise ValueError("Unknown transport intervention")
+    detector = CarryStall(first) if transport_pulse else None
+    trigger, pulse_steps = -1, 0
+    target_z = None
     if trace:
         trace.parent.mkdir(parents=True, exist_ok=True)
-        observations, commands, proposed_grip = [first.copy()], [], []
+        observations, commands, proposed_grip, proposals = [first.copy()], [], [], []
         apertures = [getattr(env, "aperture", np.nan)]
     with ExitStack() as recording:
         if video:
@@ -204,8 +235,23 @@ def policy_episode(env, pi, wm, sac, seed, video=None, trace=None, release_gate=
                 noise += sac.draw(state, deterministic=True)[0][:, None]
             for action in pi.sample(obs, noise)[0]:
                 command = action.numpy()
+                if transport_pulse:
+                    before = obs[0].numpy()
+                    if trigger < 0 and detector.observe(before):
+                        trigger = steps
+                        target_z = before[5] + .35
+                    if trigger >= 0 and steps == trigger + pulse_steps and pulse_steps < WINDOW:
+                        if detector.carrying(before) and command[3] > 0 and np.linalg.norm(before[6:8]-before[3:5]) > .12:
+                            command = command.copy()
+                            if transport_pulse == "xy":
+                                command[:2] = targetward_xy(before)
+                            else:
+                                command[2] = np.clip(.1 * (target_z-before[5]) / STEP, 0., .85)
+                            pulse_steps += 1
                 if trace:
                     proposed_grip.append(float(command[3]))
+                    if transport_pulse:
+                        proposals.append(action.numpy().copy())
                 if release_gate and lifted and command[3] <= 0:
                     before = obs[0].numpy()
                     if before[9] > .5 and before[10] > .5:
@@ -226,9 +272,11 @@ def policy_episode(env, pi, wm, sac, seed, video=None, trace=None, release_gate=
                 if done:
                     break
     if trace:
+        extra = dict(pulse_trigger=trigger, pulse_steps=pulse_steps,
+                     proposals=np.stack(proposals)) if transport_pulse else {}
         with trace.open("xb") as f:
             np.savez_compressed(f, obs=np.stack(observations), actions=np.stack(commands),
-                                proposed_grip=proposed_grip, aperture_m=apertures, success=success, seed=seed)
+                                proposed_grip=proposed_grip, aperture_m=apertures, success=success, seed=seed, **extra)
     # Shaping telescopes to the change in potential over an episode.
     return dict(success=int(success), steps=steps, lifted=lifted,
                 episode_return=float(potential(o) - potential(first) + 2 * success),
@@ -272,6 +320,8 @@ def compare(args, env):
             arms.append(("original_" + coverage, ref_wm, ref_sac))
     if args.test_release_gate:
         arms.append(("gated_base", wm_d, None))
+    if args.test_transport_pulse:
+        arms.append(("pulse_base", wm_d, None))
     with args.out.open("x", encoding="utf-8") as output:
         for i in range(args.episodes):
             scene = args.scene_offset + i
@@ -283,7 +333,8 @@ def compare(args, env):
             for mode, wm, sac in arms[offset:] + arms[:offset]:
                 video = args.video_dir / f"{mode}-{seed}.mp4" if i == 0 and args.video_dir else None
                 trace = args.trace_dir / f"{mode}-{seed}.npz" if args.trace_dir else None
-                metrics, start = policy_episode(env, pi, wm, sac, seed, video, trace, mode == "gated_base")
+                metrics, start = policy_episode(env, pi, wm, sac, seed, video, trace,
+                                                mode == "gated_base", "xy" if mode == "pulse_base" else None)
                 if first is None:
                     first = start
                     row["start"] = start.tolist()

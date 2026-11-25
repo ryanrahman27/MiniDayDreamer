@@ -28,11 +28,10 @@ def paired(reference, treatment):
 
 
 @torch.no_grad()
-def cube_forecast(model_weights, data, kind="absolute"):
-    """Open-loop six-action forecast from recorded histories, including windows where the cube moves."""
+def cube_forecast(model_weights, data, kind="absolute", horizon=2 * HORIZON):
+    """Open-loop forecast from recorded histories, including windows where the cube moves."""
     model = make_world(kind).eval()
     model.load_state_dict(model_weights)
-    horizon = 2 * HORIZON
     errors, movements, origin_errors, displacement_errors = [], [], [], []
     for i in np.flatnonzero(data.split == "holdout"):
         end = int(data.lengths[i])
@@ -93,7 +92,7 @@ def summarize(folder, expected_scenes, scene_offset=0):
     if [r["seed"] for r in rows] != list(range(first_eval_seed, first_eval_seed + expected_scenes)):
         raise ValueError("Incomplete or overlapping final evaluation seeds")
     eval_seeds = {r["seed"] for r in rows}
-    arms = [a for a in ("base", "demos", "varied", "original_demos", "original_varied", "gated_base")
+    arms = [a for a in ("base", "demos", "varied", "original_demos", "original_varied", "gated_base", "pulse_base")
             if a in rows[0]]
     if not set(ARMS).issubset(arms) or any(set(r) != {"seed", "start", *arms} for r in rows):
         raise ValueError("Incomplete policy comparison")

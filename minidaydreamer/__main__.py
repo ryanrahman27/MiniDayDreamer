@@ -29,6 +29,9 @@ def main():
     t.add_argument("--world-model", choices=["absolute", "residual"], default="residual")
     t.add_argument("--coverage", choices=["demos", "varied"], default="varied")
     t.add_argument("--base-model", type=Path, help="Reuse a frozen base from calibrate")
+    t.add_argument("--imagination-chunks", type=positive, choices=(1, 2, 4, 8, 16, 32, 64, 128), default=2,
+                   help="Depth of each RSSM rollout in three-control-tick chunks (128 chunk transitions per update)")
+    t.add_argument("--match-short", type=Path, help="Reproduce this six-tick reference before branching the actor fit")
     for option, default in (("bc", 3000), ("model", 1800), ("rl", 1500)):
         t.add_argument(f"--{option}-steps", type=positive, default=default)
     e = sub.add_parser("eval")
@@ -49,6 +52,8 @@ def main():
     paired.add_argument("--trace-dir", type=Path, help="Record states, actions and measured finger apertures")
     paired.add_argument("--test-release-gate", action="store_true",
                         help="Add a diagnostic base arm that delays openings outside the stacking tolerance")
+    paired.add_argument("--test-transport-pulse", action="store_true",
+                        help="Test a single 12-tick target-directed XY intervention at the first carry stall")
     paired.add_argument("--out", type=Path, required=True, help="Per-scene outcomes in JSON Lines format")
     paired.add_argument("--episodes", type=positive, default=50)
     paired.add_argument("--scene-offset", type=int, default=0, help="First test scene index for this shard")
