@@ -1,0 +1,376 @@
+{
+  "test_seeds": [
+    208,
+    257
+  ],
+  "policies": {
+    "base": {
+      "stacks": 2,
+      "lifts": 50,
+      "scenes": 50,
+      "mean_return": 0.6139681821767599,
+      "median_final_xy_mm": 64.4944953918457
+    },
+    "demos": {
+      "stacks": 0,
+      "lifts": 50,
+      "scenes": 50,
+      "mean_return": 0.6333224506750772,
+      "median_final_xy_mm": 70.51741409301758
+    },
+    "varied": {
+      "stacks": 3,
+      "lifts": 50,
+      "scenes": 50,
+      "mean_return": 0.682607603790366,
+      "median_final_xy_mm": 56.588937759399414
+    },
+    "original_demos": {
+      "stacks": 0,
+      "lifts": 50,
+      "scenes": 50,
+      "mean_return": 0.6485267916554832,
+      "median_final_xy_mm": 63.05478477478027
+    },
+    "original_varied": {
+      "stacks": 4,
+      "lifts": 50,
+      "scenes": 50,
+      "mean_return": 0.6881157445850451,
+      "median_final_xy_mm": 67.43445205688477
+    },
+    "pulse_base": {
+      "stacks": 2,
+      "lifts": 50,
+      "scenes": 50,
+      "mean_return": 0.6387189436263848,
+      "median_final_xy_mm": 25.94937229156494
+    }
+  },
+  "paired": {
+    "demos_vs_base": {
+      "gained": 0,
+      "lost": 2,
+      "both_succeeded": 0,
+      "difference_pp": -4.0,
+      "exact_p": 0.5
+    },
+    "varied_vs_base": {
+      "gained": 1,
+      "lost": 0,
+      "both_succeeded": 2,
+      "difference_pp": 2.0,
+      "exact_p": 1.0
+    },
+    "original_demos_vs_base": {
+      "gained": 0,
+      "lost": 2,
+      "both_succeeded": 0,
+      "difference_pp": -4.0,
+      "exact_p": 0.5
+    },
+    "original_varied_vs_base": {
+      "gained": 3,
+      "lost": 1,
+      "both_succeeded": 1,
+      "difference_pp": 4.0,
+      "exact_p": 0.625
+    },
+    "pulse_base_vs_base": {
+      "gained": 0,
+      "lost": 0,
+      "both_succeeded": 2,
+      "difference_pp": 0.0,
+      "exact_p": 1.0
+    },
+    "varied_vs_demos": {
+      "gained": 3,
+      "lost": 0,
+      "both_succeeded": 0,
+      "difference_pp": 6.0,
+      "exact_p": 0.25
+    },
+    "demos_vs_original_demos": {
+      "gained": 0,
+      "lost": 0,
+      "both_succeeded": 0,
+      "difference_pp": 0.0,
+      "exact_p": 1.0
+    },
+    "varied_vs_original_varied": {
+      "gained": 1,
+      "lost": 2,
+      "both_succeeded": 2,
+      "difference_pp": -2.0,
+      "exact_p": 1.0
+    }
+  },
+  "transport": {
+    "base": {
+      "episodes": 50,
+      "lifts": 50,
+      "transported_15mm": 47,
+      "reached_xy": 17,
+      "reached_zone": 7,
+      "median_best_held_xy_mm": 22.692652702331543,
+      "stalls": 25,
+      "stalled_failures": 25,
+      "paired_windows": 24,
+      "median_stall_distance_mm": 40.1174430847168,
+      "approach": {
+        "gap_mm": 40.009464263916016,
+        "gap_reduction_mm": 15.400169372558594,
+        "request_mm_tick": 5.577638626098633,
+        "sideways_request_mm_tick": 4.838138580322266,
+        "tool_mm_tick": 1.2932751178741455,
+        "cube_mm_tick": 1.2939612865447998,
+        "cube_tool_slip_mm_tick": 0.01091430289670825,
+        "z_request_mm_tick": -3.788114547729492
+      },
+      "stall": {
+        "gap_mm": 39.48133850097656,
+        "gap_reduction_mm": 1.416046142578125,
+        "request_mm_tick": 0.8002876937389374,
+        "sideways_request_mm_tick": 3.419041633605957,
+        "tool_mm_tick": 0.14433909952640533,
+        "cube_mm_tick": 0.14418639242649078,
+        "cube_tool_slip_mm_tick": 0.011124016717076302,
+        "z_request_mm_tick": -3.4449543952941895
+      }
+    },
+    "demos": {
+      "episodes": 50,
+      "lifts": 50,
+      "transported_15mm": 50,
+      "reached_xy": 22,
+      "reached_zone": 1,
+      "median_best_held_xy_mm": 17.394448280334473,
+      "stalls": 38,
+      "stalled_failures": 38,
+      "paired_windows": 33,
+      "median_stall_distance_mm": 48.613107681274414,
+      "approach": {
+        "gap_mm": 38.427154541015625,
+        "gap_reduction_mm": 22.617050170898438,
+        "request_mm_tick": 8.641145706176758,
+        "sideways_request_mm_tick": 7.769416332244873,
+        "tool_mm_tick": 1.8944233655929565,
+        "cube_mm_tick": 1.8946313858032227,
+        "cube_tool_slip_mm_tick": 0.009509188123047352,
+        "z_request_mm_tick": 0.9049251675605774
+      },
+      "stall": {
+        "gap_mm": 39.937843322753906,
+        "gap_reduction_mm": 1.0457229614257812,
+        "request_mm_tick": 0.8276734352111816,
+        "sideways_request_mm_tick": 6.901819705963135,
+        "tool_mm_tick": 0.14051173627376556,
+        "cube_mm_tick": 0.14162154495716095,
+        "cube_tool_slip_mm_tick": 0.00873007345944643,
+        "z_request_mm_tick": 0.24744245409965515
+      }
+    },
+    "original_demos": {
+      "episodes": 50,
+      "lifts": 50,
+      "transported_15mm": 50,
+      "reached_xy": 21,
+      "reached_zone": 1,
+      "median_best_held_xy_mm": 17.241750717163086,
+      "stalls": 36,
+      "stalled_failures": 36,
+      "paired_windows": 30,
+      "median_stall_distance_mm": 49.12006759643555,
+      "approach": {
+        "gap_mm": 41.584699630737305,
+        "gap_reduction_mm": 23.257149696350098,
+        "request_mm_tick": 9.063744068145752,
+        "sideways_request_mm_tick": 7.471279859542847,
+        "tool_mm_tick": 1.97784024477005,
+        "cube_mm_tick": 1.978557288646698,
+        "cube_tool_slip_mm_tick": 0.00903525436297059,
+        "z_request_mm_tick": 0.30144842714071274
+      },
+      "stall": {
+        "gap_mm": 41.086904525756836,
+        "gap_reduction_mm": 1.1847476959228516,
+        "request_mm_tick": 0.8524195849895477,
+        "sideways_request_mm_tick": 7.609881401062012,
+        "tool_mm_tick": 0.12499982118606567,
+        "cube_mm_tick": 0.12467891350388527,
+        "cube_tool_slip_mm_tick": 0.009348972234874964,
+        "z_request_mm_tick": -0.6309871859848499
+      }
+    },
+    "original_varied": {
+      "episodes": 50,
+      "lifts": 50,
+      "transported_15mm": 49,
+      "reached_xy": 16,
+      "reached_zone": 3,
+      "median_best_held_xy_mm": 23.389384269714355,
+      "stalls": 29,
+      "stalled_failures": 29,
+      "paired_windows": 27,
+      "median_stall_distance_mm": 37.35834884643555,
+      "approach": {
+        "gap_mm": 35.02219772338867,
+        "gap_reduction_mm": 15.57291030883789,
+        "request_mm_tick": 6.152414321899414,
+        "sideways_request_mm_tick": 4.646758556365967,
+        "tool_mm_tick": 1.313705563545227,
+        "cube_mm_tick": 1.3159294128417969,
+        "cube_tool_slip_mm_tick": 0.010592862963676453,
+        "z_request_mm_tick": -3.5344903469085693
+      },
+      "stall": {
+        "gap_mm": 36.69115447998047,
+        "gap_reduction_mm": 1.3313102722167969,
+        "request_mm_tick": 0.7368450164794922,
+        "sideways_request_mm_tick": 3.671112298965454,
+        "tool_mm_tick": 0.14741677045822144,
+        "cube_mm_tick": 0.13438595831394196,
+        "cube_tool_slip_mm_tick": 0.011308848857879639,
+        "z_request_mm_tick": -3.4063215255737305
+      }
+    },
+    "pulse_base": {
+      "episodes": 50,
+      "lifts": 50,
+      "transported_15mm": 48,
+      "reached_xy": 33,
+      "reached_zone": 14,
+      "median_best_held_xy_mm": 9.94469690322876,
+      "stalls": 26,
+      "stalled_failures": 26,
+      "paired_windows": 25,
+      "median_stall_distance_mm": 40.0270881652832,
+      "approach": {
+        "gap_mm": 40.365333557128906,
+        "gap_reduction_mm": 15.535888671875,
+        "request_mm_tick": 5.6600799560546875,
+        "sideways_request_mm_tick": 5.011388301849365,
+        "tool_mm_tick": 1.3051503896713257,
+        "cube_mm_tick": 1.3087462186813354,
+        "cube_tool_slip_mm_tick": 0.01134280115365982,
+        "z_request_mm_tick": -3.8535025119781494
+      },
+      "stall": {
+        "gap_mm": 39.0340461730957,
+        "gap_reduction_mm": 1.4354476928710938,
+        "request_mm_tick": 0.9019293785095215,
+        "sideways_request_mm_tick": 3.445842742919922,
+        "tool_mm_tick": 0.14522860944271088,
+        "cube_mm_tick": 0.1401403397321701,
+        "cube_tool_slip_mm_tick": 0.011325810104608536,
+        "z_request_mm_tick": -3.187380790710449
+      }
+    },
+    "varied": {
+      "episodes": 50,
+      "lifts": 50,
+      "transported_15mm": 48,
+      "reached_xy": 16,
+      "reached_zone": 3,
+      "median_best_held_xy_mm": 23.419952392578125,
+      "stalls": 30,
+      "stalled_failures": 30,
+      "paired_windows": 28,
+      "median_stall_distance_mm": 36.93637466430664,
+      "approach": {
+        "gap_mm": 35.67013359069824,
+        "gap_reduction_mm": 16.079864501953125,
+        "request_mm_tick": 6.1018781661987305,
+        "sideways_request_mm_tick": 4.600455284118652,
+        "tool_mm_tick": 1.354702353477478,
+        "cube_mm_tick": 1.3541293144226074,
+        "cube_tool_slip_mm_tick": 0.009641395416110754,
+        "z_request_mm_tick": -2.0568241477012634
+      },
+      "stall": {
+        "gap_mm": 34.6580696105957,
+        "gap_reduction_mm": 1.373077392578125,
+        "request_mm_tick": 0.7764211893081665,
+        "sideways_request_mm_tick": 4.042341470718384,
+        "tool_mm_tick": 0.1369279995560646,
+        "cube_mm_tick": 0.13767822831869125,
+        "cube_tool_slip_mm_tick": 0.010857327841222286,
+        "z_request_mm_tick": -3.9207016229629517
+      }
+    }
+  },
+  "xy_pulse": {
+    "enrolled": 50,
+    "triggered": 26,
+    "applied": 26,
+    "full_pulse": 5,
+    "all_progress_mm": {
+      "pairs": 26,
+      "median_base": -1.9328670501708984,
+      "median_intervention": 20.72363567352295,
+      "median_paired_difference": 26.673714637756348,
+      "increased": 26
+    },
+    "matched_progress_mm": {
+      "pairs": 21,
+      "median_base": -0.9819488525390625,
+      "median_intervention": 15.013769149780273,
+      "median_paired_difference": 23.94101905822754,
+      "increased": 21
+    }
+  },
+  "height_pulse": {
+    "enrolled": 12,
+    "triggered": 11,
+    "stacks": {
+      "base": 0,
+      "height": 0
+    },
+    "all_complete": {
+      "red_rise_mm": {
+        "pairs": 11,
+        "median_base": -0.5228221416473389,
+        "median_intervention": 33.052764892578125,
+        "median_paired_difference": 24.38069725036621,
+        "increased": 8
+      },
+      "progress_24_mm": {
+        "pairs": 11,
+        "median_base": -15.899694442749023,
+        "median_intervention": -4.7292022705078125,
+        "median_paired_difference": 5.164054870605469,
+        "increased": 8
+      },
+      "postpulse_request_mm_tick": {
+        "pairs": 11,
+        "median_base": -2.3456900119781494,
+        "median_intervention": 0.19687895476818085,
+        "median_paired_difference": 1.7429676055908203,
+        "increased": 9
+      }
+    },
+    "matched": {
+      "red_rise_mm": {
+        "pairs": 7,
+        "median_base": 8.706151962280273,
+        "median_intervention": 33.052764892578125,
+        "median_paired_difference": 24.38069725036621,
+        "increased": 4
+      },
+      "progress_24_mm": {
+        "pairs": 7,
+        "median_base": -18.254310607910156,
+        "median_intervention": -14.345199584960938,
+        "median_paired_difference": 5.164054870605469,
+        "increased": 5
+      },
+      "postpulse_request_mm_tick": {
+        "pairs": 7,
+        "median_base": -3.2740793228149414,
+        "median_intervention": 0.19687895476818085,
+        "median_paired_difference": 1.7429676055908203,
+        "increased": 6
+      }
+    }
+  }
+}

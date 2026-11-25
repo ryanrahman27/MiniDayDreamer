@@ -46,7 +46,7 @@ def finish(run, prior):
     if len(list((run / "traces").glob("*.npz"))) != 300:
         raise ValueError("Unexpected number of scored traces")
     motion = analyze(run, run)
-    run_probes(run, run)
+    run_probes(run, run, short=prior, long=run)
     pulses = motion["pulses"]
     subset = [r for r in pulses if r["matched"]]
     with (run / "height" / "height-check.json").open() as f:
@@ -66,7 +66,7 @@ def finish(run, prior):
     def xy_progress(rows):
         return paired_motion(rows, lambda r: r["base_progress_mm"], lambda r: r["pulse_progress_mm"])
     result = dict(test_seeds=scores["test_seeds"], policies=scores["policies"], paired=scores["paired"],
-                  transport=motion["policies"], xy_pulse=dict(all_progress_mm=xy_progress(pulses),
+                  transport=motion["policies"], xy_pulse=dict(**motion["pulse_counts"], all_progress_mm=xy_progress(pulses),
                                                              matched_progress_mm=xy_progress(subset)),
                   height_pulse=dict(enrolled=len(heights), triggered=sum(r["applied"]>0 for r in heights),
                                     stacks={a: sum(r[a]["success"] for r in heights) for a in ("base", "height")},

@@ -1,0 +1,210 @@
+{
+  "expert": {
+    "episodes": 24,
+    "lifts": 24,
+    "transported_15mm": 24,
+    "reached_xy": 24,
+    "reached_zone": 24,
+    "median_best_held_xy_mm": 0.512972503900528,
+    "stalls": 0,
+    "stalled_failures": 0,
+    "paired_windows": 0,
+    "approach": {},
+    "stall": {}
+  },
+  "policies": {
+    "base": {
+      "episodes": 50,
+      "lifts": 49,
+      "transported_15mm": 49,
+      "reached_xy": 21,
+      "reached_zone": 8,
+      "median_best_held_xy_mm": 12.399917602539062,
+      "stalls": 21,
+      "stalled_failures": 21,
+      "paired_windows": 19,
+      "median_stall_distance_mm": 32.798038482666016,
+      "approach": {
+        "gap_mm": 30.381446838378906,
+        "gap_reduction_mm": 14.796228408813477,
+        "request_mm_tick": 5.578420639038086,
+        "sideways_request_mm_tick": 4.25087308883667,
+        "tool_mm_tick": 1.307993769645691,
+        "cube_mm_tick": 1.308237910270691,
+        "cube_tool_slip_mm_tick": 0.012156546115875244,
+        "z_request_mm_tick": -4.331247329711914
+      },
+      "stall": {
+        "gap_mm": 31.919687271118164,
+        "gap_reduction_mm": 1.1456661224365234,
+        "request_mm_tick": 0.738183319568634,
+        "sideways_request_mm_tick": 3.7566452026367188,
+        "tool_mm_tick": 0.14539571106433868,
+        "cube_mm_tick": 0.1355465203523636,
+        "cube_tool_slip_mm_tick": 0.01409995649009943,
+        "z_request_mm_tick": -2.9756991863250732
+      }
+    },
+    "demos": {
+      "episodes": 50,
+      "lifts": 50,
+      "transported_15mm": 50,
+      "reached_xy": 32,
+      "reached_zone": 1,
+      "median_best_held_xy_mm": 8.697028160095215,
+      "stalls": 30,
+      "stalled_failures": 30,
+      "paired_windows": 23,
+      "median_stall_distance_mm": 40.782182693481445,
+      "approach": {
+        "gap_mm": 30.87342643737793,
+        "gap_reduction_mm": 22.841060638427734,
+        "request_mm_tick": 8.671101570129395,
+        "sideways_request_mm_tick": 5.708570957183838,
+        "tool_mm_tick": 1.941296100616455,
+        "cube_mm_tick": 1.9395192861557007,
+        "cube_tool_slip_mm_tick": 0.01087316032499075,
+        "z_request_mm_tick": 2.1797711849212646
+      },
+      "stall": {
+        "gap_mm": 33.21018981933594,
+        "gap_reduction_mm": -0.2882347106933594,
+        "request_mm_tick": 0.22112977504730225,
+        "sideways_request_mm_tick": 8.446959495544434,
+        "tool_mm_tick": 0.05766228958964348,
+        "cube_mm_tick": 0.06778649240732193,
+        "cube_tool_slip_mm_tick": 0.01266160886734724,
+        "z_request_mm_tick": 1.3934390544891357
+      }
+    },
+    "gated_base": {
+      "episodes": 50,
+      "lifts": 49,
+      "transported_15mm": 49,
+      "reached_xy": 24,
+      "reached_zone": 11,
+      "median_best_held_xy_mm": 12.170478820800781,
+      "stalls": 31,
+      "stalled_failures": 31,
+      "paired_windows": 29,
+      "median_stall_distance_mm": 34.1981201171875,
+      "approach": {
+        "gap_mm": 32.712188720703125,
+        "gap_reduction_mm": 14.136539459228516,
+        "request_mm_tick": 4.960958003997803,
+        "sideways_request_mm_tick": 3.280912160873413,
+        "tool_mm_tick": 1.1831775903701782,
+        "cube_mm_tick": 1.183768630027771,
+        "cube_tool_slip_mm_tick": 0.012286056764423847,
+        "z_request_mm_tick": -4.4391584396362305
+      },
+      "stall": {
+        "gap_mm": 32.76911544799805,
+        "gap_reduction_mm": 1.4546699523925781,
+        "request_mm_tick": 0.7392645478248596,
+        "sideways_request_mm_tick": 3.112018346786499,
+        "tool_mm_tick": 0.14969131350517273,
+        "cube_mm_tick": 0.15135976672172546,
+        "cube_tool_slip_mm_tick": 0.01421460509300232,
+        "z_request_mm_tick": -2.8950886726379395
+      }
+    },
+    "original_demos": {
+      "episodes": 50,
+      "lifts": 50,
+      "transported_15mm": 50,
+      "reached_xy": 30,
+      "reached_zone": 2,
+      "median_best_held_xy_mm": 8.449146747589111,
+      "stalls": 30,
+      "stalled_failures": 30,
+      "paired_windows": 25,
+      "median_stall_distance_mm": 38.2304744720459,
+      "approach": {
+        "gap_mm": 27.84459686279297,
+        "gap_reduction_mm": 26.732149124145508,
+        "request_mm_tick": 10.491446495056152,
+        "sideways_request_mm_tick": 6.960317134857178,
+        "tool_mm_tick": 2.3093271255493164,
+        "cube_mm_tick": 2.308973550796509,
+        "cube_tool_slip_mm_tick": 0.010435258038341999,
+        "z_request_mm_tick": 2.0226945877075195
+      },
+      "stall": {
+        "gap_mm": 33.68528747558594,
+        "gap_reduction_mm": -1.0121192932128906,
+        "request_mm_tick": 0.43089595437049866,
+        "sideways_request_mm_tick": 8.346638679504395,
+        "tool_mm_tick": 0.0672619417309761,
+        "cube_mm_tick": 0.06860122829675674,
+        "cube_tool_slip_mm_tick": 0.015686877071857452,
+        "z_request_mm_tick": 3.1473419666290283
+      }
+    },
+    "original_varied": {
+      "episodes": 50,
+      "lifts": 48,
+      "transported_15mm": 47,
+      "reached_xy": 21,
+      "reached_zone": 7,
+      "median_best_held_xy_mm": 14.15857219696045,
+      "stalls": 16,
+      "stalled_failures": 16,
+      "paired_windows": 14,
+      "median_stall_distance_mm": 40.017250061035156,
+      "approach": {
+        "gap_mm": 38.20682907104492,
+        "gap_reduction_mm": 16.005884170532227,
+        "request_mm_tick": 6.029568433761597,
+        "sideways_request_mm_tick": 6.115142583847046,
+        "tool_mm_tick": 1.3391292095184326,
+        "cube_mm_tick": 1.3393619060516357,
+        "cube_tool_slip_mm_tick": 0.010592737700790167,
+        "z_request_mm_tick": -3.9916563034057617
+      },
+      "stall": {
+        "gap_mm": 36.9577579498291,
+        "gap_reduction_mm": 1.1639328002929688,
+        "request_mm_tick": 0.6634894609451294,
+        "sideways_request_mm_tick": 4.705875873565674,
+        "tool_mm_tick": 0.1372266747057438,
+        "cube_mm_tick": 0.11971856281161308,
+        "cube_tool_slip_mm_tick": 0.015695237554609776,
+        "z_request_mm_tick": -2.0303893089294434
+      }
+    },
+    "varied": {
+      "episodes": 50,
+      "lifts": 50,
+      "transported_15mm": 50,
+      "reached_xy": 26,
+      "reached_zone": 9,
+      "median_best_held_xy_mm": 10.823582649230957,
+      "stalls": 17,
+      "stalled_failures": 17,
+      "paired_windows": 15,
+      "median_stall_distance_mm": 40.079002380371094,
+      "approach": {
+        "gap_mm": 39.71626281738281,
+        "gap_reduction_mm": 20.499591827392578,
+        "request_mm_tick": 7.4545512199401855,
+        "sideways_request_mm_tick": 4.884559154510498,
+        "tool_mm_tick": 1.7539342641830444,
+        "cube_mm_tick": 1.7498525381088257,
+        "cube_tool_slip_mm_tick": 0.010717228055000305,
+        "z_request_mm_tick": -0.30263569951057434
+      },
+      "stall": {
+        "gap_mm": 38.472496032714844,
+        "gap_reduction_mm": 0.7116546630859375,
+        "request_mm_tick": 0.3400801122188568,
+        "sideways_request_mm_tick": 6.256943225860596,
+        "tool_mm_tick": 0.13548846542835236,
+        "cube_mm_tick": 0.11189991235733032,
+        "cube_tool_slip_mm_tick": 0.014898966997861862,
+        "z_request_mm_tick": -2.6018483638763428
+      }
+    }
+  },
+  "pulses": []
+}

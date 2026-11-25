@@ -1,0 +1,318 @@
+[
+  {
+    "seed": 158,
+    "base": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.7301460591508452,
+      "final_xy_error_mm": 43.79529571533203,
+      "red_rise_mm": -5.217540264129639,
+      "progress_24_mm": -9.793045043945312,
+      "postpulse_request_mm_tick": -0.9893660545349121
+    },
+    "height": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.7616559157910322,
+      "final_xy_error_mm": 34.033958435058594,
+      "red_rise_mm": 33.303977966308594,
+      "progress_24_mm": 1.6597099304199219,
+      "postpulse_request_mm_tick": 0.7971603274345398
+    },
+    "trigger": 157,
+    "applied": 12,
+    "matched": false,
+    "prefix_mm": 3.144780158996582
+  },
+  {
+    "seed": 162,
+    "height": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.6075212780886807,
+      "final_xy_error_mm": 179.36927795410156,
+      "red_rise_mm": 32.75086975097656,
+      "progress_24_mm": -64.37065124511719,
+      "postpulse_request_mm_tick": -10.837918281555176
+    },
+    "base": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.6074420634711316,
+      "final_xy_error_mm": 188.62371826171875,
+      "red_rise_mm": 65.91029357910156,
+      "progress_24_mm": -74.5662612915039,
+      "postpulse_request_mm_tick": -14.445022583007812
+    },
+    "trigger": 113,
+    "applied": 12,
+    "matched": true,
+    "prefix_mm": 1.195976972579956
+  },
+  {
+    "seed": 163,
+    "base": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.1264126276606524,
+      "final_xy_error_mm": 113.53646850585938,
+      "red_rise_mm": -8.048319816589355,
+      "progress_24_mm": -51.246585845947266,
+      "postpulse_request_mm_tick": -12.56219482421875
+    },
+    "height": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.2554609746941829,
+      "final_xy_error_mm": 65.94328308105469,
+      "red_rise_mm": 33.05585479736328,
+      "progress_24_mm": -3.001728057861328,
+      "postpulse_request_mm_tick": 0.19687895476818085
+    },
+    "trigger": 135,
+    "applied": 12,
+    "matched": true,
+    "prefix_mm": 0.36782392859458923
+  },
+  {
+    "seed": 164,
+    "height": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.5971973724926808,
+      "final_xy_error_mm": 157.05014038085938,
+      "red_rise_mm": 32.77458953857422,
+      "progress_24_mm": -37.285186767578125,
+      "postpulse_request_mm_tick": -10.003637313842773
+    },
+    "base": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.5972769668743164,
+      "final_xy_error_mm": 165.2246551513672,
+      "red_rise_mm": 65.779541015625,
+      "progress_24_mm": -42.449241638183594,
+      "postpulse_request_mm_tick": -11.746604919433594
+    },
+    "trigger": 156,
+    "applied": 12,
+    "matched": true,
+    "prefix_mm": 0.28189706802368164
+  },
+  {
+    "seed": 168,
+    "base": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.21629509529297813,
+      "final_xy_error_mm": 73.50302124023438,
+      "red_rise_mm": 4.831111431121826,
+      "progress_24_mm": -18.254310607910156,
+      "postpulse_request_mm_tick": -2.307100296020508
+    },
+    "height": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.69290176461574,
+      "final_xy_error_mm": 57.69046401977539,
+      "red_rise_mm": 33.115177154541016,
+      "progress_24_mm": 0.7278327941894531,
+      "postpulse_request_mm_tick": 2.731823682785034
+    },
+    "trigger": 138,
+    "applied": 12,
+    "matched": true,
+    "prefix_mm": 1.1445831060409546
+  },
+  {
+    "seed": 173,
+    "height": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.48157840627432935,
+      "final_xy_error_mm": 15.20073127746582
+    },
+    "base": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.8573227434345267,
+      "final_xy_error_mm": 20.988304138183594
+    },
+    "trigger": -1,
+    "applied": 0
+  },
+  {
+    "seed": 175,
+    "base": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.18005910405984443,
+      "final_xy_error_mm": 99.79867553710938,
+      "red_rise_mm": -17.273223876953125,
+      "progress_24_mm": 6.2828216552734375,
+      "postpulse_request_mm_tick": 2.080364465713501
+    },
+    "height": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.5952819534749716,
+      "final_xy_error_mm": 104.65609741210938,
+      "red_rise_mm": 33.052764892578125,
+      "progress_24_mm": -4.7292022705078125,
+      "postpulse_request_mm_tick": 2.5075252056121826
+    },
+    "trigger": 122,
+    "applied": 12,
+    "matched": true,
+    "prefix_mm": 0.9989016652107239
+  },
+  {
+    "seed": 179,
+    "height": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.5331287896094042,
+      "final_xy_error_mm": 74.25767517089844,
+      "red_rise_mm": -56.10268783569336,
+      "progress_24_mm": 6.654399871826172,
+      "postpulse_request_mm_tick": -2.86260986328125
+    },
+    "base": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.5600177792097777,
+      "final_xy_error_mm": 71.51558685302734,
+      "red_rise_mm": -56.454742431640625,
+      "progress_24_mm": 6.126102447509766,
+      "postpulse_request_mm_tick": -2.3456900119781494
+    },
+    "trigger": 129,
+    "applied": 4,
+    "matched": false,
+    "prefix_mm": 2.1208746433258057
+  },
+  {
+    "seed": 181,
+    "base": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.7237882575508654,
+      "final_xy_error_mm": 6.96328592300415,
+      "red_rise_mm": -0.5228221416473389,
+      "progress_24_mm": 5.526058197021484,
+      "postpulse_request_mm_tick": 1.081755518913269
+    },
+    "height": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.9045843819419623,
+      "final_xy_error_mm": 14.786760330200195,
+      "red_rise_mm": 33.431549072265625,
+      "progress_24_mm": 16.167633056640625,
+      "postpulse_request_mm_tick": 4.419800758361816
+    },
+    "trigger": 137,
+    "applied": 12,
+    "matched": false,
+    "prefix_mm": 3.972473621368408
+  },
+  {
+    "seed": 184,
+    "height": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.6061215545121107,
+      "final_xy_error_mm": 128.32675170898438,
+      "red_rise_mm": 33.086849212646484,
+      "progress_24_mm": -20.96465301513672,
+      "postpulse_request_mm_tick": 0.922325611114502
+    },
+    "base": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.6301886247654284,
+      "final_xy_error_mm": 49.656524658203125,
+      "red_rise_mm": 8.706151962280273,
+      "progress_24_mm": -8.63461685180664,
+      "postpulse_request_mm_tick": 2.9359138011932373
+    },
+    "trigger": 116,
+    "applied": 12,
+    "matched": true,
+    "prefix_mm": 0.2268044501543045
+  },
+  {
+    "seed": 188,
+    "base": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.25190358201667146,
+      "final_xy_error_mm": 55.70631790161133,
+      "red_rise_mm": -63.53855895996094,
+      "progress_24_mm": -29.70679473876953,
+      "postpulse_request_mm_tick": -8.289359092712402
+    },
+    "height": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.20667720339206636,
+      "final_xy_error_mm": 65.28529357910156,
+      "red_rise_mm": -63.27701950073242,
+      "progress_24_mm": -34.64165496826172,
+      "postpulse_request_mm_tick": -8.13082218170166
+    },
+    "trigger": 143,
+    "applied": 2,
+    "matched": false,
+    "prefix_mm": 6.702105522155762
+  },
+  {
+    "seed": 189,
+    "height": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.6078282386448821,
+      "final_xy_error_mm": 132.543701171875,
+      "red_rise_mm": 33.03046417236328,
+      "progress_24_mm": -14.345199584960938,
+      "postpulse_request_mm_tick": -1.9947752952575684
+    },
+    "base": {
+      "success": 0,
+      "steps": 200,
+      "lifted": true,
+      "episode_return": 0.607821548598663,
+      "final_xy_error_mm": 134.7368621826172,
+      "red_rise_mm": 37.03194808959961,
+      "progress_24_mm": -15.899694442749023,
+      "postpulse_request_mm_tick": -3.2740793228149414
+    },
+    "trigger": 139,
+    "applied": 12,
+    "matched": true,
+    "prefix_mm": 0.19057731330394745
+  }
+]

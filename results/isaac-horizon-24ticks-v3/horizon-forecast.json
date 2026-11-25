@@ -1,0 +1,72 @@
+{
+  "demos": {
+    "6": {
+      "windows": 633,
+      "error_mm": 4.921377658843994,
+      "stationary_mm": 10.146538734436035,
+      "carrying_windows": 210,
+      "carrying_mm": 4.745208740234375,
+      "carrying_stationary_mm": 24.8861141204834,
+      "return_mae": 1.2650660276412964,
+      "predicted_mean_return": 1.2392911911010742,
+      "measured_mean_return": 0.01448166836053133,
+      "zero_return_mae": 0.04394521564245224,
+      "return_correlation": -0.06645378950710219
+    },
+    "24": {
+      "windows": 633,
+      "error_mm": 19.371187210083008,
+      "stationary_mm": 36.61381530761719,
+      "carrying_windows": 210,
+      "carrying_mm": 23.17818832397461,
+      "carrying_stationary_mm": 80.63166809082031,
+      "return_mae": 6.749771595001221,
+      "predicted_mean_return": 6.701346397399902,
+      "measured_mean_return": 0.048604048788547516,
+      "zero_return_mae": 0.13600116968154907,
+      "return_correlation": -0.1577140627994928
+    }
+  },
+  "varied": {
+    "6": {
+      "windows": 633,
+      "error_mm": 2.7721235752105713,
+      "stationary_mm": 10.146538734436035,
+      "carrying_windows": 210,
+      "carrying_mm": 3.3667898178100586,
+      "carrying_stationary_mm": 24.8861141204834,
+      "return_mae": 0.06594447046518326,
+      "predicted_mean_return": 0.03660312294960022,
+      "measured_mean_return": 0.01448166836053133,
+      "zero_return_mae": 0.04394521564245224,
+      "return_correlation": 0.5772927161557498
+    },
+    "24": {
+      "windows": 633,
+      "error_mm": 11.140535354614258,
+      "stationary_mm": 36.61381530761719,
+      "carrying_windows": 210,
+      "carrying_mm": 18.341777801513672,
+      "carrying_stationary_mm": 80.63166809082031,
+      "return_mae": 0.22041313350200653,
+      "predicted_mean_return": 0.1730649620294571,
+      "measured_mean_return": 0.048604048788547516,
+      "zero_return_mae": 0.13600116968154907,
+      "return_correlation": 0.24425507379328837
+    }
+  },
+  "diagnostic_seeds": [
+    1201,
+    1202,
+    1203,
+    1204,
+    1205,
+    1206,
+    1207,
+    1208,
+    1209,
+    1210,
+    1211,
+    1212
+  ]
+}

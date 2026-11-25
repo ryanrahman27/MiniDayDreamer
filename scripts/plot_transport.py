@@ -23,8 +23,8 @@ def scatter(ax, rows, xkey, ykey, title):
     ax.scatter(x[~matched], y[~matched], marker="o", facecolors="none", edgecolors="#858a90", s=34)
     ax.scatter(x[matched], y[matched], color="#21736a", s=34)
     ax.set(xlim=(low, high), ylim=(low, high), xlabel="Base progress (mm)", ylabel="Intervention progress (mm)")
-    ax.set_title(title, loc="left", fontsize=11, fontweight="bold")
-    ax.text(.04, .96, f"{matched.sum()}/{len(rows)} matched prefixes", va="top", transform=ax.transAxes, fontsize=8)
+    ax.set_title(f"{title}\n{matched.sum()} of {len(rows)} pairs closely matched", loc="left", fontsize=10,
+                 fontweight="bold")
 
 
 def plot(run):

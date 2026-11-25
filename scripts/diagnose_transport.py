@@ -114,6 +114,8 @@ def analyze(run, output):
                 rows.append(dict(seed=seed, policy=arm, success=metrics["success"], **result))
                 if arm == "pulse_base":
                     trigger = int(tr["pulse_trigger"])
+                    rows[-1]["pulse_trigger"] = trigger
+                    rows[-1]["pulse_applied_ticks"] = int(tr["pulse_steps"])
                     if trigger != (result["stall_tick"] if result["stall_tick"] is not None and result["stall_tick"] < len(actions) else -1):
                         raise ValueError(f"Pulse trigger does not match recorded states on {seed}")
                     outcome = pulse_outcome(run, seed, obs, trigger, int(tr["pulse_steps"]))
@@ -131,6 +133,11 @@ def analyze(run, output):
             experts.append(dict(success=1, **diagnose(corpus["obs"][i, :n+1], corpus["actions"][i, :n])))
     out = dict(expert=group(experts), policies={a: group([r for r in rows if r["policy"] == a])
                                                for a in sorted({r["policy"] for r in rows})}, pulses=pulses)
+    pulse_trials = [r for r in rows if r["policy"] == "pulse_base"]
+    if pulse_trials:
+        out["pulse_counts"] = dict(enrolled=len(pulse_trials), triggered=sum(r["pulse_trigger"] >= 0 for r in pulse_trials),
+                                   applied=sum(r["pulse_applied_ticks"] > 0 for r in pulse_trials),
+                                   full_pulse=sum(r["pulse_applied_ticks"] == WINDOW for r in pulse_trials))
     (output / "transport-summary.json").write_text(json.dumps(out, indent=2, allow_nan=False)+"\n")
     return out
 
