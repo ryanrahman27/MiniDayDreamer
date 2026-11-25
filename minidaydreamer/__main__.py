@@ -26,6 +26,7 @@ def main():
     t.add_argument("--data", type=Path, required=True)
     t.add_argument("--out", type=Path, required=True)
     t.add_argument("--seed", type=int, default=0)
+    t.add_argument("--world-model", choices=["absolute", "residual"], default="residual")
     t.add_argument("--coverage", choices=["demos", "varied"], default="varied")
     t.add_argument("--base-model", type=Path, help="Reuse a frozen base from calibrate")
     for option, default in (("bc", 3000), ("model", 1800), ("rl", 1500)):
@@ -43,6 +44,11 @@ def main():
     paired = sub.add_parser("compare")
     paired.add_argument("--demos-model", type=Path, required=True)
     paired.add_argument("--varied-model", type=Path, required=True)
+    paired.add_argument("--original-models", nargs=2, type=Path, metavar=("DEMOS", "VARIED"),
+                        help="Also score two reference steering checkpoints on each matched scene")
+    paired.add_argument("--trace-dir", type=Path, help="Record states, actions and measured finger apertures")
+    paired.add_argument("--test-release-gate", action="store_true",
+                        help="Add a diagnostic base arm that delays openings outside the stacking tolerance")
     paired.add_argument("--out", type=Path, required=True, help="Per-scene outcomes in JSON Lines format")
     paired.add_argument("--episodes", type=positive, default=50)
     paired.add_argument("--scene-offset", type=int, default=0, help="First test scene index for this shard")

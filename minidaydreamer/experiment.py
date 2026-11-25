@@ -8,7 +8,7 @@ import numpy as np
 import torch
 
 from .data import Dataset
-from .models import HORIZON, FlowPolicy, NoiseSAC, RSSM
+from .models import HORIZON, FlowPolicy, NoiseSAC, make_world
 from .stack import ACTION_DIM, potential
 
 
@@ -143,13 +143,13 @@ def train(args):
         policy.eval().requires_grad_(False)
     else:
         policy = fit_base(data, demo, args.bc_steps)
-    wm = RSSM()
+    wm = make_world(args.world_model)
     fit(wm, args.model_steps, lambda: wm.loss(*data.sample(wm_ids, 32, 8)))
     metrics = world_diagnostics(wm, data)
     print(json.dumps(metrics), flush=True)
     # Only the world-model fitting data varies between arms of this experiment.
     starts = posterior_states(wm, data, demo)
-    sac = NoiseSAC()
+    sac = NoiseSAC(wm.features)
     # Circular replay measured in 128-transition batches.
     blocks = min(128, args.rl_steps)
     replay = torch.empty((blocks, 128, 2 * starts.shape[1] + ACTION_DIM + 2))
@@ -161,14 +161,15 @@ def train(args):
     torch.save(dict(policy=policy.state_dict(), world=wm.state_dict(), actor=sac.actor.state_dict(),
                     eval_seed=int(data.seeds.max()) + 1, coverage=args.coverage, training_seed=args.seed,
                     demos=len(demo), world_episodes=len(wm_ids), imagination_start_episodes=len(demo),
-                    backend=data.backend, diagnostics=metrics), args.out)
+                    backend=data.backend, diagnostics=metrics, world_model=args.world_model), args.out)
 
 
 def load_policies(path, env):
     ckpt = torch.load(path, map_location="cpu", weights_only=True)
     if ckpt["backend"] != env.backend:
         raise ValueError(f"Checkpoint requires the {ckpt['backend']} backend")
-    pi, wm, sac = FlowPolicy(), RSSM(), NoiseSAC()
+    wm = make_world(ckpt.get("world_model", "absolute"))
+    pi, sac = FlowPolicy(), NoiseSAC(wm.features)
     pi.load_state_dict(ckpt["policy"])
     wm.load_state_dict(ckpt["world"])
     sac.actor.load_state_dict(ckpt["actor"])
@@ -176,13 +177,17 @@ def load_policies(path, env):
 
 
 @torch.no_grad()
-def policy_episode(env, pi, wm, sac, seed, video=None):
+def policy_episode(env, pi, wm, sac, seed, video=None, trace=None, release_gate=False):
     generator = torch.Generator().manual_seed(seed)
     first = env.reset(seed)
     obs = torch.from_numpy(first)[None]
     state = wm.initial(obs) if sac is not None else None
     lifted = False
     steps = 0
+    if trace:
+        trace.parent.mkdir(parents=True, exist_ok=True)
+        observations, commands, proposed_grip = [first.copy()], [], []
+        apertures = [getattr(env, "aperture", np.nan)]
     with ExitStack() as recording:
         if video:
             import imageio.v2 as imageio
@@ -198,7 +203,21 @@ def policy_episode(env, pi, wm, sac, seed, video=None):
             if sac is not None:
                 noise += sac.draw(state, deterministic=True)[0][:, None]
             for action in pi.sample(obs, noise)[0]:
-                o, success, done = env.step(action.numpy())
+                command = action.numpy()
+                if trace:
+                    proposed_grip.append(float(command[3]))
+                if release_gate and lifted and command[3] <= 0:
+                    before = obs[0].numpy()
+                    if before[9] > .5 and before[10] > .5:
+                        delta_m = .1 * (before[3:6] - before[6:9])
+                        if np.linalg.norm(delta_m[:2]) >= .012 or abs(delta_m[2] - env.block_height) >= .008:
+                            command = command.copy()
+                            command[3] = 1
+                o, success, done = env.step(command)
+                if trace:
+                    observations.append(o.copy())
+                    commands.append(command.copy())
+                    apertures.append(getattr(env, "aperture", np.nan))
                 obs = torch.from_numpy(o)[None]
                 if sac is not None:
                     state, _ = wm.filter(wm.advance(state, action[None]), obs)
@@ -206,6 +225,10 @@ def policy_episode(env, pi, wm, sac, seed, video=None):
                 lifted |= bool(o[9] > .5 and o[5] - first[5] > .2)
                 if done:
                     break
+    if trace:
+        with trace.open("xb") as f:
+            np.savez_compressed(f, obs=np.stack(observations), actions=np.stack(commands),
+                                proposed_grip=proposed_grip, aperture_m=apertures, success=success, seed=seed)
     # Shaping telescopes to the change in potential over an episode.
     return dict(success=int(success), steps=steps, lifted=lifted,
                 episode_return=float(potential(o) - potential(first) + 2 * success),
@@ -231,7 +254,7 @@ def evaluate(args, env):
 
 
 def compare(args, env):
-    """Evaluate all three arms on the same scene and the same base-noise sequence."""
+    """Evaluate each arm on the same scene and base-noise sequence."""
     d, pi, wm_d, sac_d = load_policies(args.demos_model, env)
     v, pi_v, wm_v, sac_v = load_policies(args.varied_model, env)
     if (d["coverage"], v["coverage"]) != ("demos", "varied") or d["eval_seed"] != v["eval_seed"]:
@@ -239,6 +262,16 @@ def compare(args, env):
     if not all(torch.equal(a, b) for a, b in zip(pi.parameters(), pi_v.parameters(), strict=True)):
         raise ValueError("The two checkpoints must contain identical base policy weights")
     arms = [("base", wm_d, None), ("demos", wm_d, sac_d), ("varied", wm_v, sac_v)]
+    if args.original_models:
+        for coverage, path in zip(("demos", "varied"), args.original_models, strict=True):
+            ref, ref_pi, ref_wm, ref_sac = load_policies(path, env)
+            if ref["coverage"] != coverage or ref["eval_seed"] != d["eval_seed"]:
+                raise ValueError("Reference checkpoint coverage or split differs")
+            if not all(torch.equal(a, b) for a, b in zip(pi.parameters(), ref_pi.parameters(), strict=True)):
+                raise ValueError("Reference checkpoint contains a different base policy")
+            arms.append(("original_" + coverage, ref_wm, ref_sac))
+    if args.test_release_gate:
+        arms.append(("gated_base", wm_d, None))
     with args.out.open("x", encoding="utf-8") as output:
         for i in range(args.episodes):
             scene = args.scene_offset + i
@@ -246,9 +279,11 @@ def compare(args, env):
             row = {"seed": seed}
             first = None
             # Rotate ordering to balance any effect of simulator history.
-            for mode, wm, sac in arms[scene % 3:] + arms[:scene % 3]:
+            offset = scene % len(arms)
+            for mode, wm, sac in arms[offset:] + arms[:offset]:
                 video = args.video_dir / f"{mode}-{seed}.mp4" if i == 0 and args.video_dir else None
-                metrics, start = policy_episode(env, pi, wm, sac, seed, video)
+                trace = args.trace_dir / f"{mode}-{seed}.npz" if args.trace_dir else None
+                metrics, start = policy_episode(env, pi, wm, sac, seed, video, trace, mode == "gated_base")
                 if first is None:
                     first = start
                     row["start"] = start.tolist()

@@ -46,6 +46,8 @@ class FlowPolicy(nn.Module):
 
 
 class RSSM(nn.Module):
+    features = FEATURES
+
     def __init__(self):
         super().__init__()
         self.memory = nn.GRUCell(STOCH + ACTION_DIM, HIDDEN)
@@ -95,12 +97,98 @@ class RSSM(nn.Module):
         return loss / actions.shape[1]
 
 
+class ResidualRSSM(nn.Module):
+    """Carry measured poses through filtering and learn action-conditioned pose increments."""
+
+    features = FEATURES + STATE_DIM + 9
+
+    def __init__(self):
+        super().__init__()
+        self.memory = nn.GRUCell(STOCH + STATE_DIM + 9 + ACTION_DIM, HIDDEN)
+        self.prior = mlp(HIDDEN, 2 * STOCH)
+        self.posterior = mlp(HIDDEN + STATE_DIM, 2 * STOCH)
+        self.motion = mlp(self.features + ACTION_DIM, 10)
+        self.reward = mlp(self.features, 1)
+        self.success = mlp(self.features, 1)
+
+    @staticmethod
+    def decode(state):
+        return state[:, FEATURES:FEATURES + STATE_DIM]
+
+    def observed(self, h, obs, velocity, sample):
+        q = RSSM.distribution(self.posterior(torch.cat((h, obs), -1)))
+        z = q.rsample() if sample else q.mean
+        return torch.cat((h, z, obs, velocity), -1), q
+
+    def initial(self, obs):
+        h = obs.new_zeros((len(obs), HIDDEN))
+        return self.observed(h, obs, torch.zeros_like(obs[:, :9]), False)[0]
+
+    def advance(self, state, action):
+        # Pose units are 100 mm. Scale the last observed displacement for the networks.
+        velocity = state[:, -9:]
+        inputs = torch.cat((state[:, HIDDEN:FEATURES], self.decode(state), 10 * velocity, action), -1)
+        h = self.memory(inputs, state[:, :HIDDEN])
+        return h, self.decode(state), velocity, action
+
+    def filter(self, context, obs, sample=False):
+        h, previous, _, _ = context
+        return self.observed(h, obs, obs[:, :9] - previous[:, :9], sample)
+
+    def predict(self, context, sample):
+        h, obs, velocity, action = context
+        p = RSSM.distribution(self.prior(h))
+        z = p.rsample() if sample else p.mean
+        latent = torch.cat((h, z), -1)
+        motion = self.motion(torch.cat((latent, obs, 10 * velocity, action), -1))
+        delta = .1 * motion[:, :9]
+        grasp = motion[:, 9:].sigmoid()
+        closed = (action[:, 3:] > 0).to(obs.dtype)
+        predicted = torch.cat((obs[:, :9] + delta, grasp, closed), -1)
+        return torch.cat((latent, predicted, delta), -1), p
+
+    def imagine(self, state, action, sample=False):
+        return self.predict(self.advance(state, action), sample)[0]
+
+    def prediction_loss(self, state, target, reward, success):
+        predicted = self.decode(state)
+        # A 5 mm position error is one training unit.
+        position = F.smooth_l1_loss(20 * predicted[:, :9], 20 * target[:, :9])
+        grasp = F.binary_cross_entropy(predicted[:, 9], target[:, 9])
+        return (position + .2 * grasp + F.mse_loss(self.reward(state)[:, 0], reward)
+                + F.binary_cross_entropy_with_logits(self.success(state)[:, 0], success))
+
+    def loss(self, obs, actions, rewards, successes):
+        state = self.initial(obs[:, 0])
+        warmup = actions.shape[1] - 2 * HORIZON
+        if warmup < 0:
+            raise ValueError("Residual RSSM needs a full imagination horizon")
+        loss = obs.new_zeros(())
+        for t, action in enumerate(actions.unbind(1)):
+            if t == warmup:
+                imagined = state
+            context = self.advance(state, action)
+            prior, p = self.predict(context, sample=True)
+            target = obs[:, t + 1]
+            state, q = self.filter(context, target, sample=True)
+            loss += self.prediction_loss(prior, target, rewards[:, t], successes[:, t])
+            loss += .05 * torch.distributions.kl_divergence(q, p).mean()
+            if t >= warmup:
+                imagined = self.imagine(imagined, action, sample=True)
+                loss += self.prediction_loss(imagined, target, rewards[:, t], successes[:, t])
+        return loss / (actions.shape[1] + 2 * HORIZON)
+
+
+def make_world(kind):
+    return {"absolute": RSSM, "residual": ResidualRSSM}[kind]()
+
+
 class NoiseSAC:
     """Black-box steering. Replay actions are bounded noise shifts, one per chunk."""
 
-    def __init__(self):
-        self.actor = mlp(FEATURES, 2 * ACTION_DIM)
-        self.critics = nn.ModuleList([mlp(FEATURES + ACTION_DIM, 1) for _ in range(2)])
+    def __init__(self, features=FEATURES):
+        self.actor = mlp(features, 2 * ACTION_DIM)
+        self.critics = nn.ModuleList([mlp(features + ACTION_DIM, 1) for _ in range(2)])
         self.targets = copy.deepcopy(self.critics).requires_grad_(False)
         self.pi_opt = torch.optim.Adam(self.actor.parameters(), lr=3e-4)
         self.q_opt = torch.optim.Adam(self.critics.parameters(), lr=3e-4)
