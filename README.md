@@ -4,6 +4,8 @@ Can a weak imitation policy learn to stack a red cube on a blue cube by changing
 
 ## Isaac pilot
 
+On 50 held-out Isaac scenes, the frozen policy stacked 2/50 times, demos-only RSSM steering stacked 1/50, and varied-rollout RSSM steering stacked 2/50. All three lifted the cube on every scene. [Experiment results and paired outcomes](results/isaac-stack-24-v1/README.md)
+
 The Franka visuomotor stacking scene randomizes cube placements, lighting and materials. The green cube is a distractor. The experiment ends successfully when the red cube stays centered above blue, both cubes move slowly, and the gripper is open and clear for eight control ticks.
 
 For the RTX PRO 6000 Blackwell Max-Q rental, use Python 3.12, Isaac Lab 3.0.0 and Isaac Sim 6.2. On the Ubuntu 24.04 Vast PyTorch image, install the graphics libraries with `apt-get install libxt6t64 libglu1-mesa`. Activate a Python 3.12 environment, then install NVIDIA's tested package combination. [Isaac Lab installation](https://docs.nvidia.com/isaaclab/3.0/isaac-lab/installation)
@@ -51,4 +53,4 @@ python -m minidaydreamer train --data runs/smoke.npz --bc-steps 2000 --model-ste
 python -m minidaydreamer eval --backend mujoco --model runs/smoke.pt --episodes 32
 ```
 
-The scripted controller completed and released stable stacks on seeds 0 and 1 on the RTX rental. The table camera recorded 640 × 480 video at 20 fps. These runs validate the simulation, grasp controller and camera. The learned policy needs its own paired evaluation in Isaac.
+The scripted controller completed and released stable stacks on seeds 0 and 1 on the RTX rental. The table camera recorded 640 × 480 video at 20 fps.
