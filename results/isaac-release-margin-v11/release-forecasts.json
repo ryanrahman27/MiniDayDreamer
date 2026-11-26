@@ -1,0 +1,42 @@
+{
+  "3": {
+    "all": {
+      "openings": 92,
+      "actual_inside": 62,
+      "model_inside": 66,
+      "model_correct_side": 88,
+      "stationary_correct_side": 83,
+      "model_mae_mm": 0.6104282931141232,
+      "stationary_mae_mm": 1.043436582321706
+    },
+    "near_margin": {
+      "openings": 53,
+      "actual_inside": 35,
+      "model_inside": 39,
+      "model_correct_side": 49,
+      "stationary_correct_side": 44,
+      "model_mae_mm": 0.713821586572899,
+      "stationary_mae_mm": 1.042512353861107
+    }
+  },
+  "12": {
+    "all": {
+      "openings": 92,
+      "actual_inside": 62,
+      "model_inside": 67,
+      "model_correct_side": 81,
+      "stationary_correct_side": 66,
+      "model_mae_mm": 1.3554015192000761,
+      "stationary_mae_mm": 3.7136871769376425
+    },
+    "near_margin": {
+      "openings": 53,
+      "actual_inside": 35,
+      "model_inside": 40,
+      "model_correct_side": 42,
+      "stationary_correct_side": 33,
+      "model_mae_mm": 1.3288098686146286,
+      "stationary_mae_mm": 3.137552902383624
+    }
+  }
+}

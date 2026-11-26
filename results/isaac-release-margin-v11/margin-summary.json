@@ -1,0 +1,869 @@
+{
+  "episodes": 4352,
+  "scenes": 128,
+  "checks": {
+    "test": {
+      "max_action_error": 0.0,
+      "max_start_difference_mm": 0.0
+    },
+    "noise": {
+      "max_action_error": 0.0,
+      "max_start_difference_mm": 0.0
+    }
+  },
+  "test": {
+    "percent": {
+      "base": 60.9375,
+      "earlier": 75.0,
+      "incumbent": 70.9375,
+      "control": 76.71875,
+      "margin": 77.1875
+    },
+    "counts_by_pair": {
+      "base": [
+        78,
+        78,
+        78,
+        78,
+        78
+      ],
+      "earlier": [
+        96,
+        96,
+        96,
+        96,
+        96
+      ],
+      "incumbent": [
+        87,
+        93,
+        92,
+        90,
+        92
+      ],
+      "control": [
+        98,
+        98,
+        102,
+        98,
+        95
+      ],
+      "margin": [
+        99,
+        100,
+        102,
+        96,
+        97
+      ]
+    },
+    "comparisons": {
+      "margin_vs_base": {
+        "success_pct": 77.1875,
+        "reference_pct": 60.9375,
+        "difference_pp": 16.25,
+        "interval_pp": [
+          5.78125,
+          26.718750000000004
+        ],
+        "by_pair_pp": [
+          16.40625,
+          17.1875,
+          18.75,
+          14.0625,
+          14.84375
+        ],
+        "wins_by_pair": [
+          39,
+          37,
+          39,
+          34,
+          34
+        ],
+        "losses_by_pair": [
+          18,
+          15,
+          15,
+          16,
+          15
+        ]
+      },
+      "margin_vs_incumbent": {
+        "success_pct": 77.1875,
+        "reference_pct": 70.9375,
+        "difference_pp": 6.25,
+        "interval_pp": [
+          0.3125,
+          12.34375
+        ],
+        "by_pair_pp": [
+          9.375,
+          5.46875,
+          7.8125,
+          4.6875,
+          3.90625
+        ],
+        "wins_by_pair": [
+          18,
+          13,
+          13,
+          14,
+          10
+        ],
+        "losses_by_pair": [
+          6,
+          6,
+          3,
+          8,
+          5
+        ]
+      },
+      "margin_vs_control": {
+        "success_pct": 77.1875,
+        "reference_pct": 76.71875,
+        "difference_pp": 0.46875,
+        "interval_pp": [
+          -2.03125,
+          2.972656249999659
+        ],
+        "by_pair_pp": [
+          0.78125,
+          1.5625,
+          0.0,
+          -1.5625,
+          1.5625
+        ],
+        "wins_by_pair": [
+          3,
+          3,
+          4,
+          2,
+          6
+        ],
+        "losses_by_pair": [
+          2,
+          1,
+          4,
+          4,
+          4
+        ]
+      },
+      "incumbent_vs_base": {
+        "success_pct": 70.9375,
+        "reference_pct": 60.9375,
+        "difference_pp": 10.0,
+        "interval_pp": [
+          -0.46875,
+          20.46875
+        ],
+        "by_pair_pp": [
+          7.03125,
+          11.71875,
+          10.9375,
+          9.375,
+          10.9375
+        ],
+        "wins_by_pair": [
+          29,
+          30,
+          33,
+          30,
+          31
+        ],
+        "losses_by_pair": [
+          20,
+          15,
+          19,
+          18,
+          17
+        ]
+      },
+      "incumbent_vs_earlier": {
+        "success_pct": 70.9375,
+        "reference_pct": 75.0,
+        "difference_pp": -4.0625,
+        "interval_pp": [
+          -13.28125,
+          5.0
+        ],
+        "by_pair_pp": [
+          -7.03125,
+          -2.34375,
+          -3.125,
+          -4.6875,
+          -3.125
+        ],
+        "wins_by_pair": [
+          14,
+          18,
+          15,
+          15,
+          17
+        ],
+        "losses_by_pair": [
+          23,
+          21,
+          19,
+          21,
+          21
+        ]
+      },
+      "control_vs_incumbent": {
+        "success_pct": 76.71875,
+        "reference_pct": 70.9375,
+        "difference_pp": 5.78125,
+        "interval_pp": [
+          -0.3125,
+          11.875
+        ],
+        "by_pair_pp": [
+          8.59375,
+          3.90625,
+          7.8125,
+          6.25,
+          2.34375
+        ],
+        "wins_by_pair": [
+          17,
+          12,
+          13,
+          14,
+          11
+        ],
+        "losses_by_pair": [
+          6,
+          7,
+          3,
+          6,
+          8
+        ]
+      }
+    },
+    "mechanisms": {
+      "base": {
+        "off_center_failures_per_100": 10.15625,
+        "never_open_failures_per_100": 25.78125,
+        "off_center_openings_per_100": 13.28125
+      },
+      "earlier": {
+        "off_center_failures_per_100": 12.5,
+        "never_open_failures_per_100": 5.46875,
+        "off_center_openings_per_100": 15.625
+      },
+      "incumbent": {
+        "off_center_failures_per_100": 16.25,
+        "never_open_failures_per_100": 6.71875,
+        "off_center_openings_per_100": 17.34375
+      },
+      "control": {
+        "off_center_failures_per_100": 19.375,
+        "never_open_failures_per_100": 0.78125,
+        "off_center_openings_per_100": 21.40625
+      },
+      "margin": {
+        "off_center_failures_per_100": 18.28125,
+        "never_open_failures_per_100": 1.40625,
+        "off_center_openings_per_100": 20.9375
+      }
+    },
+    "mechanism_changes": {
+      "off_center_failures_vs_incumbent": {
+        "difference_pp": 2.03125,
+        "interval_pp": [
+          -3.125,
+          7.34375
+        ]
+      },
+      "off_center_failures_vs_control": {
+        "difference_pp": -1.09375,
+        "interval_pp": [
+          -3.5937499999999996,
+          1.40625
+        ]
+      },
+      "never_open_failures_vs_incumbent": {
+        "difference_pp": -5.3125,
+        "interval_pp": [
+          -9.375,
+          -1.875
+        ]
+      },
+      "never_open_failures_vs_control": {
+        "difference_pp": 0.625,
+        "interval_pp": [
+          0.0,
+          2.1875
+        ]
+      }
+    }
+  },
+  "noise": {
+    "percent": {
+      "base": 58.59375,
+      "earlier": 75.78125,
+      "incumbent": 80.0,
+      "control": 78.75,
+      "margin": 80.15625
+    },
+    "counts_by_pair": {
+      "base": [
+        75,
+        75,
+        75,
+        75,
+        75
+      ],
+      "earlier": [
+        97,
+        97,
+        97,
+        97,
+        97
+      ],
+      "incumbent": [
+        102,
+        101,
+        102,
+        105,
+        102
+      ],
+      "control": [
+        100,
+        97,
+        103,
+        101,
+        103
+      ],
+      "margin": [
+        98,
+        99,
+        105,
+        105,
+        106
+      ]
+    },
+    "comparisons": {
+      "margin_vs_base": {
+        "success_pct": 80.15625,
+        "reference_pct": 58.59375,
+        "difference_pp": 21.5625,
+        "interval_pp": [
+          11.09375,
+          32.03125
+        ],
+        "by_pair_pp": [
+          17.96875,
+          18.75,
+          23.4375,
+          23.4375,
+          24.21875
+        ],
+        "wins_by_pair": [
+          38,
+          37,
+          41,
+          42,
+          42
+        ],
+        "losses_by_pair": [
+          15,
+          13,
+          11,
+          12,
+          11
+        ]
+      },
+      "margin_vs_incumbent": {
+        "success_pct": 80.15625,
+        "reference_pct": 80.0,
+        "difference_pp": 0.15625,
+        "interval_pp": [
+          -5.625,
+          6.097656249999659
+        ],
+        "by_pair_pp": [
+          -3.125,
+          -1.5625,
+          2.34375,
+          0.0,
+          3.125
+        ],
+        "wins_by_pair": [
+          6,
+          8,
+          10,
+          8,
+          10
+        ],
+        "losses_by_pair": [
+          10,
+          10,
+          7,
+          8,
+          6
+        ]
+      },
+      "margin_vs_control": {
+        "success_pct": 80.15625,
+        "reference_pct": 78.75,
+        "difference_pp": 1.40625,
+        "interval_pp": [
+          -1.7187500000000002,
+          4.6875
+        ],
+        "by_pair_pp": [
+          -1.5625,
+          1.5625,
+          1.5625,
+          3.125,
+          2.34375
+        ],
+        "wins_by_pair": [
+          2,
+          5,
+          4,
+          7,
+          5
+        ],
+        "losses_by_pair": [
+          4,
+          3,
+          2,
+          3,
+          2
+        ]
+      },
+      "incumbent_vs_base": {
+        "success_pct": 80.0,
+        "reference_pct": 58.59375,
+        "difference_pp": 21.40625,
+        "interval_pp": [
+          11.871093750000004,
+          30.9375
+        ],
+        "by_pair_pp": [
+          21.09375,
+          20.3125,
+          21.09375,
+          23.4375,
+          21.09375
+        ],
+        "wins_by_pair": [
+          38,
+          35,
+          36,
+          37,
+          36
+        ],
+        "losses_by_pair": [
+          11,
+          9,
+          9,
+          7,
+          9
+        ]
+      },
+      "incumbent_vs_earlier": {
+        "success_pct": 80.0,
+        "reference_pct": 75.78125,
+        "difference_pp": 4.21875,
+        "interval_pp": [
+          -4.53125,
+          12.968750000000002
+        ],
+        "by_pair_pp": [
+          3.90625,
+          3.125,
+          3.90625,
+          6.25,
+          3.90625
+        ],
+        "wins_by_pair": [
+          20,
+          21,
+          20,
+          21,
+          19
+        ],
+        "losses_by_pair": [
+          15,
+          17,
+          15,
+          13,
+          14
+        ]
+      },
+      "control_vs_incumbent": {
+        "success_pct": 78.75,
+        "reference_pct": 80.0,
+        "difference_pp": -1.25,
+        "interval_pp": [
+          -7.187499999999999,
+          4.84375
+        ],
+        "by_pair_pp": [
+          -1.5625,
+          -3.125,
+          0.78125,
+          -3.125,
+          0.78125
+        ],
+        "wins_by_pair": [
+          6,
+          8,
+          11,
+          8,
+          9
+        ],
+        "losses_by_pair": [
+          8,
+          12,
+          10,
+          12,
+          8
+        ]
+      }
+    },
+    "mechanisms": {
+      "base": {
+        "off_center_failures_per_100": 14.0625,
+        "never_open_failures_per_100": 25.0,
+        "off_center_openings_per_100": 17.96875
+      },
+      "earlier": {
+        "off_center_failures_per_100": 10.9375,
+        "never_open_failures_per_100": 6.25,
+        "off_center_openings_per_100": 12.5
+      },
+      "incumbent": {
+        "off_center_failures_per_100": 9.0625,
+        "never_open_failures_per_100": 4.6875,
+        "off_center_openings_per_100": 13.4375
+      },
+      "control": {
+        "off_center_failures_per_100": 14.21875,
+        "never_open_failures_per_100": 2.5,
+        "off_center_openings_per_100": 17.34375
+      },
+      "margin": {
+        "off_center_failures_per_100": 13.593749999999998,
+        "never_open_failures_per_100": 2.65625,
+        "off_center_openings_per_100": 17.96875
+      }
+    },
+    "mechanism_changes": {
+      "off_center_failures_vs_incumbent": {
+        "difference_pp": 4.53125,
+        "interval_pp": [
+          0.625,
+          8.90625
+        ]
+      },
+      "off_center_failures_vs_control": {
+        "difference_pp": -0.625,
+        "interval_pp": [
+          -3.4375000000000004,
+          1.875
+        ]
+      },
+      "never_open_failures_vs_incumbent": {
+        "difference_pp": -2.03125,
+        "interval_pp": [
+          -4.6875,
+          0.0
+        ]
+      },
+      "never_open_failures_vs_control": {
+        "difference_pp": 0.15625,
+        "interval_pp": [
+          0.0,
+          0.9375
+        ]
+      }
+    }
+  },
+  "combined": {
+    "percent": {
+      "base": 59.765625,
+      "earlier": 75.390625,
+      "incumbent": 75.46875,
+      "control": 77.734375,
+      "margin": 78.671875
+    },
+    "counts_by_pair": {
+      "base": [
+        153,
+        153,
+        153,
+        153,
+        153
+      ],
+      "earlier": [
+        193,
+        193,
+        193,
+        193,
+        193
+      ],
+      "incumbent": [
+        189,
+        194,
+        194,
+        195,
+        194
+      ],
+      "control": [
+        198,
+        195,
+        205,
+        199,
+        198
+      ],
+      "margin": [
+        197,
+        199,
+        207,
+        201,
+        203
+      ]
+    },
+    "comparisons": {
+      "margin_vs_base": {
+        "success_pct": 78.671875,
+        "reference_pct": 59.765625,
+        "difference_pp": 18.90625,
+        "interval_pp": [
+          10.9375,
+          26.953125
+        ],
+        "by_pair_pp": [
+          17.1875,
+          17.96875,
+          21.09375,
+          18.75,
+          19.53125
+        ],
+        "wins_by_pair": [
+          77,
+          74,
+          80,
+          76,
+          76
+        ],
+        "losses_by_pair": [
+          33,
+          28,
+          26,
+          28,
+          26
+        ]
+      },
+      "margin_vs_incumbent": {
+        "success_pct": 78.671875,
+        "reference_pct": 75.46875,
+        "difference_pp": 3.2031249999999996,
+        "interval_pp": [
+          -1.171875,
+          7.5
+        ],
+        "by_pair_pp": [
+          3.125,
+          1.953125,
+          5.078125,
+          2.34375,
+          3.515625
+        ],
+        "wins_by_pair": [
+          24,
+          21,
+          23,
+          22,
+          20
+        ],
+        "losses_by_pair": [
+          16,
+          16,
+          10,
+          16,
+          11
+        ]
+      },
+      "margin_vs_control": {
+        "success_pct": 78.671875,
+        "reference_pct": 77.734375,
+        "difference_pp": 0.9375,
+        "interval_pp": [
+          -0.9375,
+          2.890625
+        ],
+        "by_pair_pp": [
+          -0.390625,
+          1.5625,
+          0.78125,
+          0.78125,
+          1.953125
+        ],
+        "wins_by_pair": [
+          5,
+          8,
+          8,
+          9,
+          11
+        ],
+        "losses_by_pair": [
+          6,
+          4,
+          6,
+          7,
+          6
+        ]
+      },
+      "incumbent_vs_base": {
+        "success_pct": 75.46875,
+        "reference_pct": 59.765625,
+        "difference_pp": 15.703125000000002,
+        "interval_pp": [
+          8.203125,
+          23.28125
+        ],
+        "by_pair_pp": [
+          14.0625,
+          16.015625,
+          16.015625,
+          16.40625,
+          16.015625
+        ],
+        "wins_by_pair": [
+          67,
+          65,
+          69,
+          67,
+          67
+        ],
+        "losses_by_pair": [
+          31,
+          24,
+          28,
+          25,
+          26
+        ]
+      },
+      "incumbent_vs_earlier": {
+        "success_pct": 75.46875,
+        "reference_pct": 75.390625,
+        "difference_pp": 0.078125,
+        "interval_pp": [
+          -6.406249999999999,
+          6.5625
+        ],
+        "by_pair_pp": [
+          -1.5625,
+          0.390625,
+          0.390625,
+          0.78125,
+          0.390625
+        ],
+        "wins_by_pair": [
+          34,
+          39,
+          35,
+          36,
+          36
+        ],
+        "losses_by_pair": [
+          38,
+          38,
+          34,
+          34,
+          35
+        ]
+      },
+      "control_vs_incumbent": {
+        "success_pct": 77.734375,
+        "reference_pct": 75.46875,
+        "difference_pp": 2.265625,
+        "interval_pp": [
+          -2.265625,
+          6.640625
+        ],
+        "by_pair_pp": [
+          3.515625,
+          0.390625,
+          4.296875,
+          1.5625,
+          1.5625
+        ],
+        "wins_by_pair": [
+          23,
+          20,
+          24,
+          22,
+          20
+        ],
+        "losses_by_pair": [
+          14,
+          19,
+          13,
+          18,
+          16
+        ]
+      }
+    },
+    "mechanisms": {
+      "base": {
+        "off_center_failures_per_100": 12.109375,
+        "never_open_failures_per_100": 25.390625,
+        "off_center_openings_per_100": 15.625
+      },
+      "earlier": {
+        "off_center_failures_per_100": 11.71875,
+        "never_open_failures_per_100": 5.859375,
+        "off_center_openings_per_100": 14.0625
+      },
+      "incumbent": {
+        "off_center_failures_per_100": 12.65625,
+        "never_open_failures_per_100": 5.703125,
+        "off_center_openings_per_100": 15.390625
+      },
+      "control": {
+        "off_center_failures_per_100": 16.796875,
+        "never_open_failures_per_100": 1.640625,
+        "off_center_openings_per_100": 19.375
+      },
+      "margin": {
+        "off_center_failures_per_100": 15.937499999999998,
+        "never_open_failures_per_100": 2.03125,
+        "off_center_openings_per_100": 19.453125
+      }
+    },
+    "mechanism_changes": {
+      "off_center_failures_vs_incumbent": {
+        "difference_pp": 3.28125,
+        "interval_pp": [
+          -0.078125,
+          6.796874999999999
+        ]
+      },
+      "off_center_failures_vs_control": {
+        "difference_pp": -0.8593750000000001,
+        "interval_pp": [
+          -2.734375,
+          0.9375
+        ]
+      },
+      "never_open_failures_vs_incumbent": {
+        "difference_pp": -3.671875,
+        "interval_pp": [
+          -6.015625,
+          -1.5625
+        ]
+      },
+      "never_open_failures_vs_control": {
+        "difference_pp": 0.390625,
+        "interval_pp": [
+          0.0,
+          1.40625
+        ]
+      }
+    }
+  }
+}

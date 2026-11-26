@@ -1,0 +1,18 @@
+{
+  "stacked": {
+    "openings": 75,
+    "off_center": 0,
+    "above_8mm": 32,
+    "both": 0,
+    "median_xy_mm": 5.537773609161377,
+    "median_height_mm": 5.29150390625
+  },
+  "failed": {
+    "openings": 17,
+    "off_center": 13,
+    "above_8mm": 15,
+    "both": 12,
+    "median_xy_mm": 15.170439720153809,
+    "median_height_mm": 20.84157943725586
+  }
+}

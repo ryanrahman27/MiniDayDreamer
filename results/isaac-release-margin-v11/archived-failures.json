@@ -1,0 +1,73 @@
+{
+  "101": {
+    "all": {
+      "first_open_off_center": 13,
+      "never_open_never_centered_while_lifted": 5,
+      "opened_centered_ended_outside_pose": 4,
+      "never_open_stayed_high_while_centered": 3
+    },
+    "base_won": {
+      "never_open_never_centered_while_lifted": 2,
+      "first_open_off_center": 5,
+      "opened_centered_ended_outside_pose": 3
+    }
+  },
+  "211": {
+    "all": {
+      "first_open_off_center": 13,
+      "never_open_never_centered_while_lifted": 5,
+      "opened_centered_ended_outside_pose": 4,
+      "never_open_stayed_high_while_centered": 3
+    },
+    "base_won": {
+      "never_open_never_centered_while_lifted": 2,
+      "first_open_off_center": 5,
+      "opened_centered_ended_outside_pose": 3
+    }
+  },
+  "307": {
+    "all": {
+      "first_open_off_center": 14,
+      "never_open_other": 1,
+      "opened_centered_ended_outside_pose": 4,
+      "never_open_stayed_high_while_centered": 3,
+      "never_open_never_centered_while_lifted": 3
+    },
+    "base_won": {
+      "never_open_other": 1,
+      "first_open_off_center": 5,
+      "opened_centered_ended_outside_pose": 3,
+      "never_open_never_centered_while_lifted": 1
+    }
+  },
+  "401": {
+    "all": {
+      "first_open_off_center": 14,
+      "never_open_other": 1,
+      "opened_centered_ended_outside_pose": 4,
+      "never_open_stayed_high_while_centered": 3,
+      "never_open_never_centered_while_lifted": 3
+    },
+    "base_won": {
+      "never_open_other": 1,
+      "first_open_off_center": 5,
+      "opened_centered_ended_outside_pose": 3,
+      "never_open_never_centered_while_lifted": 1
+    }
+  },
+  "503": {
+    "all": {
+      "first_open_off_center": 14,
+      "never_open_other": 1,
+      "opened_centered_ended_outside_pose": 4,
+      "never_open_stayed_high_while_centered": 3,
+      "never_open_never_centered_while_lifted": 3
+    },
+    "base_won": {
+      "never_open_other": 1,
+      "first_open_off_center": 5,
+      "opened_centered_ended_outside_pose": 3,
+      "never_open_never_centered_while_lifted": 1
+    }
+  }
+}

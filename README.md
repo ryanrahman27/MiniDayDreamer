@@ -4,6 +4,8 @@ Can a weak imitation policy learn to stack a red cube on a blue cube by changing
 
 ## Isaac pilot
 
+On 128 fresh Isaac scenes and two action-noise streams, release-margin steering averaged 78.7% released stacks, versus 59.8% for the frozen base, 75.5% for the previous tuned actor and 77.7% for the same correction trained with the old reward. The 18.9-point gain over the base held across all five steering seeds (95% interval +10.9 to +27.0). The matched reward difference was +0.9 points (−0.9 to +2.9). Off-center failures persisted while failures to open became less frequent. [Paired release measurements and fresh-seed comparison](results/isaac-release-margin-v11/README.md)
+
 Across two action-noise streams on 100 fresh physical scenes, five newly trained DSRL actors averaged 74% released stacks versus 54% for the frozen base and 69.5% for the previous steering checkpoint. The gain over the base was 20.0 percentage points (95% interval +10.7 to +29.2). On 32 additional single-environment scenes the three scores were 87.5%, 59.4% and 90.6%, respectively. [Multi-seed tuning, from-scratch controls and paired validation](results/isaac-multiseed-v10/README.md)
 
 On 100 fresh matched Isaac scenes, a retreat-reward DSRL actor trained in the frozen varied RSSM produced 81 released terminal stacks, versus 51 for the previous targeted actor and 63 for the frozen base. Requiring the policy to pull its own gripper 50 mm clear for eight ticks gave 73, 44 and 61 stacks, respectively. A separate withdrawal test found that the extra terminal placements persisted when the hand moved away. [Stack stability, gripper clearance and paired results](results/isaac-retreat-v9/README.md)
