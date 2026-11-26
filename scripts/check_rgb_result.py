@@ -5,11 +5,11 @@ import csv
 import json
 from pathlib import Path
 
-PUBLISHED = Path(__file__).resolve().parents[1] / "results" / "isaac-rgb-wait-v15" / "calibrated"
-
-
 def report(directory):
-    protocol = json.loads((directory / "protocol.json").read_text())
+    protocol_path = directory / "test-wait" / "protocol.json"
+    if not protocol_path.is_file():
+        protocol_path = directory / "protocol.json"
+    protocol = json.loads(protocol_path.read_text())
     start = protocol["first_scene"]
     scenes = range(start, start + protocol["width"] * protocol["batches"])
     arms = protocol["actors"]
@@ -48,5 +48,5 @@ def report(directory):
 
 if __name__ == "__main__":
     cli = argparse.ArgumentParser(description=__doc__)
-    cli.add_argument("directory", nargs="?", type=Path, default=PUBLISHED)
+    cli.add_argument("directory", type=Path, help="Scored run containing test-outcomes.csv")
     report(cli.parse_args().directory)
