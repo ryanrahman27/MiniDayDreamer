@@ -1,0 +1,418 @@
+{
+  "midbase": {
+    "mid_base": {
+      "success": {
+        "episodes": 60,
+        "modes": {
+          "stable_stack": 60
+        },
+        "success": 60,
+        "lifted": 60,
+        "reached_center": 60,
+        "never_open": 0,
+        "first_open_grasped": 60,
+        "open_off_center": 1,
+        "open_high": 31,
+        "loss_off_center": 0,
+        "rising_at_alignment": 0,
+        "descent_by_12_after": 60,
+        "ended_in_pose": 60
+      },
+      "failure": {
+        "episodes": 40,
+        "modes": {
+          "first_open_off_center": 11,
+          "never_open_never_centered_while_lifted": 1,
+          "never_open_other": 4,
+          "never_open_stayed_high_while_centered": 16,
+          "opened_centered_ended_in_pose_without_stable_stack": 6,
+          "opened_centered_ended_outside_pose": 2
+        },
+        "success": 0,
+        "lifted": 40,
+        "reached_center": 38,
+        "never_open": 21,
+        "first_open_grasped": 19,
+        "open_off_center": 11,
+        "open_high": 13,
+        "loss_off_center": 12,
+        "rising_at_alignment": 13,
+        "descent_by_12_after": 24,
+        "ended_in_pose": 7
+      }
+    },
+    "mid_varied_learned": {
+      "success": {
+        "episodes": 51,
+        "modes": {
+          "stable_stack": 51
+        },
+        "success": 51,
+        "lifted": 51,
+        "reached_center": 51,
+        "never_open": 0,
+        "first_open_grasped": 51,
+        "open_off_center": 3,
+        "open_high": 27,
+        "loss_off_center": 1,
+        "rising_at_alignment": 1,
+        "descent_by_12_after": 51,
+        "ended_in_pose": 51
+      },
+      "failure": {
+        "episodes": 49,
+        "modes": {
+          "first_open_off_center": 12,
+          "never_open_never_centered_while_lifted": 2,
+          "never_open_other": 4,
+          "never_open_stayed_high_while_centered": 21,
+          "opened_centered_ended_in_pose_without_stable_stack": 8,
+          "opened_centered_ended_outside_pose": 2
+        },
+        "success": 0,
+        "lifted": 49,
+        "reached_center": 47,
+        "never_open": 27,
+        "first_open_grasped": 22,
+        "open_off_center": 12,
+        "open_high": 18,
+        "loss_off_center": 13,
+        "rising_at_alignment": 15,
+        "descent_by_12_after": 30,
+        "ended_in_pose": 10
+      }
+    },
+    "mid_varied_direct": {
+      "success": {
+        "episodes": 48,
+        "modes": {
+          "stable_stack": 48
+        },
+        "success": 48,
+        "lifted": 48,
+        "reached_center": 48,
+        "never_open": 0,
+        "first_open_grasped": 48,
+        "open_off_center": 3,
+        "open_high": 33,
+        "loss_off_center": 2,
+        "rising_at_alignment": 1,
+        "descent_by_12_after": 48,
+        "ended_in_pose": 48
+      },
+      "failure": {
+        "episodes": 52,
+        "modes": {
+          "first_open_off_center": 7,
+          "never_open_never_centered_while_lifted": 1,
+          "never_open_other": 2,
+          "never_open_stayed_high_while_centered": 37,
+          "opened_centered_ended_in_pose_without_stable_stack": 3,
+          "opened_centered_ended_outside_pose": 2
+        },
+        "success": 0,
+        "lifted": 52,
+        "reached_center": 49,
+        "never_open": 40,
+        "first_open_grasped": 12,
+        "open_off_center": 7,
+        "open_high": 11,
+        "loss_off_center": 8,
+        "rising_at_alignment": 27,
+        "descent_by_12_after": 14,
+        "ended_in_pose": 4
+      }
+    }
+  },
+  "target": {
+    "base": {
+      "success": {
+        "episodes": 51,
+        "modes": {
+          "stable_stack": 51
+        },
+        "success": 51,
+        "lifted": 51,
+        "reached_center": 51,
+        "never_open": 0,
+        "first_open_grasped": 51,
+        "open_off_center": 0,
+        "open_high": 34,
+        "loss_off_center": 0,
+        "rising_at_alignment": 0,
+        "descent_by_12_after": 50,
+        "ended_in_pose": 51
+      },
+      "failure": {
+        "episodes": 49,
+        "modes": {
+          "first_open_off_center": 13,
+          "never_open_never_centered_while_lifted": 1,
+          "never_open_other": 5,
+          "never_open_stayed_high_while_centered": 25,
+          "opened_centered_ended_in_pose_without_stable_stack": 1,
+          "opened_centered_ended_outside_pose": 4
+        },
+        "success": 0,
+        "lifted": 49,
+        "reached_center": 44,
+        "never_open": 31,
+        "first_open_grasped": 18,
+        "open_off_center": 13,
+        "open_high": 17,
+        "loss_off_center": 13,
+        "rising_at_alignment": 22,
+        "descent_by_12_after": 22,
+        "ended_in_pose": 4
+      }
+    },
+    "direct": {
+      "success": {
+        "episodes": 36,
+        "modes": {
+          "stable_stack": 36
+        },
+        "success": 36,
+        "lifted": 36,
+        "reached_center": 36,
+        "never_open": 0,
+        "first_open_grasped": 36,
+        "open_off_center": 0,
+        "open_high": 30,
+        "loss_off_center": 1,
+        "rising_at_alignment": 0,
+        "descent_by_12_after": 35,
+        "ended_in_pose": 36
+      },
+      "failure": {
+        "episodes": 64,
+        "modes": {
+          "first_open_off_center": 9,
+          "never_open_never_centered_while_lifted": 1,
+          "never_open_other": 3,
+          "never_open_stayed_high_while_centered": 41,
+          "opened_centered_ended_in_pose_without_stable_stack": 7,
+          "opened_centered_ended_outside_pose": 3
+        },
+        "success": 0,
+        "lifted": 64,
+        "reached_center": 59,
+        "never_open": 45,
+        "first_open_grasped": 19,
+        "open_off_center": 9,
+        "open_high": 14,
+        "loss_off_center": 9,
+        "rising_at_alignment": 38,
+        "descent_by_12_after": 22,
+        "ended_in_pose": 8
+      }
+    },
+    "handoff": {
+      "success": {
+        "episodes": 40,
+        "modes": {
+          "stable_stack": 40
+        },
+        "success": 40,
+        "lifted": 40,
+        "reached_center": 40,
+        "never_open": 0,
+        "first_open_grasped": 40,
+        "open_off_center": 0,
+        "open_high": 20,
+        "loss_off_center": 0,
+        "rising_at_alignment": 2,
+        "descent_by_12_after": 40,
+        "ended_in_pose": 40
+      },
+      "failure": {
+        "episodes": 60,
+        "modes": {
+          "first_open_off_center": 8,
+          "never_open_never_centered_while_lifted": 1,
+          "never_open_other": 3,
+          "never_open_stayed_high_while_centered": 39,
+          "opened_centered_ended_in_pose_without_stable_stack": 7,
+          "opened_centered_ended_outside_pose": 2
+        },
+        "success": 0,
+        "lifted": 60,
+        "reached_center": 56,
+        "never_open": 43,
+        "first_open_grasped": 17,
+        "open_off_center": 8,
+        "open_high": 11,
+        "loss_off_center": 9,
+        "rising_at_alignment": 34,
+        "descent_by_12_after": 20,
+        "ended_in_pose": 8
+      }
+    }
+  },
+  "approach": {
+    "base": {
+      "success": {
+        "episodes": 53,
+        "modes": {
+          "stable_stack": 53
+        },
+        "success": 53,
+        "lifted": 53,
+        "reached_center": 52,
+        "never_open": 0,
+        "first_open_grasped": 53,
+        "open_off_center": 1,
+        "open_high": 30,
+        "loss_off_center": 1,
+        "rising_at_alignment": 1,
+        "descent_by_12_after": 52,
+        "ended_in_pose": 53
+      },
+      "failure": {
+        "episodes": 47,
+        "modes": {
+          "first_open_off_center": 5,
+          "never_open_never_centered_while_lifted": 2,
+          "never_open_other": 2,
+          "never_open_stayed_high_while_centered": 24,
+          "opened_centered_ended_in_pose_without_stable_stack": 10,
+          "opened_centered_ended_outside_pose": 4
+        },
+        "success": 0,
+        "lifted": 47,
+        "reached_center": 42,
+        "never_open": 28,
+        "first_open_grasped": 19,
+        "open_off_center": 5,
+        "open_high": 10,
+        "loss_off_center": 5,
+        "rising_at_alignment": 19,
+        "descent_by_12_after": 19,
+        "ended_in_pose": 11
+      }
+    },
+    "handoff": {
+      "success": {
+        "episodes": 45,
+        "modes": {
+          "stable_stack": 45
+        },
+        "success": 45,
+        "lifted": 45,
+        "reached_center": 45,
+        "never_open": 0,
+        "first_open_grasped": 45,
+        "open_off_center": 1,
+        "open_high": 21,
+        "loss_off_center": 0,
+        "rising_at_alignment": 2,
+        "descent_by_12_after": 45,
+        "ended_in_pose": 45
+      },
+      "failure": {
+        "episodes": 55,
+        "modes": {
+          "first_open_off_center": 8,
+          "never_open_never_centered_while_lifted": 1,
+          "never_open_other": 6,
+          "never_open_stayed_high_while_centered": 33,
+          "opened_centered_ended_in_pose_without_stable_stack": 6,
+          "opened_centered_ended_outside_pose": 1
+        },
+        "success": 0,
+        "lifted": 55,
+        "reached_center": 51,
+        "never_open": 40,
+        "first_open_grasped": 15,
+        "open_off_center": 8,
+        "open_high": 6,
+        "loss_off_center": 9,
+        "rising_at_alignment": 29,
+        "descent_by_12_after": 22,
+        "ended_in_pose": 9
+      }
+    },
+    "approach": {
+      "success": {
+        "episodes": 48,
+        "modes": {
+          "stable_stack": 48
+        },
+        "success": 48,
+        "lifted": 48,
+        "reached_center": 48,
+        "never_open": 0,
+        "first_open_grasped": 48,
+        "open_off_center": 0,
+        "open_high": 19,
+        "loss_off_center": 0,
+        "rising_at_alignment": 1,
+        "descent_by_12_after": 48,
+        "ended_in_pose": 48
+      },
+      "failure": {
+        "episodes": 52,
+        "modes": {
+          "first_open_off_center": 11,
+          "never_open_never_centered_while_lifted": 1,
+          "never_open_other": 6,
+          "never_open_stayed_high_while_centered": 27,
+          "opened_centered_ended_in_pose_without_stable_stack": 6,
+          "opened_centered_ended_outside_pose": 1
+        },
+        "success": 0,
+        "lifted": 52,
+        "reached_center": 49,
+        "never_open": 34,
+        "first_open_grasped": 18,
+        "open_off_center": 11,
+        "open_high": 9,
+        "loss_off_center": 10,
+        "rising_at_alignment": 22,
+        "descent_by_12_after": 27,
+        "ended_in_pose": 7
+      }
+    }
+  },
+  "all_frozen_base": {
+    "success": {
+      "episodes": 164,
+      "modes": {
+        "stable_stack": 164
+      },
+      "success": 164,
+      "lifted": 164,
+      "reached_center": 163,
+      "never_open": 0,
+      "first_open_grasped": 164,
+      "open_off_center": 2,
+      "open_high": 95,
+      "loss_off_center": 1,
+      "rising_at_alignment": 1,
+      "descent_by_12_after": 162,
+      "ended_in_pose": 164
+    },
+    "failure": {
+      "episodes": 136,
+      "modes": {
+        "first_open_off_center": 29,
+        "never_open_never_centered_while_lifted": 4,
+        "never_open_other": 11,
+        "never_open_stayed_high_while_centered": 65,
+        "opened_centered_ended_in_pose_without_stable_stack": 17,
+        "opened_centered_ended_outside_pose": 10
+      },
+      "success": 0,
+      "lifted": 136,
+      "reached_center": 124,
+      "never_open": 80,
+      "first_open_grasped": 56,
+      "open_off_center": 29,
+      "open_high": 40,
+      "loss_off_center": 30,
+      "rising_at_alignment": 54,
+      "descent_by_12_after": 65,
+      "ended_in_pose": 22
+    }
+  }
+}

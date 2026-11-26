@@ -4,6 +4,8 @@ Can a weak imitation policy learn to stack a red cube on a blue cube by changing
 
 ## Isaac pilot
 
+Across 300 archived frozen-base runs, the two most frequent failures were never opening after lift and first opening off-center. We trained a DSRL actor to descend, center and release using rewards from the frozen RSSM. On 100 fresh paired Isaac scenes it stacked 56 times, versus 55 with the original reward on identical training starts, 47 with the earlier DSRL actor and 63 for the frozen base. [Failure modes, reward design and paired outcomes](results/isaac-failure-dsrl-v8/README.md)
+
 The steered cube kept climbing as its successful base partner leveled off or descended, typically 31–32 mm from the target in two archived failure cohorts. On 100 fresh scenes, switching steering off at 80 mm yielded 48 stacks, versus 45 at 12 mm and 53 for the frozen base. [Climb timing, trajectory plot and paired early-handoff results](results/isaac-approach-handoff-v7/README.md)
 
 In 16 of 24 archived losses, direct steering kept holding the cube. On 100 new scenes, switching steering off when the cube first crossed over blue stacked 40/100 times, versus 36/100 with always-on steering and 51/100 for the frozen base. [Paired height and release measurements, and fresh handoff results](results/isaac-target-handoff-v6/README.md)
