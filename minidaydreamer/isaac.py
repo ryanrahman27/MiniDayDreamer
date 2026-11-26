@@ -35,10 +35,11 @@ class IsaacStack:
     block_height = .0468
     grip_delay = 7
 
-    def __init__(self, *, cameras=True):
+    def __init__(self, *, cameras=True, released_at_finish=False, num_envs=1):
+        self.released_at_finish = released_at_finish
         task = TASK_V3 if TASK_V3 in gym.registry else TASK_V2
         options = {"overrides": ["physics=isaacsim_physx"]} if task == TASK_V3 else {}
-        cfg = parse_env_cfg(task, device="cuda:0", num_envs=1, **options)
+        cfg = parse_env_cfg(task, device="cuda:0", num_envs=num_envs, **options)
         # The upstream lighting and material reset events use these flags in every split.
         cfg.eval_mode = True
         cfg.eval_type = "all"
@@ -102,7 +103,8 @@ class IsaacStack:
         velocities = (scene[k].data.root_lin_vel_w for k in ("cube_1", "cube_2"))
         self.cube_speeds_mps = tuple(getattr(v, "torch", v)[0].norm().item() for v in velocities)
         slow = all(speed < .025 for speed in self.cube_speeds_mps)
-        stacked = (not self.closed and self.aperture > .035 and np.linalg.norm(tool - red) > .05
+        stacked = (not self.closed and self.aperture > .035
+                   and (self.released_at_finish or np.linalg.norm(tool - red) > .05)
                    and np.linalg.norm(red[:2] - blue[:2]) < .012
                    and abs(red[2] - blue[2] - self.block_height) < .008
                    and .014 < blue[2] < .032 and slow)
@@ -111,4 +113,7 @@ class IsaacStack:
         if self.frame_callback is not None:
             self.frame_callback()
         success = self.stable >= 8
-        return state, success, success or self.steps >= self.max_steps or min(red[2], blue[2]) < -.05
+        done = self.steps >= self.max_steps or min(red[2], blue[2]) < -.05
+        if self.released_at_finish:
+            return state, bool(done and success), done
+        return state, success, success or done

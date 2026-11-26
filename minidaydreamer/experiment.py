@@ -100,7 +100,10 @@ def imagine_batch(wm, policy, sac, starts, chunks=2, state_reward=None):
             else:
                 tick_reward, dwell = state_reward.step(wm.decode(previous), wm.decode(successor), dwell)
             reward += discount * tick_reward
-            discount *= .99 * (1 - wm.success(successor).sigmoid())
+            if getattr(state_reward, "fixed_horizon", False):
+                discount *= .99
+            else:
+                discount *= .99 * (1 - wm.success(successor).sigmoid())
         transitions.append(torch.cat((state, shift, reward, discount, successor), -1))
         state = successor
     return torch.cat(transitions)
@@ -189,8 +192,9 @@ def verify_weights(module, weights, name):
         raise ValueError(f"Could not reproduce {name} weights")
 
 
-def fit_steering(wm, policy, starts, rl_steps, chunks, state_reward=None):
-    sac = NoiseSAC(wm.features)
+def fit_steering(wm, policy, starts, rl_steps, chunks, state_reward=None, sac=None):
+    if sac is None:
+        sac = NoiseSAC(wm.features)
     # Circular replay measured in 128-transition batches.
     blocks = min(128, rl_steps)
     replay = torch.empty((blocks, 128, 2 * starts.shape[1] + ACTION_DIM + 2))

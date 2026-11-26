@@ -1,0 +1,15 @@
+{
+  "gain_percent": [
+    100,
+    75,
+    125,
+    150
+  ],
+  "selection": "Highest mean then worst development seed, then closest to 100 percent.",
+  "additional_cold_controls": [
+    401,
+    503
+  ],
+  "reason": "Cover all five independent starting seeds, including the two beyond the initial three controls.",
+  "test_results_opened": false
+}

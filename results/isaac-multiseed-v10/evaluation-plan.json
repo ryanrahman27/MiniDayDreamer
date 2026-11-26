@@ -1,0 +1,18 @@
+{
+  "primary_test_scenes": [
+    840,
+    939
+  ],
+  "scalar_confirmation_scenes": [
+    940,
+    971
+  ],
+  "development_scenes": [
+    808,
+    839
+  ],
+  "primary": "Mean actor-minus-base released-terminal success over all five locked training seeds and all 100 fresh scenes.",
+  "interval": "Crossed bootstrap resampling scenes and training seeds independently; percentile 95% interval; paired differences share the same base.",
+  "inference_seeds": "One Gaussian stream seeded with each scene ID, shared across all arms.",
+  "score_window": "Last eight control ticks of a fixed 200-tick episode, or until cube drop. No early success termination."
+}

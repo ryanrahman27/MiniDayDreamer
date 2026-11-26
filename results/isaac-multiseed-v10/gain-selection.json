@@ -1,0 +1,26 @@
+{
+  "gain_percent": 125,
+  "counts": {
+    "100": [
+      25,
+      24
+    ],
+    "75": [
+      25,
+      23
+    ],
+    "125": [
+      28,
+      27
+    ],
+    "150": [
+      25,
+      24
+    ]
+  },
+  "recipe_selection_sha256": "3f7c8b6a0dcf3a17ec443439820390e137a309c8ac99e2f0f86318bd9809338e",
+  "gain_file_sha256": {
+    "eval-808.jsonl": "15f611c75e4bc586cd1289f930889b103f13f24c76bed588771af6471caf7efe",
+    "eval-824.jsonl": "16a459785f4e5308dbddf1c69ed5db1ccaf69c52159fc8d1ffbc16505e4484ce"
+  }
+}

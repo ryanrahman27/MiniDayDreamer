@@ -1,0 +1,10 @@
+{
+  "scenes": [
+    840,
+    939
+  ],
+  "banks": "Reuse the identical 100 physical test resets",
+  "noise_seed_offset": 1000003,
+  "arms": "frozen base, previous checkpoint, five selected-recipe training seeds",
+  "primary_analysis": "First stream stays primary. Average outcomes within scene before crossed bootstrap over two streams."
+}

@@ -4,6 +4,8 @@ Can a weak imitation policy learn to stack a red cube on a blue cube by changing
 
 ## Isaac pilot
 
+Across two action-noise streams on 100 fresh physical scenes, five newly trained DSRL actors averaged 74% released stacks versus 54% for the frozen base and 69.5% for the previous steering checkpoint. The gain over the base was 20.0 percentage points (95% interval +10.7 to +29.2). On 32 additional single-environment scenes the three scores were 87.5%, 59.4% and 90.6%, respectively. [Multi-seed tuning, from-scratch controls and paired validation](results/isaac-multiseed-v10/README.md)
+
 On 100 fresh matched Isaac scenes, a retreat-reward DSRL actor trained in the frozen varied RSSM produced 81 released terminal stacks, versus 51 for the previous targeted actor and 63 for the frozen base. Requiring the policy to pull its own gripper 50 mm clear for eight ticks gave 73, 44 and 61 stacks, respectively. A separate withdrawal test found that the extra terminal placements persisted when the hand moved away. [Stack stability, gripper clearance and paired results](results/isaac-retreat-v9/README.md)
 
 Across 300 archived frozen-base runs, the two most frequent failures were never opening after lift and first opening off-center. We trained a DSRL actor to descend, center and release using rewards from the frozen RSSM. On 100 fresh paired Isaac scenes it stacked 56 times, versus 55 with the original reward on identical training starts, 47 with the earlier DSRL actor and 63 for the frozen base. [Failure modes, reward design and paired outcomes](results/isaac-failure-dsrl-v8/README.md)
@@ -22,7 +24,7 @@ The repaired RSSM beat a stationary cube forecast on 12 independent scenes. On 5
 
 On 50 held-out Isaac scenes, the frozen policy stacked 2/50 times, demos-only RSSM steering stacked 1/50, and varied-rollout RSSM steering stacked 2/50. All three lifted the cube on every scene. [Experiment results and paired outcomes](results/isaac-stack-24-v1/README.md)
 
-The Franka visuomotor stacking scene randomizes cube placements, lighting and materials. The green cube is a distractor. The experiment ends successfully when the red cube stays centered above blue, both cubes move slowly, and the gripper is open and clear for eight control ticks.
+The Franka visuomotor stacking scene randomizes cube placements, lighting and materials. The green cube is a distractor. The current multi-seed study scores eight ticks of released, stable stacking at the end of the episode. The historical pilot commands below use the earlier early-stopping rule, which also required the tool to move 50 mm clear.
 
 For the RTX PRO 6000 Blackwell Max-Q rental, use Python 3.12, Isaac Lab 3.0.0 and Isaac Sim 6.2. On the Ubuntu 24.04 Vast PyTorch image, install the graphics libraries with `apt-get install libxt6t64 libglu1-mesa`. Activate a Python 3.12 environment, then install NVIDIA's tested package combination. [Isaac Lab installation](https://docs.nvidia.com/isaaclab/3.0/isaac-lab/installation)
 

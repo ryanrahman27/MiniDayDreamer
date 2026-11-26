@@ -1,0 +1,958 @@
+{
+  "dev": {
+    "scenes": 32,
+    "totals": {
+      "base": 19,
+      "previous": 25,
+      "solo-11": 22,
+      "solo-29": 21,
+      "prior50-11": 22,
+      "prior50-29": 23,
+      "prior80-11": 25,
+      "prior80-29": 24
+    },
+    "early_drops": 0,
+    "max_action_error": 1.2665987014770508e-06,
+    "max_paired_start_error_mm": 0.0
+  },
+  "gain": {
+    "scenes": 32,
+    "totals": {
+      "prior80-11@75": 25,
+      "prior80-29@75": 23,
+      "prior80-11@125": 28,
+      "prior80-29@125": 27,
+      "prior80-11@150": 25,
+      "prior80-29@150": 24
+    },
+    "early_drops": 0,
+    "max_action_error": 8.791685104370117e-07,
+    "max_paired_start_error_mm": 0.0
+  },
+  "test": {
+    "scenes": 100,
+    "totals": {
+      "base": 59,
+      "previous": 69,
+      "prior80-101": 75,
+      "prior80-211": 75,
+      "prior80-307": 75,
+      "prior80-401": 75,
+      "prior80-503": 75,
+      "solo-101": 69,
+      "solo-211": 80,
+      "solo-307": 65,
+      "solo-401": 67,
+      "solo-503": 73
+    },
+    "early_drops": 0,
+    "max_action_error": 1.519918441772461e-06,
+    "max_paired_start_error_mm": 0.0,
+    "scenes_with_seed_disagreement": 0,
+    "winner_vs_base": {
+      "mean_stacks": 75.0,
+      "mean_success_pct": 75.0,
+      "reference_success_pct": 59.0,
+      "mean_difference_pp": 16.0,
+      "crossed_bootstrap_95_pp": [
+        5.0,
+        27.0
+      ],
+      "wins_by_actor": [
+        26,
+        26,
+        26,
+        26,
+        26
+      ],
+      "losses_by_actor": [
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "actor_success_totals": [
+        75,
+        75,
+        75,
+        75,
+        75
+      ],
+      "actor_differences_pp": [
+        16.0,
+        16.0,
+        16.0,
+        16.0,
+        16.0
+      ],
+      "positive_actors": 5
+    },
+    "winner_vs_previous": {
+      "mean_stacks": 75.0,
+      "mean_success_pct": 75.0,
+      "reference_success_pct": 69.0,
+      "mean_difference_pp": 6.0,
+      "crossed_bootstrap_95_pp": [
+        -2.0,
+        14.000000000000002
+      ],
+      "wins_by_actor": [
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "losses_by_actor": [
+        6,
+        6,
+        6,
+        6,
+        6
+      ],
+      "actor_success_totals": [
+        75,
+        75,
+        75,
+        75,
+        75
+      ],
+      "actor_differences_pp": [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ],
+      "positive_actors": 5
+    },
+    "previous_vs_base": {
+      "mean_stacks": 69.0,
+      "mean_success_pct": 69.0,
+      "reference_success_pct": 59.0,
+      "mean_difference_pp": 10.0,
+      "crossed_bootstrap_95_pp": [
+        -2.0,
+        22.0
+      ],
+      "wins_by_actor": [
+        24
+      ],
+      "losses_by_actor": [
+        14
+      ],
+      "actor_success_totals": [
+        69
+      ],
+      "actor_differences_pp": [
+        10.0
+      ],
+      "positive_actors": 1
+    },
+    "paired_by_actor": {
+      "prior80-101": {
+        "gained": 26,
+        "lost": 10,
+        "both_succeeded": 49,
+        "difference_pp": 16.0,
+        "exact_p": 0.011330984183587134
+      },
+      "prior80-211": {
+        "gained": 26,
+        "lost": 10,
+        "both_succeeded": 49,
+        "difference_pp": 16.0,
+        "exact_p": 0.011330984183587134
+      },
+      "prior80-307": {
+        "gained": 26,
+        "lost": 10,
+        "both_succeeded": 49,
+        "difference_pp": 16.0,
+        "exact_p": 0.011330984183587134
+      },
+      "prior80-401": {
+        "gained": 26,
+        "lost": 10,
+        "both_succeeded": 49,
+        "difference_pp": 16.0,
+        "exact_p": 0.011330984183587134
+      },
+      "prior80-503": {
+        "gained": 26,
+        "lost": 10,
+        "both_succeeded": 49,
+        "difference_pp": 16.0,
+        "exact_p": 0.011330984183587134
+      }
+    },
+    "scene_blocks": [
+      {
+        "first": 840,
+        "last": 864,
+        "base": 17,
+        "previous": 20,
+        "winning_actors": [
+          22,
+          22,
+          22,
+          22,
+          22
+        ]
+      },
+      {
+        "first": 865,
+        "last": 889,
+        "base": 14,
+        "previous": 18,
+        "winning_actors": [
+          20,
+          20,
+          20,
+          20,
+          20
+        ]
+      },
+      {
+        "first": 890,
+        "last": 914,
+        "base": 14,
+        "previous": 18,
+        "winning_actors": [
+          17,
+          17,
+          17,
+          17,
+          17
+        ]
+      },
+      {
+        "first": 915,
+        "last": 939,
+        "base": 14,
+        "previous": 13,
+        "winning_actors": [
+          16,
+          16,
+          16,
+          16,
+          16
+        ]
+      }
+    ],
+    "from_scratch_vs_base": {
+      "mean_stacks": 70.8,
+      "mean_success_pct": 70.8,
+      "reference_success_pct": 59.0,
+      "mean_difference_pp": 11.799999999999999,
+      "crossed_bootstrap_95_pp": [
+        -0.4,
+        23.599999999999998
+      ],
+      "wins_by_actor": [
+        27,
+        30,
+        24,
+        24,
+        23
+      ],
+      "losses_by_actor": [
+        17,
+        9,
+        18,
+        16,
+        9
+      ],
+      "actor_success_totals": [
+        69,
+        80,
+        65,
+        67,
+        73
+      ],
+      "actor_differences_pp": [
+        10.0,
+        21.0,
+        6.0,
+        8.0,
+        14.000000000000002
+      ],
+      "positive_actors": 5
+    },
+    "common_state_shifts": {
+      "histories": 1340,
+      "source": "First 20 unsteered primary test scenes, every chunk boundary.",
+      "mean_effective_shift_by_seed": [
+        [
+          -0.030511893332004547,
+          0.16134953498840332,
+          -0.12132726609706879,
+          0.18660353124141693
+        ],
+        [
+          -0.031228119507431984,
+          0.16331399977207184,
+          -0.12146405130624771,
+          0.18921035528182983
+        ],
+        [
+          -0.02897629328072071,
+          0.16061735153198242,
+          -0.12056226283311844,
+          0.18627957999706268
+        ],
+        [
+          -0.027300214394927025,
+          0.15607334673404694,
+          -0.12095335870981216,
+          0.1824982762336731
+        ],
+        [
+          -0.027140801772475243,
+          0.16224099695682526,
+          -0.12068158388137817,
+          0.18931226432323456
+        ]
+      ],
+      "mean_abs_difference_from_previous": 0.11512583494186401,
+      "mean_between_seed_std": 0.002042293082922697,
+      "maximum_between_seed_range": 0.11346378922462463
+    }
+  },
+  "scalar": {
+    "scenes": 32,
+    "totals": {
+      "base": 19,
+      "previous": 29,
+      "prior80-101": 28,
+      "prior80-211": 29,
+      "prior80-307": 28,
+      "prior80-401": 27,
+      "prior80-503": 28
+    },
+    "early_drops": 0,
+    "max_action_error": 2.682209014892578e-06,
+    "max_paired_start_error_mm": 0.0,
+    "scenes_with_seed_disagreement": 3,
+    "winner_vs_base": {
+      "mean_stacks": 28.0,
+      "mean_success_pct": 87.5,
+      "reference_success_pct": 59.375,
+      "mean_difference_pp": 28.125,
+      "crossed_bootstrap_95_pp": [
+        9.375,
+        46.875
+      ],
+      "wins_by_actor": [
+        10,
+        11,
+        11,
+        11,
+        11
+      ],
+      "losses_by_actor": [
+        1,
+        1,
+        2,
+        3,
+        2
+      ],
+      "actor_success_totals": [
+        28,
+        29,
+        28,
+        27,
+        28
+      ],
+      "actor_differences_pp": [
+        28.125,
+        31.25,
+        28.125,
+        25.0,
+        28.125
+      ],
+      "positive_actors": 5
+    },
+    "winner_vs_previous": {
+      "mean_stacks": 28.0,
+      "mean_success_pct": 87.5,
+      "reference_success_pct": 90.625,
+      "mean_difference_pp": -3.125,
+      "crossed_bootstrap_95_pp": [
+        -18.75,
+        12.5
+      ],
+      "wins_by_actor": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "losses_by_actor": [
+        4,
+        3,
+        4,
+        5,
+        4
+      ],
+      "actor_success_totals": [
+        28,
+        29,
+        28,
+        27,
+        28
+      ],
+      "actor_differences_pp": [
+        -3.125,
+        0.0,
+        -3.125,
+        -6.25,
+        -3.125
+      ],
+      "positive_actors": 0
+    },
+    "previous_vs_base": {
+      "mean_stacks": 29.0,
+      "mean_success_pct": 90.625,
+      "reference_success_pct": 59.375,
+      "mean_difference_pp": 31.25,
+      "crossed_bootstrap_95_pp": [
+        15.625,
+        46.875
+      ],
+      "wins_by_actor": [
+        10
+      ],
+      "losses_by_actor": [
+        0
+      ],
+      "actor_success_totals": [
+        29
+      ],
+      "actor_differences_pp": [
+        31.25
+      ],
+      "positive_actors": 1
+    },
+    "paired_by_actor": {
+      "prior80-101": {
+        "gained": 10,
+        "lost": 1,
+        "both_succeeded": 18,
+        "difference_pp": 28.125,
+        "exact_p": 0.01171875
+      },
+      "prior80-211": {
+        "gained": 11,
+        "lost": 1,
+        "both_succeeded": 18,
+        "difference_pp": 31.25,
+        "exact_p": 0.00634765625
+      },
+      "prior80-307": {
+        "gained": 11,
+        "lost": 2,
+        "both_succeeded": 17,
+        "difference_pp": 28.125,
+        "exact_p": 0.0224609375
+      },
+      "prior80-401": {
+        "gained": 11,
+        "lost": 3,
+        "both_succeeded": 16,
+        "difference_pp": 25.0,
+        "exact_p": 0.057373046875
+      },
+      "prior80-503": {
+        "gained": 11,
+        "lost": 2,
+        "both_succeeded": 17,
+        "difference_pp": 28.125,
+        "exact_p": 0.0224609375
+      }
+    },
+    "scene_blocks": [
+      {
+        "first": 940,
+        "last": 947,
+        "base": 5,
+        "previous": 7,
+        "winning_actors": [
+          7,
+          7,
+          7,
+          7,
+          7
+        ]
+      },
+      {
+        "first": 948,
+        "last": 955,
+        "base": 5,
+        "previous": 7,
+        "winning_actors": [
+          7,
+          8,
+          7,
+          6,
+          7
+        ]
+      },
+      {
+        "first": 956,
+        "last": 963,
+        "base": 5,
+        "previous": 8,
+        "winning_actors": [
+          6,
+          6,
+          6,
+          6,
+          6
+        ]
+      },
+      {
+        "first": 964,
+        "last": 971,
+        "base": 4,
+        "previous": 7,
+        "winning_actors": [
+          8,
+          8,
+          8,
+          8,
+          8
+        ]
+      }
+    ]
+  },
+  "prior_gain": {
+    "scenes": 100,
+    "totals": {
+      "previous_scaled": 67
+    },
+    "early_drops": 0,
+    "max_action_error": 6.556510925292969e-07,
+    "max_paired_start_error_mm": 0.0,
+    "winner_vs_scaled_previous": {
+      "mean_stacks": 75.0,
+      "mean_success_pct": 75.0,
+      "reference_success_pct": 67.0,
+      "mean_difference_pp": 8.0,
+      "crossed_bootstrap_95_pp": [
+        -2.0,
+        18.0
+      ],
+      "wins_by_actor": [
+        18,
+        18,
+        18,
+        18,
+        18
+      ],
+      "losses_by_actor": [
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "actor_success_totals": [
+        75,
+        75,
+        75,
+        75,
+        75
+      ],
+      "actor_differences_pp": [
+        8.0,
+        8.0,
+        8.0,
+        8.0,
+        8.0
+      ],
+      "positive_actors": 5
+    }
+  },
+  "noise": {
+    "scenes": 100,
+    "totals": {
+      "base": 49,
+      "previous": 70,
+      "prior80-101": 72,
+      "prior80-211": 73,
+      "prior80-307": 73,
+      "prior80-401": 74,
+      "prior80-503": 73
+    },
+    "early_drops": 0,
+    "max_action_error": 8.344650268554688e-07,
+    "max_paired_start_error_mm": 0.0,
+    "scenes_with_seed_disagreement": 7,
+    "winner_vs_base": {
+      "mean_stacks": 73.0,
+      "mean_success_pct": 73.0,
+      "reference_success_pct": 49.0,
+      "mean_difference_pp": 24.0,
+      "crossed_bootstrap_95_pp": [
+        11.0,
+        36.8
+      ],
+      "wins_by_actor": [
+        37,
+        37,
+        36,
+        38,
+        38
+      ],
+      "losses_by_actor": [
+        14,
+        13,
+        12,
+        13,
+        14
+      ],
+      "actor_success_totals": [
+        72,
+        73,
+        73,
+        74,
+        73
+      ],
+      "actor_differences_pp": [
+        23.0,
+        24.0,
+        24.0,
+        25.0,
+        24.0
+      ],
+      "positive_actors": 5
+    },
+    "winner_vs_previous": {
+      "mean_stacks": 73.0,
+      "mean_success_pct": 73.0,
+      "reference_success_pct": 70.0,
+      "mean_difference_pp": 3.0,
+      "crossed_bootstrap_95_pp": [
+        -6.0,
+        11.799999999999999
+      ],
+      "wins_by_actor": [
+        11,
+        13,
+        12,
+        13,
+        13
+      ],
+      "losses_by_actor": [
+        9,
+        10,
+        9,
+        9,
+        10
+      ],
+      "actor_success_totals": [
+        72,
+        73,
+        73,
+        74,
+        73
+      ],
+      "actor_differences_pp": [
+        2.0,
+        3.0,
+        3.0,
+        4.0,
+        3.0
+      ],
+      "positive_actors": 5
+    },
+    "previous_vs_base": {
+      "mean_stacks": 70.0,
+      "mean_success_pct": 70.0,
+      "reference_success_pct": 49.0,
+      "mean_difference_pp": 21.0,
+      "crossed_bootstrap_95_pp": [
+        9.0,
+        33.0
+      ],
+      "wins_by_actor": [
+        31
+      ],
+      "losses_by_actor": [
+        10
+      ],
+      "actor_success_totals": [
+        70
+      ],
+      "actor_differences_pp": [
+        21.0
+      ],
+      "positive_actors": 1
+    },
+    "paired_by_actor": {
+      "prior80-101": {
+        "gained": 37,
+        "lost": 14,
+        "both_succeeded": 35,
+        "difference_pp": 23.0,
+        "exact_p": 0.0017691971837869858
+      },
+      "prior80-211": {
+        "gained": 37,
+        "lost": 13,
+        "both_succeeded": 36,
+        "difference_pp": 24.0,
+        "exact_p": 0.000936222910851825
+      },
+      "prior80-307": {
+        "gained": 36,
+        "lost": 12,
+        "both_succeeded": 37,
+        "difference_pp": 24.0,
+        "exact_p": 0.0007172696733945827
+      },
+      "prior80-401": {
+        "gained": 38,
+        "lost": 13,
+        "both_succeeded": 36,
+        "difference_pp": 25.0,
+        "exact_p": 0.0006210434562277101
+      },
+      "prior80-503": {
+        "gained": 38,
+        "lost": 14,
+        "both_succeeded": 35,
+        "difference_pp": 24.0,
+        "exact_p": 0.001195120320007348
+      }
+    },
+    "scene_blocks": [
+      {
+        "first": 840,
+        "last": 864,
+        "base": 8,
+        "previous": 14,
+        "winning_actors": [
+          19,
+          19,
+          19,
+          19,
+          19
+        ]
+      },
+      {
+        "first": 865,
+        "last": 889,
+        "base": 17,
+        "previous": 22,
+        "winning_actors": [
+          21,
+          22,
+          21,
+          22,
+          21
+        ]
+      },
+      {
+        "first": 890,
+        "last": 914,
+        "base": 11,
+        "previous": 18,
+        "winning_actors": [
+          18,
+          17,
+          18,
+          18,
+          17
+        ]
+      },
+      {
+        "first": 915,
+        "last": 939,
+        "base": 13,
+        "previous": 16,
+        "winning_actors": [
+          14,
+          15,
+          15,
+          15,
+          16
+        ]
+      }
+    ]
+  },
+  "both_noise_streams": {
+    "winner_vs_base": {
+      "mean_success_pct": 74.0,
+      "reference_success_pct": 54.0,
+      "mean_difference_pp": 20.0,
+      "crossed_bootstrap_95_pp": [
+        10.7,
+        29.2
+      ],
+      "positive_actors": 5
+    },
+    "winner_vs_previous": {
+      "mean_success_pct": 74.0,
+      "reference_success_pct": 69.5,
+      "mean_difference_pp": 4.5,
+      "crossed_bootstrap_95_pp": [
+        -1.9,
+        10.7
+      ],
+      "positive_actors": 5
+    }
+  },
+  "gain_percent": 125,
+  "winning_recipe": "prior80",
+  "episodes": 2672,
+  "training": {
+    "prior50-11": {
+      "name": "prior50-11",
+      "sha256": "aec9c1a40f3be950335902ebd65cfad1c9c1c021daeb34036eaac7679c3d7b0a",
+      "seed": 11,
+      "recipe": "prior50",
+      "ticks": 576000,
+      "qualified": 47656,
+      "bonuses": 1277
+    },
+    "prior50-29": {
+      "name": "prior50-29",
+      "sha256": "30a12fc9b2c05c55cea7cbb911f931065e87d5be6855803efd88affcbd8112a4",
+      "seed": 29,
+      "recipe": "prior50",
+      "ticks": 576000,
+      "qualified": 47802,
+      "bonuses": 1320
+    },
+    "prior80-101": {
+      "name": "prior80-101",
+      "sha256": "c814c79f01014c5e49c0ea0bb40a3b98ba92345435ff0d624909ceb794bec5bc",
+      "seed": 101,
+      "recipe": "prior80",
+      "ticks": 576000,
+      "qualified": 48948,
+      "bonuses": 1307
+    },
+    "prior80-11": {
+      "name": "prior80-11",
+      "sha256": "6ef0a998f5e5582e1e0cc889f745d48a0f971c865c5b2b5de3983ae1b623181d",
+      "seed": 11,
+      "recipe": "prior80",
+      "ticks": 576000,
+      "qualified": 50088,
+      "bonuses": 1354
+    },
+    "prior80-211": {
+      "name": "prior80-211",
+      "sha256": "33647cd93ea1f7caafb848bae97a8a3879cd727391e1e9eb57b3b5097e331e0b",
+      "seed": 211,
+      "recipe": "prior80",
+      "ticks": 576000,
+      "qualified": 50047,
+      "bonuses": 1355
+    },
+    "prior80-29": {
+      "name": "prior80-29",
+      "sha256": "72eead8ec37b33aeb2f04f2accf8121c9498951c0585b9ff57aeab425e39f9e6",
+      "seed": 29,
+      "recipe": "prior80",
+      "ticks": 576000,
+      "qualified": 50197,
+      "bonuses": 1403
+    },
+    "prior80-307": {
+      "name": "prior80-307",
+      "sha256": "55a29cbf0dd9a607ee685c0072fa3e0252c8e5817d97fc6069e104486983c5ea",
+      "seed": 307,
+      "recipe": "prior80",
+      "ticks": 576000,
+      "qualified": 49211,
+      "bonuses": 1352
+    },
+    "prior80-401": {
+      "name": "prior80-401",
+      "sha256": "03949491d8a0b7815d8a74e06d7b93e53842f353a534fb95685e62298fefc1a0",
+      "seed": 401,
+      "recipe": "prior80",
+      "ticks": 576000,
+      "qualified": 49360,
+      "bonuses": 1314
+    },
+    "prior80-503": {
+      "name": "prior80-503",
+      "sha256": "c18fc146bebeda28a49751d2d820f1f2ff66076f3d65ab37939380345b0032d0",
+      "seed": 503,
+      "recipe": "prior80",
+      "ticks": 576000,
+      "qualified": 49311,
+      "bonuses": 1344
+    },
+    "solo-101": {
+      "name": "solo-101",
+      "sha256": "0907cb356a031745cef6c84e99d538d50a8661125347cb76bc6daaa674ce84d1",
+      "seed": 101,
+      "recipe": "solo",
+      "ticks": 576000,
+      "qualified": 50988,
+      "bonuses": 1367
+    },
+    "solo-11": {
+      "name": "solo-11",
+      "sha256": "78ec086116129d0e1b87a464b0a50d2ddef55a8dca43f2fe9bc4eb1fe816d3e4",
+      "seed": 11,
+      "recipe": "solo",
+      "ticks": 576000,
+      "qualified": 50849,
+      "bonuses": 1388
+    },
+    "solo-211": {
+      "name": "solo-211",
+      "sha256": "9e61ec1170850e462a8aedcb80d076f3d42a57c087f9d5cc973ff80b0cba4f7e",
+      "seed": 211,
+      "recipe": "solo",
+      "ticks": 576000,
+      "qualified": 52081,
+      "bonuses": 1411
+    },
+    "solo-29": {
+      "name": "solo-29",
+      "sha256": "ceaa069db6915b93630a1ad272d50202a054e88d042f953b2656f25d95f27c40",
+      "seed": 29,
+      "recipe": "solo",
+      "ticks": 576000,
+      "qualified": 51575,
+      "bonuses": 1450
+    },
+    "solo-307": {
+      "name": "solo-307",
+      "sha256": "54fb49662b77c5ccf5390f3f6a43c7622599fc9f242dc695592a1d1dec70442d",
+      "seed": 307,
+      "recipe": "solo",
+      "ticks": 576000,
+      "qualified": 50965,
+      "bonuses": 1423
+    },
+    "solo-401": {
+      "name": "solo-401",
+      "sha256": "a7fbf1df3819627f4330a5f510710e9c58a649c60962cf83545d833c9417ae88",
+      "seed": 401,
+      "recipe": "solo",
+      "ticks": 576000,
+      "qualified": 50154,
+      "bonuses": 1361
+    },
+    "solo-503": {
+      "name": "solo-503",
+      "sha256": "57c490babff0ebd587cf1ad61a48f6eadd933bc9c43649820adaf3adcb5e31f5",
+      "seed": 503,
+      "recipe": "solo",
+      "ticks": 576000,
+      "qualified": 48630,
+      "bonuses": 1291
+    }
+  }
+}
