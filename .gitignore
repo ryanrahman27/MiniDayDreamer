@@ -5,3 +5,6 @@ runs/
 *.npz
 *.pt
 *.mp4
+
+# Generated RGB study reports and per-trial exports
+/results/isaac-rgb-*/

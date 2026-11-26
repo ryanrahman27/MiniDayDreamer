@@ -5,6 +5,7 @@ import csv
 import json
 from pathlib import Path
 
+
 def report(directory):
     protocol_path = directory / "test-wait" / "protocol.json"
     if not protocol_path.is_file():

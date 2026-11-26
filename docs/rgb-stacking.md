@@ -78,8 +78,6 @@ tar --zstd -xf "$assets/rgb-actions.tar.zst" -C runs/rgb-reproduction/isaac-rgb-
 bash scripts/reproduce_rgb.sh runs/rgb-reproduction
 ```
 
-The runner collects data, fits the RGB policy and RSSM, trains the noise controllers, fits the height correction on development rollouts, and evaluates the calibrated actor if it passes the original development criterion. Each stage writes logs under its own run directory. A new collection or GPU build can change which checkpoint qualifies. [Selection rule](../scripts/summarize_rgb_wait.py)
-
 ## What we verified
 
 The CPU scorer reconstructed the published summary from all 1,760 confirmation rollouts. Refitting the five actor seeds on the original host reproduced every saved actor weight exactly. We also replayed one 16-scene batch in Isaac with the packaged controllers and checked the terminal stack labels against all 176 new trajectories. The full base-policy training and ten-batch simulator evaluation were part of the original experiment.
