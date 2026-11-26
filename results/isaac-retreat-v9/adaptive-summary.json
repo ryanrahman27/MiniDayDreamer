@@ -1,0 +1,86 @@
+{
+  "groups": {
+    "archive": {
+      "replayed": 3,
+      "terminal_reproduced": 3,
+      "survived": 3
+    },
+    "base": {
+      "replayed": 1,
+      "terminal_reproduced": 1,
+      "survived": 1
+    },
+    "retreat": {
+      "replayed": 1,
+      "terminal_reproduced": 1,
+      "survived": 1
+    }
+  },
+  "replays": [
+    {
+      "name": "archive-653",
+      "seed": 653,
+      "strict": 0,
+      "released_ever": 1,
+      "released_terminal": 1,
+      "max_released_ticks": 18,
+      "max_xyz_error_mm": 1.4785468578338623,
+      "final_xyz_error_mm": 1.261431336402893,
+      "steps_out": 24,
+      "acquired_70mm": 1,
+      "survived": 1
+    },
+    {
+      "name": "archive-690",
+      "seed": 690,
+      "strict": 0,
+      "released_ever": 1,
+      "released_terminal": 1,
+      "max_released_ticks": 28,
+      "max_xyz_error_mm": 1.2039201259613037,
+      "final_xyz_error_mm": 0.9882029891014099,
+      "steps_out": 27,
+      "acquired_70mm": 1,
+      "survived": 1
+    },
+    {
+      "name": "archive-700",
+      "seed": 700,
+      "strict": 0,
+      "released_ever": 1,
+      "released_terminal": 1,
+      "max_released_ticks": 20,
+      "max_xyz_error_mm": 0.8692107200622559,
+      "final_xyz_error_mm": 0.8035903573036194,
+      "steps_out": 27,
+      "acquired_70mm": 1,
+      "survived": 1
+    },
+    {
+      "name": "base-766",
+      "seed": 766,
+      "strict": 0,
+      "released_ever": 1,
+      "released_terminal": 1,
+      "max_released_ticks": 16,
+      "max_xyz_error_mm": 0.230538010597229,
+      "final_xyz_error_mm": 0.2304079234600067,
+      "steps_out": 28,
+      "acquired_70mm": 1,
+      "survived": 1
+    },
+    {
+      "name": "retreat-801",
+      "seed": 801,
+      "strict": 0,
+      "released_ever": 1,
+      "released_terminal": 1,
+      "max_released_ticks": 12,
+      "max_xyz_error_mm": 0.6590518355369568,
+      "final_xyz_error_mm": 0.6518820524215698,
+      "steps_out": 24,
+      "acquired_70mm": 1,
+      "survived": 1
+    }
+  ]
+}

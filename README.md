@@ -4,6 +4,8 @@ Can a weak imitation policy learn to stack a red cube on a blue cube by changing
 
 ## Isaac pilot
 
+On 100 fresh matched Isaac scenes, a retreat-reward DSRL actor trained in the frozen varied RSSM produced 81 released terminal stacks, versus 51 for the previous targeted actor and 63 for the frozen base. Requiring the policy to pull its own gripper 50 mm clear for eight ticks gave 73, 44 and 61 stacks, respectively. A separate withdrawal test found that the extra terminal placements persisted when the hand moved away. [Stack stability, gripper clearance and paired results](results/isaac-retreat-v9/README.md)
+
 Across 300 archived frozen-base runs, the two most frequent failures were never opening after lift and first opening off-center. We trained a DSRL actor to descend, center and release using rewards from the frozen RSSM. On 100 fresh paired Isaac scenes it stacked 56 times, versus 55 with the original reward on identical training starts, 47 with the earlier DSRL actor and 63 for the frozen base. [Failure modes, reward design and paired outcomes](results/isaac-failure-dsrl-v8/README.md)
 
 The steered cube kept climbing as its successful base partner leveled off or descended, typically 31–32 mm from the target in two archived failure cohorts. On 100 fresh scenes, switching steering off at 80 mm yielded 48 stacks, versus 45 at 12 mm and 53 for the frozen base. [Climb timing, trajectory plot and paired early-handoff results](results/isaac-approach-handoff-v7/README.md)

@@ -1,0 +1,12 @@
+{
+  "base_sha256": "eafd9895ee92b67c3a8c922fe9cb213e786a16553d3fbd1b84bbfa1aaeb16ef9",
+  "targeted_sha256": "3eaec77ab7431ee126a01267fccef444bc095102f5e8f2f2a611ff18e672d028",
+  "retreat_sha256": "8ec391304a042949417de533d75e4482c19951cc8983a681c9a0acd893f9d6c8",
+  "start_tensor_sha256": "9a932cfd62daa7349660a6c1e0518f780f24595229686730715f93dc35e24a0f",
+  "rng_sha256": "f4848ec567f391f66a2543188823b21e8d7dcddeb9c2e2b5a3e162d28df1bd88",
+  "imagined_ticks": 576000,
+  "moving_out": 25613,
+  "moving_in": 1652,
+  "dwell_advances": 13247,
+  "completions": 1856
+}

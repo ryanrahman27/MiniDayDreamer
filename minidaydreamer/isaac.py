@@ -100,7 +100,8 @@ class IsaacStack:
         tool, red, blue = state[:9].reshape(3, 3) * .1
         scene = self.env.unwrapped.scene
         velocities = (scene[k].data.root_lin_vel_w for k in ("cube_1", "cube_2"))
-        slow = all(getattr(v, "torch", v)[0].norm().item() < .025 for v in velocities)
+        self.cube_speeds_mps = tuple(getattr(v, "torch", v)[0].norm().item() for v in velocities)
+        slow = all(speed < .025 for speed in self.cube_speeds_mps)
         stacked = (not self.closed and self.aperture > .035 and np.linalg.norm(tool - red) > .05
                    and np.linalg.norm(red[:2] - blue[:2]) < .012
                    and abs(red[2] - blue[2] - self.block_height) < .008

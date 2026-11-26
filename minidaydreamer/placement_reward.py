@@ -1,6 +1,5 @@
 """Extra imagined reward for descending on approach and releasing a centered cube."""
 
-
 from .state_reward import StateReward
 
 
@@ -38,3 +37,42 @@ class PlacementReward(StateReward):
     def step(self, previous, current, dwell):
         reward, count = super().step(previous, current, dwell)
         return reward + sum(placement_terms(previous, current))[:, None], count
+
+
+def retreat_progress(previous, current):
+    """Credit motion away from a released, seated cube up to 50 mm of clearance."""
+
+    def seated(obs):
+        xy, height = relative_pose(obs)
+        return (
+            (xy < 12)
+            & (height.abs() < 8)
+            & (obs[..., 8] > 0.14)
+            & (obs[..., 8] < 0.32)
+            & (obs[..., 9] < 0.5)
+            & (obs[..., 10] < 0.5)
+        )
+
+    def clearance(obs):
+        return (2 * (obs[..., :3] - obs[..., 3:6]).norm(dim=-1)).clamp(max=1)
+
+    red_slow = (current[..., 3:6] - previous[..., 3:6]).norm(dim=-1) < 0.0125
+    blue_slow = (current[..., 6:9] - previous[..., 6:9]).norm(dim=-1) < 0.0125
+    return (
+        seated(previous) * seated(current) * red_slow * blue_slow * (clearance(current) - clearance(previous))
+    )
+
+
+class RetreatReward(PlacementReward):
+    def __init__(self, data, episodes):
+        super().__init__(data, episodes)
+        self.moving_out = self.moving_in = self.dwell_advances = 0
+
+    def step(self, previous, current, dwell):
+        reward, count = super().step(previous, current, dwell)
+        motion = retreat_progress(previous, current)
+        self.moving_out += int((motion > 0).sum())
+        self.moving_in += int((motion < 0).sum())
+        self.dwell_advances += int((count > dwell).sum())
+        # Losing an incomplete streak gives back its credit. Completed dwell is absorbing.
+        return reward + (motion + 0.8 * (count - dwell) / 8)[:, None], count
