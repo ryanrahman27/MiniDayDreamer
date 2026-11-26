@@ -1,0 +1,46 @@
+{
+  "base_modes": {
+    "no_lift": 70,
+    "stacked": 97,
+    "seated_no_open": 55,
+    "opened_in_band_then_failed": 19,
+    "opened_off_center": 30,
+    "never_centered_no_open": 27,
+    "centered_not_seated_no_open": 19,
+    "opened_centered_high": 3
+  },
+  "eligibility_by_mode": {
+    "original_fixed": {
+      "stacked": 96,
+      "seated_no_open": 53,
+      "opened_in_band_then_failed": 19,
+      "opened_off_center": 27,
+      "never_centered_no_open": 4,
+      "centered_not_seated_no_open": 4,
+      "opened_centered_high": 2
+    },
+    "lower_gate_only": {
+      "stacked": 90,
+      "seated_no_open": 50,
+      "opened_in_band_then_failed": 19,
+      "opened_off_center": 24,
+      "never_centered_no_open": 4,
+      "centered_not_seated_no_open": 4,
+      "opened_centered_high": 1
+    },
+    "learned_wait": {
+      "stacked": 68,
+      "seated_no_open": 48,
+      "opened_in_band_then_failed": 18,
+      "opened_off_center": 17,
+      "never_centered_no_open": 3,
+      "centered_not_seated_no_open": 4
+    }
+  },
+  "base_failures": 223,
+  "eligible_base_failures": {
+    "original_fixed": 109,
+    "lower_gate_only": 102,
+    "learned_wait": 90
+  }
+}

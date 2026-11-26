@@ -1,0 +1,32 @@
+{
+  "base_sha256": "8e69bc49405dafa2f2f74fd4ce99243aaed6b2d8d1bf0ed96ad71a1cac6f97c6",
+  "actors": [
+    "rgb-base",
+    "rgb-incumbent",
+    "rgb-target"
+  ],
+  "noise_offsets": [
+    0,
+    1000003
+  ],
+  "width": 16,
+  "batches": 10,
+  "inputs": [
+    "table_rgb",
+    "wrist_rgb"
+  ],
+  "repeat_base_first_stream": true,
+  "initial_image": "shared RGB from the matched reset; live cameras after first action",
+  "score": "final 8 ticks released, aligned and slow",
+  "failure_study": "fresh",
+  "actor_seeds": [
+    101,
+    211,
+    307,
+    401,
+    503
+  ],
+  "task_ticks": 200,
+  "first_scene": 730000,
+  "seed_assignment": "scene offset modulo 5; paired actors share seed"
+}

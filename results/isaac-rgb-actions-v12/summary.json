@@ -1,0 +1,152 @@
+{
+  "physical_scenes": 128,
+  "steering_seeds": 5,
+  "noise_streams": 2,
+  "rgb_base": 0.328125,
+  "rgb_steered": 0.33046875,
+  "paired_gain": 0.00234375,
+  "crossed_paired_95ci": [
+    -0.03986328124999998,
+    0.04609375
+  ],
+  "lighting_groups": 8,
+  "group_and_actor_seed_95ci": [
+    -0.03046875,
+    0.03515625
+  ],
+  "paired_gain_by_actor": {
+    "rgb-dsrl-101": -0.00390625,
+    "rgb-dsrl-211": 0.00390625,
+    "rgb-dsrl-307": -0.0078125,
+    "rgb-dsrl-401": 0.0078125,
+    "rgb-dsrl-503": 0.01171875
+  },
+  "paired_gain_by_stream": [
+    0.009375,
+    -0.0046875
+  ],
+  "gained_pairs": 111,
+  "lost_pairs": 108,
+  "paired_comparisons": 1280,
+  "per_arm": {
+    "rgb-base": {
+      "success": [
+        0.328125,
+        0.328125
+      ],
+      "grasped": [
+        0.9375,
+        0.9296875
+      ],
+      "lifted": [
+        0.84375,
+        0.8046875
+      ],
+      "reset_rgb_mae_max": 3.054560899734497
+    },
+    "rgb-dsrl-101": {
+      "success": [
+        0.34375,
+        0.3046875
+      ],
+      "grasped": [
+        0.9375,
+        0.9375
+      ],
+      "lifted": [
+        0.84375,
+        0.84375
+      ],
+      "reset_rgb_mae_max": 3.210322618484497
+    },
+    "rgb-dsrl-211": {
+      "success": [
+        0.3359375,
+        0.328125
+      ],
+      "grasped": [
+        0.9375,
+        0.9296875
+      ],
+      "lifted": [
+        0.8203125,
+        0.8203125
+      ],
+      "reset_rgb_mae_max": 3.397714138031006
+    },
+    "rgb-dsrl-307": {
+      "success": [
+        0.3203125,
+        0.3203125
+      ],
+      "grasped": [
+        0.9375,
+        0.9375
+      ],
+      "lifted": [
+        0.8203125,
+        0.8515625
+      ],
+      "reset_rgb_mae_max": 3.220341444015503
+    },
+    "rgb-dsrl-401": {
+      "success": [
+        0.34375,
+        0.328125
+      ],
+      "grasped": [
+        0.9375,
+        0.9296875
+      ],
+      "lifted": [
+        0.84375,
+        0.8359375
+      ],
+      "reset_rgb_mae_max": 3.330439805984497
+    },
+    "rgb-dsrl-503": {
+      "success": [
+        0.34375,
+        0.3359375
+      ],
+      "grasped": [
+        0.9296875,
+        0.9375
+      ],
+      "lifted": [
+        0.84375,
+        0.8515625
+      ],
+      "reset_rgb_mae_max": 3.242621660232544
+    }
+  },
+  "source_protocol": {
+    "base_sha256": "8e69bc49405dafa2f2f74fd4ce99243aaed6b2d8d1bf0ed96ad71a1cac6f97c6",
+    "actors": [
+      "rgb-base",
+      "rgb-dsrl-101",
+      "rgb-dsrl-211",
+      "rgb-dsrl-307",
+      "rgb-dsrl-401",
+      "rgb-dsrl-503"
+    ],
+    "noise_offsets": [
+      0,
+      1000003
+    ],
+    "width": 16,
+    "batches": 8,
+    "inputs": [
+      "table_rgb",
+      "wrist_rgb"
+    ],
+    "repeat_base_first_stream": true,
+    "initial_image": "shared RGB from the matched reset; live cameras after first action",
+    "score": "final 8 ticks released, aligned and slow"
+  },
+  "base_replay": {
+    "success": 0.375,
+    "original_success": 0.328125,
+    "same_outcome_fraction": 0.84375
+  }
+}

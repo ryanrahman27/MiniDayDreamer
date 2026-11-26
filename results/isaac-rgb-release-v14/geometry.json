@@ -1,0 +1,26 @@
+{
+  "demo_anchors": 72,
+  "visible_anchor_frames": 360,
+  "fit_anchor_frames": 360,
+  "center_px": [
+    -0.13818359375,
+    -8.86136245727539,
+    -0.39768218994140625,
+    9.355026245117188
+  ],
+  "validation_episodes": 16,
+  "expert_geometry_at_release": [
+    0.8921188116073608,
+    0.927850604057312,
+    0.9139443635940552,
+    0.9403085708618164
+  ],
+  "expert_geometry_15_ticks_before": [
+    0.005662697833031416,
+    0.06426678597927094,
+    0.009419401176273823,
+    0.025644535198807716
+  ],
+  "distilled_validation_mae": 0.031380195170640945,
+  "distilled_validation_corr": 0.922455370426178
+}

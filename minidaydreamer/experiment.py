@@ -97,6 +97,8 @@ def imagine_batch(wm, policy, sac, starts, chunks=2, state_reward=None):
             successor = wm.imagine(successor, action, sample=True)
             if state_reward is None:
                 tick_reward = wm.reward(successor)
+            elif getattr(state_reward, "uses_action", False):
+                tick_reward, dwell = state_reward.step_action(wm.decode(previous), wm.decode(successor), action, dwell)
             else:
                 tick_reward, dwell = state_reward.step(wm.decode(previous), wm.decode(successor), dwell)
             reward += discount * tick_reward

@@ -1,0 +1,24 @@
+{
+  "arm": "rgb-base",
+  "base_trials": 320,
+  "eligible_carries": 269,
+  "min_offset_mm": 12,
+  "ticks_after_lift": 12,
+  "bearing_cosine": 0.736770510673523,
+  "median_bearing_cosine": 0.9306724071502686,
+  "positive_direction_fraction": 0.9107806691449815,
+  "shuffled_mean_bearing_cosine": 0.016352981328964233,
+  "median_carry_probability": 0.9998714923858643,
+  "by_outcome": {
+    "never_centered_no_open": {
+      "trials": 46,
+      "bearing_cosine": 0.48551085591316223,
+      "positive_direction_fraction": 0.8043478260869565
+    },
+    "stacked": {
+      "trials": 118,
+      "bearing_cosine": 0.8424928188323975,
+      "positive_direction_fraction": 0.9661016949152542
+    }
+  }
+}

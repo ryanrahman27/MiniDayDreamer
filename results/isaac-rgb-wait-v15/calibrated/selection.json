@@ -1,0 +1,105 @@
+{
+  "selected": "middle",
+  "qualified": [
+    "wait-middle"
+  ],
+  "beat_original_fixed_while_lower": true,
+  "arms": {
+    "rgb-base": {
+      "trials": 64,
+      "stacks": 19,
+      "modes": {
+        "stacked": 19,
+        "opened_off_center": 7,
+        "no_lift": 9,
+        "seated_no_open": 8,
+        "centered_not_seated_no_open": 4,
+        "never_centered_no_open": 13,
+        "opened_in_band_then_failed": 3,
+        "opened_centered_high": 1
+      },
+      "per_seed": {
+        "101": 4,
+        "211": 4,
+        "307": 4,
+        "401": 4,
+        "503": 3
+      },
+      "per_stream": {
+        "0": 19
+      },
+      "shifted": 0,
+      "open_within_six": 0,
+      "median_shift_height_mm": null,
+      "median_shift_xy_mm": null,
+      "median_steered_open_height_mm": null,
+      "median_steered_open_xy_mm": null,
+      "in_band_at_shift": 0,
+      "in_band_at_steered_open": 0,
+      "episodes_actor_deferred": 0
+    },
+    "fixed-permissive": {
+      "trials": 64,
+      "stacks": 31,
+      "modes": {
+        "stacked": 31,
+        "never_centered_no_open": 10,
+        "no_lift": 12,
+        "opened_off_center": 9,
+        "opened_centered_high": 1,
+        "centered_not_seated_no_open": 1
+      },
+      "per_seed": {
+        "101": 5,
+        "211": 7,
+        "307": 5,
+        "401": 8,
+        "503": 6
+      },
+      "per_stream": {
+        "0": 31
+      },
+      "shifted": 39,
+      "open_within_six": 39,
+      "median_shift_height_mm": 20.672718048095703,
+      "median_shift_xy_mm": 7.807220458984375,
+      "median_steered_open_height_mm": 20.672718048095703,
+      "median_steered_open_xy_mm": 7.807220458984375,
+      "in_band_at_shift": 3,
+      "in_band_at_steered_open": 3,
+      "episodes_actor_deferred": 0
+    },
+    "wait-middle": {
+      "trials": 64,
+      "stacks": 33,
+      "modes": {
+        "stacked": 33,
+        "never_centered_no_open": 9,
+        "no_lift": 11,
+        "centered_not_seated_no_open": 5,
+        "opened_off_center": 5,
+        "opened_centered_high": 1
+      },
+      "per_seed": {
+        "101": 7,
+        "211": 6,
+        "307": 8,
+        "401": 6,
+        "503": 6
+      },
+      "per_stream": {
+        "0": 33
+      },
+      "shifted": 30,
+      "open_within_six": 30,
+      "median_shift_height_mm": 7.373640060424805,
+      "median_shift_xy_mm": 6.8409423828125,
+      "median_steered_open_height_mm": 7.373640060424805,
+      "median_steered_open_xy_mm": 6.8409423828125,
+      "in_band_at_shift": 15,
+      "in_band_at_steered_open": 15,
+      "episodes_actor_deferred": 17
+    }
+  },
+  "rule": "Among candidates with median intervention at least 4 mm lower than original fixed and median horizontal offset under 12 mm, maximize dev stacks, then minimize off-center opening failures; use all if none qualify."
+}

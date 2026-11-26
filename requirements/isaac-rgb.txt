@@ -1,0 +1,8 @@
+# Linux x86_64, CPython 3.12, CUDA 13.0 wheels
+isaaclab[isaacsim]==3.0.0
+isaacsim==6.2.0.0
+torch==2.11.0+cu130
+torchvision==0.26.0+cu130
+numpy==2.5.5
+gymnasium==1.4.0
+warp-lang==1.17.0

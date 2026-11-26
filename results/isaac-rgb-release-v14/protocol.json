@@ -1,0 +1,58 @@
+{
+  "base_sha256": "8e69bc49405dafa2f2f74fd4ce99243aaed6b2d8d1bf0ed96ad71a1cac6f97c6",
+  "actors": [
+    "rgb-base",
+    "rgb-target",
+    "rgb-incumbent",
+    "release-permissive",
+    "fixed-permissive"
+  ],
+  "noise_offsets": [
+    0,
+    1000003
+  ],
+  "width": 16,
+  "batches": 10,
+  "inputs": [
+    "table_rgb",
+    "wrist_rgb"
+  ],
+  "repeat_base_first_stream": true,
+  "initial_image": "shared RGB from the matched reset; live cameras after first action",
+  "score": "final 8 ticks released, aligned and slow",
+  "failure_study": "release",
+  "actor_seeds": [
+    101,
+    211,
+    307,
+    401,
+    503
+  ],
+  "task_ticks": 200,
+  "first_scene": 910000,
+  "configs": {
+    "careful": [
+      0.73,
+      2,
+      8
+    ],
+    "balanced": [
+      0.5,
+      2,
+      12
+    ],
+    "permissive": [
+      0.28,
+      2,
+      16
+    ],
+    "prompt": [
+      0.56,
+      1,
+      24
+    ]
+  },
+  "selected": "permissive",
+  "geometry_sha256": "848ef8675e8ac6915988b8a3bf6734027b78a83f1e456c5eb72dc2aa2f9cbcd1",
+  "seed_assignment": "scene offset modulo 5"
+}

@@ -35,7 +35,7 @@ class IsaacStack:
     block_height = .0468
     grip_delay = 7
 
-    def __init__(self, *, cameras=True, released_at_finish=False, num_envs=1):
+    def __init__(self, *, cameras=True, released_at_finish=False, num_envs=1, rgb_size=None):
         self.released_at_finish = released_at_finish
         task = TASK_V3 if TASK_V3 in gym.registry else TASK_V2
         options = {"overrides": ["physics=isaacsim_physx"]} if task == TASK_V3 else {}
@@ -54,6 +54,10 @@ class IsaacStack:
         if cameras:
             cfg.scene.table_cam.width = 640
             cfg.scene.table_cam.height = 480
+            if rgb_size is not None:
+                for camera in (cfg.scene.table_cam, cfg.scene.wrist_cam):
+                    camera.width = camera.height = rgb_size
+                    camera.data_types = ["rgb"]
         else:
             cfg.scene.table_cam = cfg.scene.wrist_cam = None
             cfg.observations.policy.table_cam = cfg.observations.policy.wrist_cam = None

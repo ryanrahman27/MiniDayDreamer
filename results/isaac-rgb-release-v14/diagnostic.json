@@ -1,0 +1,42 @@
+{
+  "diagnostic_cases": 23,
+  "scenes": 17,
+  "held_eight_ticks": 21,
+  "median_longest_dwell": 27.0,
+  "historical_fresh_features": 31,
+  "draws_per_feature": 15,
+  "noise_response": {
+    "0": {
+      "open_command_fraction": 0.0021505376789718866,
+      "mean_absolute_xyz_command_change": 0.0
+    },
+    "0.5": {
+      "open_command_fraction": 0.00358422938734293,
+      "mean_absolute_xyz_command_change": 0.001450398820452392
+    },
+    "2": {
+      "open_command_fraction": 0.013620072044432163,
+      "mean_absolute_xyz_command_change": 0.006282678339630365
+    },
+    "6": {
+      "open_command_fraction": 0.048028673976659775,
+      "mean_absolute_xyz_command_change": 0.031878601759672165
+    },
+    "8": {
+      "open_command_fraction": 0.23655913770198822,
+      "mean_absolute_xyz_command_change": 0.053597163408994675
+    },
+    "10": {
+      "open_command_fraction": 0.8351254463195801,
+      "mean_absolute_xyz_command_change": 0.07815450429916382
+    },
+    "14": {
+      "open_command_fraction": 1.0,
+      "mean_absolute_xyz_command_change": 0.1256140023469925
+    },
+    "18": {
+      "open_command_fraction": 1.0,
+      "mean_absolute_xyz_command_change": 0.165986105799675
+    }
+  }
+}

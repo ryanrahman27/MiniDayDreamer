@@ -1,8 +1,17 @@
 # MiniDayDreamer
 
-Can a weak imitation policy learn to stack a red cube on a blue cube by changing its input noise entirely inside a learned world model? The first experiment uses a simulated Franka arm in Isaac Lab. The RGB camera records what happened. The policy and recurrent state-space model (RSSM) initially use simulator state, so their success measures control under different cube poses. Testing robustness to camera appearance requires a visual encoder in a later experiment.
+Our frozen RGB policy could pick up a cube and carry it over the target, then lift it away again without opening the gripper. We trained a small controller inside a recurrent state-space model (RSSM) to decide when to shift the policy’s input noise toward release.
 
-## Isaac pilot
+On 160 held-out Isaac scenes with two noise draws each, the frozen policy stacked **97/320** times (30.3%). With learned steering it stacked **155/320** times (48.4%). A fixed shift using the same visual trigger stacked **150/320** times (46.9%). The paired 95% interval was +12.5 to +24.1 points against the base and −2.5 to +5.6 against the matched fixed shift.
+
+[Watch the 35-second demo](https://github.com/ryanrahman27/MiniDayDreamer/releases/download/rgb-stacking-v1/MiniDayDreamer.mp4) · [Reproduce the RGB experiment](docs/rgb-stacking.md) · [Results and failure cases](results/isaac-rgb-wait-v15/README.md)
+
+To count the published stacks from the trial records, run `python scripts/check_rgb_result.py`. It uses the Python standard library.
+
+## Earlier state-input experiments
+
+<details>
+<summary>Results from the state-input baselines and steering experiments</summary>
 
 On 128 fresh Isaac scenes and two action-noise streams, release-margin steering averaged 78.7% released stacks, versus 59.8% for the frozen base, 75.5% for the previous tuned actor and 77.7% for the same correction trained with the old reward. The 18.9-point gain over the base held across all five steering seeds (95% interval +10.9 to +27.0). The matched reward difference was +0.9 points (−0.9 to +2.9). Off-center failures persisted while failures to open became less frequent. [Paired release measurements and fresh-seed comparison](results/isaac-release-margin-v11/README.md)
 
@@ -28,15 +37,23 @@ On 50 held-out Isaac scenes, the frozen policy stacked 2/50 times, demos-only RS
 
 The Franka visuomotor stacking scene randomizes cube placements, lighting and materials. The green cube is a distractor. The current multi-seed study scores eight ticks of released, stable stacking at the end of the episode. The historical pilot commands below use the earlier early-stopping rule, which also required the tool to move 50 mm clear.
 
+</details>
+
+## Install Isaac
+
 For the RTX PRO 6000 Blackwell Max-Q rental, use Python 3.12, Isaac Lab 3.0.0 and Isaac Sim 6.2. On the Ubuntu 24.04 Vast PyTorch image, install the graphics libraries with `apt-get install libxt6t64 libglu1-mesa`. Activate a Python 3.12 environment, then install NVIDIA's tested package combination. [Isaac Lab installation](https://docs.nvidia.com/isaaclab/3.0/isaac-lab/installation)
 
 ```bash
-uv pip install 'isaaclab[isaacsim]==3.0.0' \
+uv pip install -r requirements/isaac-rgb.txt \
   --overrides https://raw.githubusercontent.com/isaac-sim/IsaacLab/v3.0.0/tools/wheel_builder/uv-overrides.txt \
   --extra-index-url https://pypi.nvidia.com --torch-backend cu130 --index-strategy unsafe-best-match
 ```
 
-With the Isaac environment activated and MiniDayDreamer as the current directory:
+Install the package in the active Isaac environment with `uv pip install -e .`. The [RGB reproduction guide](docs/rgb-stacking.md) covers the camera experiment.
+
+## Run the state-input baseline
+
+From the repository root, run the following commands.
 
 ```bash
 python -m pip install -e ".[video]"
