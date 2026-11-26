@@ -55,7 +55,7 @@ For a quick replay, add `--first-batch 0 --stop-batch 1` to the Isaac command. T
 
 ## Refit the steering actor on CPU
 
-The checkpoint bundle includes the frozen flow, RSSM, placement estimator, posterior starts, and release actors. The saved calibration came from 21 six-tick windows in the development recordings. Extract the bundle into a new directory so the published weights stay available for comparison.
+The checkpoint bundle includes the frozen flow, RSSM, placement estimator, posterior starts, and release actors. The saved calibration came from 21 six-tick windows in the development recordings. Extract the bundle into a new directory so you can compare the new weights with the originals.
 
 ```bash
 mkdir -p runs/refit
@@ -64,7 +64,7 @@ python scripts/rgb_wait_actor.py runs/refit --seed 101 \
   --calibration runs/refit/dev-height-calibration.json
 ```
 
-Each fit uses 1,290,240 imagined action ticks. The five published seeds are 101, 211, 307, 401 and 503. The actor file and training diagnostics are written to `runs/refit/wait-101.pt` and `wait-101.json` for the example above.
+Each fit uses 1,290,240 imagined action ticks. We trained five seeds: 101, 211, 307, 401 and 503. The actor file and training diagnostics are written to `runs/refit/wait-101.pt` and `wait-101.json` for the example above.
 
 ## Train from the camera recordings
 

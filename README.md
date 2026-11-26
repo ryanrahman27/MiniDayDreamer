@@ -4,7 +4,7 @@ Our frozen RGB policy could pick up a cube and carry it over the target, then li
 
 On 160 held-out Isaac scenes with two noise draws each, the frozen policy stacked **97/320** times (30.3%). With learned steering it stacked **155/320** times (48.4%). A fixed shift using the same visual trigger stacked **150/320** times (46.9%). The paired 95% interval was +12.5 to +24.1 points against the base and −2.5 to +5.6 against the matched fixed shift.
 
-[Reproduce the RGB experiment](docs/rgb-stacking.md) · [Steering objective](scripts/rgb_wait_actor.py)
+[Read the write-up](https://ryanrahman.org/preprints/minidaydreamer.html) · [Reproduce the RGB experiment](docs/rgb-stacking.md) · [Steering objective](scripts/rgb_wait_actor.py)
 
 On an Isaac machine, run `bash scripts/reproduce_rgb.sh runs/from-scratch` to collect the demos, fit the models and run the paired evaluation.
 
