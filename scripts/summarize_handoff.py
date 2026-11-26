@@ -36,7 +36,7 @@ def verify_commands(trace, arm, pi, wm, actor, trigger):
             state, _ = wm.filter(wm.advance(state, actions[t:t+1]), obs[t+1:t+2])
         shift = actor.draw(torch.cat(history), deterministic=True)[0]
         expected = pi.sample(starts, noise + shift[:, None]).flatten(0, 1)[:len(actions)]
-        if arm == "handoff" and trigger is not None:
+        if arm in ("handoff", "approach") and trigger is not None:
             expected[trigger:] = plain[trigger:]
     torch.testing.assert_close(actions, expected, rtol=0., atol=2e-4)
     return float((actions - expected).abs().max())

@@ -12,9 +12,13 @@ from reward_study import digest, load
 
 ARMS = ("base", "direct", "handoff")
 SEEDS = range(408, 508)
+APPROACH_SEEDS = range(508, 608)
+APPROACH_ARMS = ("base", "handoff", "approach")
+APPROACH_RADIUS_MM = 80.0
 
 
-def score(run, prior, first, count, cameras, env):
+def score(run, prior, first, count, cameras, env, approach_study=False):
+    arms, seeds = (APPROACH_ARMS, APPROACH_SEEDS) if approach_study else (ARMS, SEEDS)
     audit = json.loads((prior / "midbase-summary.json").read_text())
     actor_path = run / "mid-varied-direct.pt"
     base_path = run / "selected-base.pt"
@@ -28,16 +32,17 @@ def score(run, prior, first, count, cameras, env):
     wm.eval()
     with (run / f"eval-{first}.jsonl").open("x") as stream:
         for seed in range(first, first + count):
-            if seed not in SEEDS:
+            if seed not in seeds:
                 raise ValueError("Seed outside the specified fresh test set")
             row = {"seed": seed}
-            offset = seed % len(ARMS)
-            for arm in ARMS[offset:] + ARMS[:offset]:
+            offset = seed % len(arms)
+            for arm in arms[offset:] + arms[:offset]:
                 video = run / "videos" / f"{arm}-{seed}.mp4" if cameras and seed == first else None
                 metrics, start = policy_episode(env, pi, wm if arm != "base" else None,
                                                 actor if arm != "base" else None, seed, video,
                                                 run / "traces" / f"{arm}-{seed}.npz",
-                                                handoff_at_target=arm == "handoff")
+                                                handoff_at_target=arm in ("handoff", "approach"),
+                                                handoff_radius_mm=APPROACH_RADIUS_MM if arm == "approach" else 12.0)
                 if "start" in row:
                     np.testing.assert_allclose(row["start"], start, atol=.01, rtol=0)
                 else:
@@ -53,6 +58,8 @@ if __name__ == "__main__":
     parser.add_argument("--first", type=int, required=True)
     parser.add_argument("--count", type=int, required=True)
     parser.add_argument("--video", action="store_true")
+    parser.add_argument("--approach-study", action="store_true",
+                        help="Compare the 80 mm and 12 mm handoffs with the frozen base on seeds 508–607")
     args = parser.parse_args()
     torch.set_num_threads(2)
     from isaaclab.app import AppLauncher
@@ -61,7 +68,7 @@ if __name__ == "__main__":
         from minidaydreamer.isaac import IsaacStack
         task = IsaacStack(cameras=args.video)
         try:
-            score(args.run, args.prior, args.first, args.count, args.video, task)
+            score(args.run, args.prior, args.first, args.count, args.video, task, args.approach_study)
         finally:
             task.close()
     finally:

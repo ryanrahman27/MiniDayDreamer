@@ -1,0 +1,164 @@
+{
+  "first_seed": 508,
+  "last_seed": 607,
+  "episodes": 300,
+  "policies": {
+    "base": {
+      "stacks": 53,
+      "lifted": 100,
+      "reached_80": 100,
+      "reached_12": 94,
+      "switches": 0,
+      "switches_on_first_lift": 0,
+      "median_switch_tick": null,
+      "median_80_to_12_ticks": 16.0,
+      "never_open": 28,
+      "rising_at_alignment": 20,
+      "descent_by_12_after": 71
+    },
+    "handoff": {
+      "stacks": 45,
+      "lifted": 100,
+      "reached_80": 100,
+      "reached_12": 96,
+      "switches": 96,
+      "switches_on_first_lift": 0,
+      "median_switch_tick": 125.0,
+      "median_80_to_12_ticks": 16.0,
+      "never_open": 40,
+      "rising_at_alignment": 31,
+      "descent_by_12_after": 67
+    },
+    "approach": {
+      "stacks": 48,
+      "lifted": 100,
+      "reached_80": 100,
+      "reached_12": 97,
+      "switches": 100,
+      "switches_on_first_lift": 0,
+      "median_switch_tick": 108.0,
+      "median_80_to_12_ticks": 16.0,
+      "never_open": 34,
+      "rising_at_alignment": 23,
+      "descent_by_12_after": 75
+    }
+  },
+  "paired": {
+    "approach_vs_handoff": {
+      "gained": 4,
+      "lost": 1,
+      "both_succeeded": 44,
+      "difference_pp": 3.0,
+      "exact_p": 0.375,
+      "gained_seeds": [
+        537,
+        549,
+        550,
+        585
+      ],
+      "lost_seeds": [
+        529
+      ]
+    },
+    "approach_vs_base": {
+      "gained": 10,
+      "lost": 15,
+      "both_succeeded": 38,
+      "difference_pp": -5.0,
+      "exact_p": 0.42435622215270996,
+      "gained_seeds": [
+        510,
+        512,
+        537,
+        550,
+        553,
+        555,
+        573,
+        575,
+        586,
+        598
+      ],
+      "lost_seeds": [
+        518,
+        527,
+        544,
+        554,
+        556,
+        559,
+        561,
+        563,
+        574,
+        584,
+        587,
+        591,
+        594,
+        597,
+        602
+      ]
+    },
+    "handoff_vs_base": {
+      "gained": 9,
+      "lost": 17,
+      "both_succeeded": 36,
+      "difference_pp": -8.0,
+      "exact_p": 0.16863754391670227,
+      "gained_seeds": [
+        510,
+        512,
+        529,
+        553,
+        555,
+        573,
+        575,
+        586,
+        598
+      ],
+      "lost_seeds": [
+        518,
+        527,
+        544,
+        549,
+        554,
+        556,
+        559,
+        561,
+        563,
+        574,
+        584,
+        585,
+        587,
+        591,
+        594,
+        597,
+        602
+      ]
+    }
+  },
+  "late_never_open": {
+    "scenes": 40,
+    "opened_early": 6,
+    "stacked_early": 2
+  },
+  "close_prefix_pairs": 90,
+  "approach_vs_handoff_close": {
+    "gained": 4,
+    "lost": 1,
+    "both_succeeded": 39,
+    "difference_pp": 3.3333333333333335,
+    "exact_p": 0.375,
+    "gained_seeds": [
+      537,
+      549,
+      550,
+      585
+    ],
+    "lost_seeds": [
+      529
+    ]
+  },
+  "max_start_coordinate_difference_mm": 0.0,
+  "max_replayed_action_error": 5.602836608886719e-06,
+  "base_sha256": "eafd9895ee92b67c3a8c922fe9cb213e786a16553d3fbd1b84bbfa1aaeb16ef9",
+  "direct_actor_sha256": "1a2c9491e8844e03b7f6e64a5afd74dbc09a084d21415580ec9572516c2df9cb",
+  "approach_radius_mm": 80.0
+}

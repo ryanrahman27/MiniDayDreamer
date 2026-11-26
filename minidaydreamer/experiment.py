@@ -216,7 +216,7 @@ def load_policies(path, env):
 
 @torch.no_grad()
 def policy_episode(env, pi, wm, sac, seed, video=None, trace=None, release_gate=False, transport_pulse=None,
-                   handoff_at_target=False):
+                   handoff_at_target=False, handoff_radius_mm=12.0):
     if handoff_at_target and sac is None:
         raise ValueError("Target handoff requires a steering actor")
     generator = torch.Generator().manual_seed(seed)
@@ -256,7 +256,7 @@ def policy_episode(env, pi, wm, sac, seed, video=None, trace=None, release_gate=
                 if handoff_at_target and steering_off_step < 0:
                     before = obs[0].numpy()
                     if (before[9] > .5 and before[5] - first[5] > .2
-                            and np.linalg.norm(before[3:5] - before[6:8]) < .12):
+                            and np.linalg.norm(before[3:5] - before[6:8]) < handoff_radius_mm / 100):
                         steering_off_step = steps
                         # Keep the chunk clock and its original Gaussian draw, even on a mid-chunk handoff.
                         chunk = pi.sample(chunk_start, noise)[0]
